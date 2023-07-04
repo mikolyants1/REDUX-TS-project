@@ -19,7 +19,7 @@ interface state2{
 interface state3{
     item:mass[]
 }
-export default function Main(){
+export default function Main():JSX.Element{
 const [state,setState]=React.useState<state1>({show1:1,show2:0,show3:0,show4:0,show5:0})
 const [ser,setSer]=React.useState<state2>({text:''})
 const item6:Array<mass>=item1.concat(item2,item3,item4)

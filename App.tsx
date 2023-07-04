@@ -9,34 +9,34 @@ import About from './components/about'
 import Main from './components/main'
 import Header from './components/header'
 
-function Home() {
+const Home=():JSX.Element=> {
    return <div>
        <Outlet />
    </div>
 }
-function Links() {
+const Links=():JSX.Element=> {
    return <div>
    <Entry />
    </div>
 }
-function Shop() {
+const Shop=():JSX.Element=>{
     return <div>
         <Outlet />
     </div>
 }
-function ShopList() {
+const ShopList=():JSX.Element=> {
     return <div>
     <Header />
     <Main />
    </div>
 }
-function Names(){
+const Names=():JSX.Element=>{
    return <div>
       <Header />
      <About />
    </div>
 }
-function BaskList(){
+const BaskList=():JSX.Element=>{
     return <div>
        <Header />
       <Bask2 />
