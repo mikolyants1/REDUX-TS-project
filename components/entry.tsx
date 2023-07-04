@@ -43,15 +43,22 @@ export default function Entry():JSX.Element {
         backgroundColor='rgb(210,210,210)',
         borderRadius='20px'
     }
+    enum style1{
+        width='100%',
+        height='100%',
+        borderRadius='10px',
+        border='1px solid grey',
+        backgroundColor='rgb(241, 241, 241)',
+      }
     return <div>
          <div style={style}>
             <div style={{height:'15px'}}></div>
         <div className='info'>
-            <input className='input'  type="text"
+            <input style={style1}  type="text"
          onChange={(e:React.ChangeEvent<HTMLInputElement>)=>setState({name:e.target.value,phone:state.phone})} />
          </div>
         <div className='info'>
-            <input className='input'  type="text"
+            <input style={style1}  type="text"
          onChange={(e:React.ChangeEvent<HTMLInputElement>)=>setState({phone:e.target.value,name:state.name})} />
          </div>
      <div className='reg1'>

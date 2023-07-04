@@ -13,11 +13,11 @@ interface state2{
 }
 export default function Regist():JSX.Element {
 const [state,setState]=React.useState<state1>({name:'',phone:''})
-const [state1,setState1]=React.useState<state2>({src:'/',error:''})
+const [state1,setState1]=React.useState<state2>({src:'/regist',error:''})
 const user=useAppSelector((store)=>store.reduce.user)
 const dispatch=useAppDispatch()
-function press() {
-    let con=0
+function press():void {
+    let con:number=0
     console.log(state.name)
     if (state.name!==''&&state.phone!=='') {
         for (let i = 0; i < user.length; i++) {
@@ -26,7 +26,7 @@ function press() {
           }
         }
         if (con>0) {
-            setState1({error:'уже есть',src:state1.src})
+            setState1({error:'уже есть',src:'/regist'})
         }else{
           
          dispatch( add({name:state.name,phone:state.phone,user:user}));
@@ -36,16 +36,23 @@ function press() {
         setState1({src:'/regist',error:state1.error})
     }
 }
+enum style{
+  width='100%',
+  height='100%',
+  borderRadius='10px',
+  border='1px solid grey',
+  backgroundColor='rgb(241, 241, 241)',
+}
     return <div>
          <div className='user'>
             <div style={{height:'15px'}}></div>
         <div className='info'>
-            <input className='input' 
+            <input style={style}
             onChange={(e:React.ChangeEvent<HTMLInputElement>)=>setState({name:e.target.value,phone:state.phone})}
           type="text" />
           </div>
         <div className='info'>
-            <input className='input'
+            <input style={style}
              onChange={(e:React.ChangeEvent<HTMLInputElement>)=>setState({phone:e.target.value,name:state.name})}
            type="text" />
            </div>
