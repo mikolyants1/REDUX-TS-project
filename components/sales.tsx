@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link } from 'react-router-dom'
 import { item1 } from './items.js'
-
+import { bask } from '../store/slice.js'
 type Props={
     src:string,
     name:string,
@@ -36,7 +36,7 @@ value.value=='down'?mass.sort((x,y)=>y-x):mass.sort((x,y)=>x-y)
        }
        setState({item:mass1})
 }
-   const text:JSX.Element[]=state.item.map(({src,name,price},index)=>{
+   const text:JSX.Element[]=state.item.map(({src,name,price}:bask,index:number)=>{
     return <div className='item' key={index}>
         <img className='itemImg'  src={src} alt="" />
         <div className='itemName' >
@@ -49,7 +49,8 @@ to={`/home/about/?name=${name}`}>{name}</Link></div>
     return <div>
        <div className='sel'>
             <button onClick={sort}>отсортировать</button> 
-         <select className='select' value={value.value} onChange={(e)=>setValue({value:e.target.value})}>
+         <select className='select' value={value.value}
+          onChange={(e:React.ChangeEvent<HTMLSelectElement>)=>setValue({value:e.target.value})}>
             <option value="up">по возрастанию</option>
             <option value="down">по убыванию</option>
          </select>
@@ -79,7 +80,7 @@ value.value=='down'?mass.sort((x,y)=>y-x):mass.sort((x,y)=>x-y)
        }
        setState({item:mass1})
 }
-  const text:JSX.Element[]=state.item.map(({src,name,price},index)=>{
+  const text:JSX.Element[]=state.item.map(({src,name,price}:bask,index:number)=>{
     return <div className='item' key={index}>
         <img className='itemImgMac'  src={src} alt="" />
         <div className='itemNameMac' >
@@ -92,7 +93,8 @@ to={`/home/about/?name=${name}`}>{name}</Link></div>
     return <div > 
          <div className='sel'>
             <button onClick={sort}>отсортировать</button> 
-         <select className='select' value={value.value} onChange={(e)=>setValue({value:e.target.value})}>
+         <select className='select' value={value.value}
+          onChange={(e:React.ChangeEvent<HTMLSelectElement>)=>setValue({value:e.target.value})}>
             <option value="up">по возрастанию</option>
             <option value="down">по убыванию</option>
          </select>
@@ -123,7 +125,7 @@ value.value=='down'?mass.sort((x,y)=>y-x):mass.sort((x,y)=>x-y)
        }
        setState({item:mass1})
 }
-   const text:JSX.Element[]=state.item.map(({src,name,price},index)=>{
+   const text:JSX.Element[]=state.item.map(({src,name,price}:bask,index:number)=>{
     return <div className='item' key={index}>
         <img className='itemImg' src={src} alt="" />
         <div className='itemName'>
@@ -136,7 +138,8 @@ value.value=='down'?mass.sort((x,y)=>y-x):mass.sort((x,y)=>x-y)
     return <div>
         <div className='sel'>
             <button onClick={sort}>отсортировать</button> 
-         <select className='select' value={value.value} onChange={(e)=>setValue({value:e.target.value})}>
+         <select className='select' value={value.value}
+          onChange={(e:React.ChangeEvent<HTMLSelectElement>)=>setValue({value:e.target.value})}>
             <option value="up">по возрастанию</option>
             <option value="down">по убыванию</option>
          </select>
@@ -166,7 +169,7 @@ value.value=='down'?mass.sort((x,y)=>y-x):mass.sort((x,y)=>x-y)
        }
        setState({item:mass1})
 }
-const  text:JSX.Element[]=state.item.map(({src,name,price},index)=>{
+const  text:JSX.Element[]=state.item.map(({src,name,price}:bask,index:number)=>{
     return <div className='item' key={index}>
        <img className='itemImg' src={src} alt="" />
     <div className='itemName'>
@@ -180,7 +183,8 @@ to={`/home/about/?name=${name}`}>{name}</Link></div>
     return <div >
         <div className='sel'>
             <button onClick={sort}>отсортировать</button> 
-         <select className='select' value={value.value} onChange={(e)=>setValue({value:e.target.value})}>
+         <select className='select' value={value.value} 
+         onChange={(e:React.ChangeEvent<HTMLSelectElement>)=>setValue({value:e.target.value})}>
             <option value="up">по возрастанию</option>
             <option value="down">по убыванию</option>
          </select>
@@ -195,7 +199,7 @@ export const Search:React.FC<props>=({item,show}):JSX.Element|null=> {
     let imgClass:string=''
     let nameClass:string=''
     let priceClass:string=''
-    const text:JSX.Element[]=item.map(({src,name,price},index)=>{
+    const text:JSX.Element[]=item.map(({src,name,price}:bask,index:number)=>{
         if (item1.some((x)=>x.name==name)) {
             imgClass='itemImgMac'
             nameClass='itemNameMac'
