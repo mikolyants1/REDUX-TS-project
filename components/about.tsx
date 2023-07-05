@@ -4,6 +4,7 @@ import { add1 } from '../store/slice.js';
 import { useAppDispatch,useAppSelector } from '../store/store.js';
 import { item1,item2,item3,item4 } from './items.jsx';
 import { User} from '../store/slice.js';
+import { Link } from 'react-router-dom';
 interface state1{
    class:string
 }
@@ -34,6 +35,9 @@ export default function About():JSX.Element {
       onClick={()=>{dispatch(add1({id:user1.id,name:name,price:price,src:src}))}} >добавить в корзину
       </button>
      </div>
+     <div className='baskBack'>
+       <Link style={{textDecoration:'none'}} to='/home'>вернуться на главную</Link>
+        </div>
         </div> 
      </div>
 }

@@ -57,9 +57,8 @@ to={`/home/about/?name=${name}`}>{name}</Link></div>
          </div>
         <div className='main1'>{text}</div>
     </div>
-    }else{
-        return null
     }
+    return null
 }
 export function Mac({item,show}:props):JSX.Element|null {
 const [state,setState]=React.useState<state1>({item:item})
@@ -101,10 +100,8 @@ to={`/home/about/?name=${name}`}>{name}</Link></div>
          </div>
         <div className='main1'>{text}</div>
     </div>
-    }else{
-        return null
     }
-
+    return null
 }
 export  function Ipad({item,show}:props):JSX.Element|null {
     const [state,setState]=React.useState<state1>({item:item})
@@ -146,9 +143,8 @@ value.value=='down'?mass.sort((x,y)=>y-x):mass.sort((x,y)=>x-y)
          </div>
         <div className='main1'>{text}</div>
     </div>
-    }else{
-        return null
     }
+    return null
 }
  export  function Watch({item,show}:props):JSX.Element|null {
 const [state,setState]=React.useState<state1>({item:item})
@@ -191,9 +187,9 @@ to={`/home/about/?name=${name}`}>{name}</Link></div>
          </div>
         <div className='main1'>{text}</div>
     </div>
-    }else{
-        return null
     }
+     return null
+    
 }
 export const Search:React.FC<props>=({item,show}):JSX.Element|null=> {
     let imgClass:string=''
@@ -221,7 +217,6 @@ export const Search:React.FC<props>=({item,show}):JSX.Element|null=> {
      return <div>
          <div className='main1'>{text}</div>
      </div>
-     }else{
-         return null
      }
+    return null
 }
