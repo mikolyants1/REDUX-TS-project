@@ -67,12 +67,12 @@ enum style{
     backgroundColor='rgb(240, 240, 240)',
 }
     return <div className='main'>
-    <div className='catalog'>
+    <nav className='catalog'>
 <div className='cat1' onClick={()=>press(0)}>Mac</div>
 <div className='cat1' onClick={()=>press(1)}>Iphone</div>
 <div className='cat1' onClick={()=>press(2)}>Ipad</div>
 <div className='cat1' onClick={()=>press(3)}>Watch</div>
-    </div>
+    </nav>
     <div className='ser'>
  <input type="text" style={style} value={ser.text}
   onChange={(e:React.ChangeEvent<HTMLInputElement>)=>setSer({text:e.target.value})} />

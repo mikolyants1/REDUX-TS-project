@@ -8,7 +8,8 @@ export default function Bask2():JSX.Element {
     const id:string[]|undefined[]=useAppSelector((store)=>store.phone.id)
     const user:User[]=useAppSelector((store)=>store.reduce.user)
     const dispatch=useAppDispatch()
-     const user1:any=user.find((x)=>x.phone==id.at(-2))
+     const user1:any=user.find((x)=>x.phone==id[0])
+ console.log(id)
      let imgClass:string=''
      let divClass:string=''
         const list:JSX.Element[]= user1.bask.map(({name,price,src}:bask,index:number)=>{

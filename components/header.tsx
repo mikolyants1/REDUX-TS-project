@@ -13,12 +13,13 @@ export default function Header():JSX.Element {
         state.text.push(current[i])
        }
       }
-      setState({text:state.text})     
+      setState({text:state.text})   
+      console.log(current)  
     },[])
     return <div className='header' >    
              <div className='header1' >
                <div className='headerDiv'>
-                <Link className='headerLink' to='/'>{state.text.at(-1)}</Link></div>
+                <Link className='headerLink' to='/'>{state.text[0]}</Link></div>
                 <div className='headerName'>SmartShop</div>
                 <div className='headerDiv'>
                 <Link className='headerLink' to='/home/bask'>корзина</Link></div>

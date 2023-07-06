@@ -62,7 +62,7 @@ export default function Entry():JSX.Element {
          onChange={(e:React.ChangeEvent<HTMLInputElement>)=>setState({phone:e.target.value,name:state.name})} />
          </div>
      <div className='reg1'>
-        <button className='but1' onClick={()=>{press();dispatch( add2(state.name))}}>
+        <button className='but1' onClick={()=>{press();dispatch( add2(state.name));dispatch(add3(state.phone))}}>
         <Link to={`${state1.src}`} className='link1' >войти</Link>
         </button>
         </div> 

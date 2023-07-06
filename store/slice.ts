@@ -47,7 +47,7 @@ const slice=createSlice({
           
         },
         add1:(state,action:PayloadAction<pay1>):void=>{
-        const    {id,name,price,src} =action.payload
+        const  {id,name,price,src}=action.payload
             state.user[id].bask.push({
                 name:name,
                 price:price,

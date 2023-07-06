@@ -12,11 +12,15 @@ const slice1=createSlice({
     initialState,
     reducers:{  
         add2:(state,action:PayloadAction<string>):void=>{
+            state.current=[]
             state.current.push(action.payload)
            
            },
         add3:(state,action:PayloadAction<string>):void=>{
             state.id.push(action.payload)
+            if (state.id.length>2) {
+                state.id.shift() 
+             }
           },
     }
 })
