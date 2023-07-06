@@ -18,6 +18,12 @@ export default function Entry():JSX.Element {
     const [state1,setState1]=React.useState<state2>({src:'/',error:''})
     const user:User[]=useAppSelector((store)=>store.reduce.user)
     const dispatch=useAppDispatch()
+    function change1(e:React.ChangeEvent<HTMLInputElement>):void {
+        setState({name:e.target.value,phone:state.phone})
+    }
+    function change2(e:React.ChangeEvent<HTMLInputElement>):void {
+        setState({phone:e.target.value,name:state.name})
+    }
     function press():void {
         let con:number=0
         if (state.phone!==''&&state.name!=='') {
@@ -29,7 +35,7 @@ export default function Entry():JSX.Element {
             if (con==0) {
                 setState1({error:'не найден',src:state1.src})
             }else{
-                dispatch(add3(state.phone))
+             
              setState1({src:'/home',error:state1.error})
             }
         }else{
@@ -55,14 +61,14 @@ export default function Entry():JSX.Element {
             <div style={{height:'15px'}}></div>
         <div className='info'>
             <input style={style1}  type="text"
-         onChange={(e:React.ChangeEvent<HTMLInputElement>)=>setState({name:e.target.value,phone:state.phone})} />
+         onChange={(e:React.ChangeEvent<HTMLInputElement>)=>{change1(e);dispatch(add2(e.target.value))}} />
          </div>
         <div className='info'>
             <input style={style1}  type="text"
-         onChange={(e:React.ChangeEvent<HTMLInputElement>)=>setState({phone:e.target.value,name:state.name})} />
+         onChange={(e:React.ChangeEvent<HTMLInputElement>)=>{change2(e);dispatch(add3(e.target.value))}} />
          </div>
      <div className='reg1'>
-        <button className='but1' onClick={()=>{press();dispatch( add2(state.name));dispatch(add3(state.phone))}}>
+        <button className='but1' onClick={()=>{press()}}>
         <Link to={`${state1.src}`} className='link1' >войти</Link>
         </button>
         </div> 

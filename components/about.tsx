@@ -12,9 +12,9 @@ interface state1{
 export default function About():JSX.Element {
    const [cless,setCless]=React.useState<state1>({class:'aboutImg'})
     const [searchParams] = useSearchParams();
-    const id:string[]=useAppSelector((store)=>store.phone.id)
+    const id:string=useAppSelector((store)=>store.phone.id)
     const user:User[]=useAppSelector((store)=>store.reduce.user)
-    const user1:any=user.find((x)=>x.phone==id.at(-2))
+    const user1:any=user.find((x)=>x.phone==id)
     const dispatch=useAppDispatch()
     const name:any=searchParams.get("name")
     const item:any|undefined=item1.concat(item2,item3,item4).find((x)=>x.name==name)
