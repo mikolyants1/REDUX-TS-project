@@ -14,7 +14,6 @@ export default function Header():JSX.Element {
        }
       }
       setState({text:state.text})   
-      console.log(current)  
     },[])
     return <div className='header' >    
              <div className='header1' >
