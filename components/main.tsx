@@ -8,6 +8,9 @@ interface state1{
     show4:number,
     show5:number
 }
+interface action{
+    type:number
+}
 type mass={
     src:string,
     name:string,
@@ -20,35 +23,41 @@ interface state3{
     item:mass[]
 }
 export default function Main():JSX.Element{
-const [state,setState]=React.useState<state1>({show1:1,show2:0,show3:0,show4:0,show5:0})
 const [ser,setSer]=React.useState<state2>({text:''})
+const [state,action]=React.useReducer(reducer,{show1:1,show2:0,show3:0,show4:0,show5:0})
 const item6:Array<mass>=item1.concat(item2,item3,item4)
 const [items,setItems]=React.useState<state3>({item:item6})
-function press(x:number):void {
-    if (x==0) {
-        setState({show1:1,show2:0,show3:0,show4:0,show5:0})
+function reducer(state:state1,{type}:action):state1 {
+    switch (type) {
+    case 0:
         setSer({text:''})
-    }else if(x==1) {
-        setState({show1:0,show2:1,show3:0,show4:0,show5:0})
+        return {show1:1,show2:0,show3:0,show4:0,show5:0}
+        break;
+    case 1:
         setSer({text:''})
-    }else if(x==2) {
-        setState({show1:0,show2:0,show3:1,show4:0,show5:0})
+        return {show1:0,show2:1,show3:0,show4:0,show5:0}
+        break;
+    case 2:
         setSer({text:''})
-    }
-    else if(x==3) {
-        setState({show1:0,show2:0,show3:0,show4:1,show5:0})
+        return {show1:0,show2:0,show3:1,show4:0,show5:0}
+        break
+    case 3:
         setSer({text:''})
-    }
-    
+        return {show1:0,show2:0,show3:0,show4:1,show5:0}
+        break
+    case 4:
+        if (ser.text!=='') {
+        return {show1:0,show2:0,show3:0,show4:0,show5:1}
+            }else{
+            return {show1:1,show2:0,show3:0,show4:0,show5:0}
+            }
+        break
+        default:
+            return state
+        break;
+    } 
 }
-function search():void {
-    if (ser.text!=='') {
-        setState({show1:0,show2:0,show3:0,show4:0,show5:1})
-       
-    }else{
-        setState({show1:1,show2:0,show3:0,show4:0,show5:0})
-    }
-}
+
 function filter():void {
     const val=ser.text.trim().toLocaleLowerCase()
 const list=item6.filter((item)=>{
@@ -68,15 +77,15 @@ enum style{
 }
     return <div className='main'>
     <nav className='catalog'>
-<div className='cat1' onClick={()=>press(0)}>Mac</div>
-<div className='cat1' onClick={()=>press(1)}>Iphone</div>
-<div className='cat1' onClick={()=>press(2)}>Ipad</div>
-<div className='cat1' onClick={()=>press(3)}>Watch</div>
+<div className='cat1' onClick={()=>action({type:0})}>Mac</div>
+<div className='cat1' onClick={()=>action({type:1})}>Iphone</div>
+<div className='cat1' onClick={()=>action({type:2})}>Ipad</div>
+<div className='cat1' onClick={()=>action({type:3})}>Watch</div>
     </nav>
     <div className='ser'>
  <input type="text" style={style} value={ser.text}
   onChange={(e:React.ChangeEvent<HTMLInputElement>)=>setSer({text:e.target.value})} />
- <button className='serBut' onClick={()=>{search();filter()}}>search</button>
+ <button className='serBut' onClick={()=>{action({type:4});filter()}}>search</button>
         </div>
     <div >
     <Mac show={state.show1} item={item1} />
