@@ -1,6 +1,6 @@
 import React from 'react'
 import {Iphone,Mac,Watch,Ipad,Search} from './sales'
-import { item1,item2,item3,item4 } from './items.js'
+import { item1,item2,item3,item4 } from './items'
 interface state1{
     show1:number,
     show2:number,

@@ -1,8 +1,8 @@
 import React from 'react'
 import {Link } from 'react-router-dom'
-import { item1 } from './items.js'
-import { bask } from '../store/slice.js'
-import { sort,props,state1 } from '../types/state.js'
+import { item1 } from './items'
+import { bask } from '../store/slice'
+import { sort,props,state1 } from '../types/state'
  export function Iphone({item,show}:props):JSX.Element|null {
 const [state,setState]=React.useState<state1>({item:item})
 const [value,setValue]=React.useState<string>('up')
