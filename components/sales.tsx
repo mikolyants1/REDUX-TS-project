@@ -2,38 +2,10 @@ import React from 'react'
 import {Link } from 'react-router-dom'
 import { item1 } from './items.js'
 import { bask } from '../store/slice.js'
-type Props={
-    src:string,
-    name:string,
-    price:string
-}
-interface props{
-    item:Props[],
-    show:number
-}
-interface state1{
-    item:Props[]
-}
-
+import { sort,props,state1 } from '../types/state.js'
  export function Iphone({item,show}:props):JSX.Element|null {
-    const [state,setState]=React.useState<state1>({item:item})
+const [state,setState]=React.useState<state1>({item:item})
 const [value,setValue]=React.useState<string>('up')
-function sort():void {
-    const mass:number[]=[]
-    for (let i = 0; i < state.item.length; i++) {
-      mass.push(parseInt(state.item[i].price))
-    }
-    const mass1:Props[]=[]
-value=='down'?mass.sort((x,y)=>y-x):mass.sort((x,y)=>x-y)
-    for (let i = 0; i < mass.length; i++) {
-        for (let ind = 0; ind < state.item.length; ind++) {
-           if (mass[i]==parseInt(state.item[ind].price)) {
-            mass1.push(state.item[ind])
-           }
-        }
-       }
-       setState({item:mass1})
-}
    const text:JSX.Element[]=state.item.map(({src,name,price}:bask,index:number)=>{
     return <div className='item' key={index}>
         <img className='itemImg'  src={src} alt="" />
@@ -46,7 +18,7 @@ to={`/home/about/?name=${name}`}>{name}</Link></div>
     if (show==1) {
     return <div>
        <div className='sel'>
-            <button onClick={sort}>отсортировать</button> 
+            <button onClick={()=>sort({state:state,value:value,set:setState})}>отсортировать</button> 
          <select className='select' value={value}
           onChange={(e:React.ChangeEvent<HTMLSelectElement>)=>setValue(e.target.value)}>
             <option value="up">по возрастанию</option>
@@ -61,23 +33,7 @@ to={`/home/about/?name=${name}`}>{name}</Link></div>
 export function Mac({item,show}:props):JSX.Element|null {
 const [state,setState]=React.useState<state1>({item:item})
 const [value,setValue]=React.useState<string>('up')
-function sort():void {
-    const mass:number[]=[]
-    for (let i = 0; i < state.item.length; i++) {
-      mass.push(parseInt(state.item[i].price))
-    }
-    const mass1:Props[]=[]
-value=='down'?mass.sort((x,y)=>y-x):mass.sort((x,y)=>x-y)
-    for (let i = 0; i < mass.length; i++) {
-        for (let ind = 0; ind < state.item.length; ind++) {
-           if (mass[i]==parseInt(state.item[ind].price)) {
-            mass1.push(state.item[ind])
-           }
-        }
-       }
-       setState({item:mass1})
-}
-  const text:JSX.Element[]=state.item.map(({src,name,price}:bask,index:number)=>{
+const text:JSX.Element[]=state.item.map(({src,name,price}:bask,index:number)=>{
     return <div className='item' key={index}>
         <img className='itemImgMac'  src={src} alt="" />
         <div className='itemNameMac' >
@@ -89,7 +45,7 @@ to={`/home/about/?name=${name}`}>{name}</Link></div>
     if (show==1) {
     return <div > 
          <div className='sel'>
-            <button onClick={sort}>отсортировать</button> 
+            <button onClick={()=>sort({state:state,value:value,set:setState})}>отсортировать</button> 
          <select className='select' value={value}
           onChange={(e:React.ChangeEvent<HTMLSelectElement>)=>setValue(e.target.value)}>
             <option value="up">по возрастанию</option>
@@ -104,22 +60,6 @@ to={`/home/about/?name=${name}`}>{name}</Link></div>
 export  function Ipad({item,show}:props):JSX.Element|null {
     const [state,setState]=React.useState<state1>({item:item})
 const [value,setValue]=React.useState<string>('up')
-function sort():void {
-    const mass:number[]=[]
-    for (let i = 0; i < state.item.length; i++) {
-      mass.push(parseInt(state.item[i].price))
-    }
-    const mass1:Props[]=[]
-value=='down'?mass.sort((x,y)=>y-x):mass.sort((x,y)=>x-y)
-    for (let i = 0; i < mass.length; i++) {
-        for (let ind = 0; ind < state.item.length; ind++) {
-           if (mass[i]==parseInt(state.item[ind].price)) {
-            mass1.push(state.item[ind])
-           }
-        }
-       }
-       setState({item:mass1})
-}
    const text:JSX.Element[]=state.item.map(({src,name,price}:bask,index:number)=>{
     return <div className='item' key={index}>
         <img className='itemImg' src={src} alt="" />
@@ -132,7 +72,7 @@ value=='down'?mass.sort((x,y)=>y-x):mass.sort((x,y)=>x-y)
     if (show==1) {
     return <div>
         <div className='sel'>
-            <button onClick={sort}>отсортировать</button> 
+            <button onClick={()=>sort({state:state,value:value,set:setState})}>отсортировать</button> 
          <select className='select' value={value}
           onChange={(e:React.ChangeEvent<HTMLSelectElement>)=>setValue(e.target.value)}>
             <option value="up">по возрастанию</option>
@@ -147,22 +87,6 @@ value=='down'?mass.sort((x,y)=>y-x):mass.sort((x,y)=>x-y)
  export  function Watch({item,show}:props):JSX.Element|null {
 const [state,setState]=React.useState<state1>({item:item})
 const [value,setValue]=React.useState<string>('up')
-function sort():void {
-    const mass:number[]=[]
-    for (let i = 0; i < state.item.length; i++) {
-      mass.push(parseInt(state.item[i].price))
-    }
-    const mass1:Props[]=[]
-value=='down'?mass.sort((x,y)=>y-x):mass.sort((x,y)=>x-y)
-    for (let i = 0; i < mass.length; i++) {
-        for (let ind = 0; ind < state.item.length; ind++) {
-           if (mass[i]==parseInt(state.item[ind].price)) {
-            mass1.push(state.item[ind])
-           }
-        }
-       }
-       setState({item:mass1})
-}
 const  text:JSX.Element[]=state.item.map(({src,name,price}:bask,index:number)=>{
     return <div className='item' key={index}>
        <img className='itemImg' src={src} alt="" />
@@ -176,7 +100,7 @@ to={`/home/about/?name=${name}`}>{name}</Link></div>
     if (show==1) {
     return <div >
         <div className='sel'>
-            <button onClick={sort}>отсортировать</button> 
+            <button onClick={()=>sort({state:state,value:value,set:setState})}>отсортировать</button> 
          <select className='select' value={value} 
          onChange={(e:React.ChangeEvent<HTMLSelectElement>)=>setValue(e.target.value)}>
             <option value="up">по возрастанию</option>
