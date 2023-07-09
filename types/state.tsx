@@ -1,4 +1,7 @@
 import React from "react"
+import { useDispatch, useSelector } from "react-redux"
+import type { TypedUseSelectorHook } from "react-redux"
+import store from "../store/store"
  type Props={
     src:string,
     name:string,
@@ -33,3 +36,7 @@ value=='down'?mass.sort((x,y)=>y-x):mass.sort((x,y)=>x-y)
        }
      return set({item:mass1})
 }
+type RootState = ReturnType<typeof store.getState>
+type AppDispatch = typeof store.dispatch
+export const useAppDispatch: () => AppDispatch = useDispatch
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector

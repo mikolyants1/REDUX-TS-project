@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { add1 } from '../store/slice.js';
-import { useAppDispatch,useAppSelector } from '../store/store.js';
+import { useAppDispatch,useAppSelector } from '../types/state.js';
 import { item1,item2,item3,item4 } from './items.jsx';
 import { User} from '../store/slice.js';
 import { Link } from 'react-router-dom';

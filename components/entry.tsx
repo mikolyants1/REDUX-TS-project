@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useAppDispatch,useAppSelector } from '../store/store'
+import { useAppDispatch,useAppSelector } from '../types/state.js'
 import { add2} from '../store/slice1'
 import { add3} from '../store/slice1'
 import { User } from '../store/slice'

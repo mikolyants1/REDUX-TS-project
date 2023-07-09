@@ -1,4 +1,4 @@
-import { useAppSelector } from '../store/store'
+import { useAppSelector } from '../types/state.js'
 import {Link } from 'react-router-dom'
 
 export default function Header():JSX.Element {

@@ -1,6 +1,6 @@
 import React from'react'
 import { Link } from 'react-router-dom'
-import { useAppDispatch,useAppSelector } from '../store/store'
+import { useAppDispatch,useAppSelector } from '../types/state.js'
 import { add } from '../store/slice'
 interface state1{
   name:string|undefined,
@@ -29,7 +29,7 @@ function press():void {
             setState1({error:'уже есть',src:'/regist'})
         }else{
           
-         dispatch( add({name:state.name,phone:state.phone,user:user}));
+         dispatch(add({name:state.name,phone:state.phone,user:user}));
          setState1({src:'/',error:state1.error})
         }
     }else{

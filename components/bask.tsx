@@ -1,7 +1,7 @@
 
 import { Link } from 'react-router-dom'
 import { del} from '../store/slice'
-import { useAppDispatch,useAppSelector } from '../store/store'
+import { useAppDispatch,useAppSelector } from '../types/state.js'
 import { item1 } from './items.jsx'
 import { User,bask } from '../store/slice'
 export default function Bask2():JSX.Element {
