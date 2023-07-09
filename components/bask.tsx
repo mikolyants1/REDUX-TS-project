@@ -11,7 +11,7 @@ export default function Bask2():JSX.Element {
      const user1:any=user.find((x)=>x.phone==id)
      let imgClass:string=''
      let divClass:string=''
-        const list:JSX.Element[]= user1.bask.map(({name,price,src}:bask,index:number)=>{
+    const list:JSX.Element[]=user1.bask.map(({name,price,src}:bask,index:number)=>{
  if (item1.some((x)=>x.name==name)) {
    imgClass='baskImgMac'
     divClass='item2'

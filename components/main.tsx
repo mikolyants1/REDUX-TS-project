@@ -30,34 +30,30 @@ const [items,setItems]=React.useState<state3>({item:item6})
 function reducer(state:state1,action:action):state1 {
     switch (action.type) {
     case 0:
-        setSer({text:''})
         return {show1:1,show2:0,show3:0,show4:0,show5:0}
         break;
     case 1:
-        setSer({text:''})
         return {show1:0,show2:1,show3:0,show4:0,show5:0}
         break;
     case 2:
-        setSer({text:''})
         return {show1:0,show2:0,show3:1,show4:0,show5:0}
         break
     case 3:
-        setSer({text:''})
         return {show1:0,show2:0,show3:0,show4:1,show5:0}
         break
     case 4:
         if (ser.text!=='') {
         return {show1:0,show2:0,show3:0,show4:0,show5:1}
-            }else{
-            return {show1:1,show2:0,show3:0,show4:0,show5:0}
-            }
+        }else{
+        setSer({text:''}) 
+        return {show1:1,show2:0,show3:0,show4:0,show5:0}
+        }
         break
         default:
             return state
         break;
     } 
 }
-
 function filter():void {
     const val:string=ser.text.trim().toLocaleLowerCase()
 const list:mass[]=item6.filter((item)=>{
@@ -67,7 +63,7 @@ const list:mass[]=item6.filter((item)=>{
 })
 setItems({item:list})
 }
-enum style{
+enum style {
     border=`1px solid grey`,
     width='93%',
     height='26px',

@@ -8,10 +8,9 @@ import { Link } from 'react-router-dom';
 interface state1{
    class:string
 }
-
 export default function About():JSX.Element {
    const [cless,setCless]=React.useState<state1>({class:'aboutImg'})
-    const [searchParams] = useSearchParams();
+    const [searchParams,setSearchParams] = useSearchParams();
     const id:string=useAppSelector((store)=>store.phone.id)
     const user:User[]=useAppSelector((store)=>store.reduce.user)
     const user1:any=user.find((x)=>x.phone==id)
