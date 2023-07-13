@@ -1,4 +1,4 @@
-import {createSlice,PayloadAction,Slice } from '@reduxjs/toolkit'
+import {createSlice,PayloadAction,Slice,ActionCreatorWithPayload } from '@reduxjs/toolkit'
 export type bask={
     name?:string|undefined,
     price?:string|undefined,
@@ -27,6 +27,11 @@ interface pay1{
 interface pay2{
     id:number,
     index:number
+}
+type action={
+    add:ActionCreatorWithPayload<pay,'shop/add'>,
+    add1:ActionCreatorWithPayload<pay1,'shop/add1'>,
+    del:ActionCreatorWithPayload<pay2,'shop/del'>,
 }
 const initialState:state={
     user:[],
@@ -65,5 +70,5 @@ const slice:Slice<state,{
         }
     }
 })
-export const {add,add1,del}=slice.actions
+export const {add,add1,del}:action=slice.actions
 export default slice.reducer

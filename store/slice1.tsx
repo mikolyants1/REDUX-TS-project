@@ -1,9 +1,12 @@
-import {createSlice,PayloadAction, Slice } from '@reduxjs/toolkit'
+import {ActionCreatorWithPayload, createSlice,PayloadAction, Slice } from '@reduxjs/toolkit'
 interface state{
     current:string,
     id:string
 }
-
+type action={
+    add2:ActionCreatorWithPayload<string,'shop/add2'>,
+    add3:ActionCreatorWithPayload<string,'shop/add3'>
+}
 const initialState:state={
     current:'',
     id:''
@@ -24,5 +27,5 @@ const slice1:Slice<state,{
           },
     }
 })
-export const {add2,add3}=slice1.actions
+export const {add2,add3}:action=slice1.actions
 export default slice1.reducer
