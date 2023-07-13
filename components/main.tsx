@@ -27,8 +27,8 @@ const [ser,setSer]=React.useState<state2>({text:''})
 const [state,dispatch]=React.useReducer(reducer,{show1:1,show2:0,show3:0,show4:0,show5:0})
 const item6:Array<mass>=item1.concat(item2,item3,item4)
 const [items,setItems]=React.useState<state3>({item:item6})
-function reducer(state:state1,action:action):state1 {
-    switch (action.type) {
+function reducer(state:state1,{type}:action):state1 {
+    switch (type) {
     case 0:
         return {show1:1,show2:0,show3:0,show4:0,show5:0}
         break;
@@ -56,7 +56,7 @@ function reducer(state:state1,action:action):state1 {
 }
 function filter():void {
     const val:string=ser.text.trim().toLocaleLowerCase()
-const list:mass[]=item6.filter((item)=>{
+const list:mass[]=item6.filter((item:mass)=>{
     if (item.name.toLocaleLowerCase().indexOf(val)!==-1) {
         return item
     }
