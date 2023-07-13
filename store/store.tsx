@@ -1,10 +1,13 @@
 import { configureStore,combineReducers } from '@reduxjs/toolkit'
 import storage from 'redux-persist/lib/storage'
-import { persistStore, persistReducer } from 'redux-persist'
+import { persistStore, persistReducer, Persistor, WebStorage } from 'redux-persist'
 import slice from './slice'
 import slice1 from './slice1'
-
-const config={
+interface state{
+    key:string,
+    storage:WebStorage
+}
+const config:state={
     key:'root',
     storage
 }
@@ -16,5 +19,5 @@ const persist=persistReducer(config,combine)
 const store=configureStore({
     reducer:persist
 })
-export const cachedStore=persistStore(store)
+export const cachedStore:Persistor=persistStore(store)
 export default store

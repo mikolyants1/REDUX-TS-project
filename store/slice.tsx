@@ -1,4 +1,4 @@
-import {createSlice,PayloadAction } from '@reduxjs/toolkit'
+import {createSlice,PayloadAction,Slice } from '@reduxjs/toolkit'
 export type bask={
     name?:string|undefined,
     price?:string|undefined,
@@ -32,11 +32,15 @@ const initialState:state={
     user:[],
 }
 
-const slice=createSlice({
+const slice:Slice<state,{
+    add:(state:state,action:PayloadAction<pay>)=>void,
+    add1:(state:state,action:PayloadAction<pay1>)=>void,
+    del:(state:state,action:PayloadAction<pay2>)=>void,
+},"shop">=createSlice({
     name:'shop',
     initialState,
     reducers:{
-        add:(state,action:PayloadAction<pay>):void=>{
+        add:(state,action)=>{
             const {name,phone,user}=action.payload
             state.user.push({
                 name:name,
@@ -46,7 +50,7 @@ const slice=createSlice({
             }) 
           
         },
-        add1:(state,action:PayloadAction<pay1>):void=>{
+        add1:(state,action)=>{
         const  {id,name,price,src}=action.payload
             state.user[id].bask.push({
                 name:name,
@@ -55,7 +59,7 @@ const slice=createSlice({
             })
 
         },
-        del:(state,action:PayloadAction<pay2>):void=>{
+        del:(state,action)=>{
             const {id,index}=action.payload
           state.user[id].bask.splice(index,1)
         }
