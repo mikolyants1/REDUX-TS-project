@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useAppDispatch,useAppSelector } from '../types/state.js'
-import { add2} from '../store/slice1'
-import { add3} from '../store/slice1'
+import { add2,add3} from '../store/slice1'
 import { User } from '../store/slice'
+import { AnyAction, Dispatch } from '@reduxjs/toolkit'
 interface state1{
     name:string,
     phone:string,
@@ -17,7 +17,7 @@ export default function Entry():JSX.Element {
     const [state,setState]=React.useState<state1>({name:'',phone:''})
     const [state1,setState1]=React.useState<state2>({src:'/',error:''})
     const user:User[]=useAppSelector((store)=>store.reduce.user)
-    const dispatch=useAppDispatch()
+    const dispatch:Dispatch<AnyAction>=useAppDispatch()
     function change1(e:React.ChangeEvent<HTMLInputElement>):void {
         setState({name:e.target.value,phone:state.phone})
     }
