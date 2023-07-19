@@ -114,9 +114,7 @@ to={`/home/about/?name=${name}`}>{name}</Link></div>
     
 }
 export const Search:React.FC<props>=({item,show}):JSX.Element|null=> {
-    let imgClass:string=''
-    let nameClass:string=''
-    let priceClass:string=''
+let [imgClass,nameClass,priceClass]:string[]=['','','']
     const text:JSX.Element[]=item.map(({src,name,price}:bask,index:number)=>{
         if (item1.some((x)=>x.name==name)) {
             imgClass='itemImgMac'

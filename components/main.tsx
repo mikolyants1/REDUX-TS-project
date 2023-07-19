@@ -9,7 +9,7 @@ interface state1{
     show5:number
 }
 interface action{
-    type:number
+type:number
 }
 type mass={
     src:string,

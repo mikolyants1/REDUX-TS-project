@@ -10,8 +10,7 @@ export default function Bask2():JSX.Element {
     const user:User[]=useAppSelector((store)=>store.reduce.user)
     const dispatch:Dispatch<AnyAction>=useAppDispatch()
      const user1:any=user.find((x)=>x.phone==id)
-     let imgClass:string=''
-     let divClass:string=''
+     let [imgClass,divClass]:string[]=['','']
     const list:JSX.Element[]=user1.bask.map(({name,price,src}:bask,index:number)=>{
  if (item1.some((x)=>x.name==name)) {
    imgClass='baskImgMac'
