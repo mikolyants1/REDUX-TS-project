@@ -42,14 +42,14 @@ export default function Entry():JSX.Element {
             setState1({src:'/',error:state1.error})
         }
     }
-    enum style{
+    enum style {
         margin='100px auto',
         width='300px',
         height='200px',
         backgroundColor='rgb(210,210,210)',
         borderRadius='20px'
     }
-    enum style1{
+    enum style1 {
         width='100%',
         height='100%',
         borderRadius='10px',
@@ -60,12 +60,22 @@ export default function Entry():JSX.Element {
          <div style={style}>
             <div style={{height:'15px'}}></div>
         <div className='info'>
-            <input style={style1}  type="text"
+            <input style={style1}  type="text" list='dataName'
          onChange={(e:React.ChangeEvent<HTMLInputElement>)=>{change1(e);dispatch(add2(e.target.value))}} />
+         <datalist  id='dataName'>
+          {user.map(({name}:User,index:number)=>(
+            <option key={index} value={name}>{name}</option>
+          ))}
+         </datalist>
          </div>
         <div className='info'>
-            <input style={style1}  type="text"
+            <input style={style1}  type="text" list='dataPhone'
          onChange={(e:React.ChangeEvent<HTMLInputElement>)=>{change2(e);dispatch(add3(e.target.value))}} />
+         <datalist id='dataPhone'>
+             {user.map(({phone}:User,index:number)=>(
+            <option key={index} value={phone}>{phone}</option>
+          ))}
+         </datalist>
          </div>
      <div className='reg1'>
         <button className='but1' onClick={press}>
