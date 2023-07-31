@@ -44,17 +44,17 @@ const BaskList=():JSX.Element=>{
  }
 
 export default function App():JSX.Element{
-  return  <Provider store={store}>
+  return <Provider store={store}>
      <PersistGate persistor={cachedStore} >
         <Router>
           <Routes>
             <Route path='/' element={<Home />}>
               <Route index element={<Links />} />
               <Route path='regist' element={<Regist />} />
-            <Route path='home' element={<Shop />} >
-                <Route index element={<ShopList />} />
-            <Route path='/home/about' element={<Names />} />
-            <Route path='/home/bask' element={<BaskList />} />
+              <Route path='home' element={<Shop />} >
+              <Route index element={<ShopList />} />
+            <Route path='about' element={<Names />} />
+            <Route path='bask' element={<BaskList />} />
             </Route>
           </Route>
         </Routes>

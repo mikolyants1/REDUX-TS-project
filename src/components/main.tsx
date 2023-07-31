@@ -9,9 +9,9 @@ interface state1{
     show5:number
 }
 interface action{
-type:number
+     type:number
 }
-type mass={
+export type mass={
     src:string,
     name:string,
     price:string
@@ -57,7 +57,7 @@ function reducer(state:state1,{type}:action):state1 {
 function filter():void {
     const val:string=ser.text.trim().toLocaleLowerCase()
 const list:mass[]=item6.filter((item:mass)=>{
-    if (item.name.toLocaleLowerCase().indexOf(val)!==-1) {
+if (item.name.toLocaleLowerCase().indexOf(val)!==-1) {
         return item
     }
 })

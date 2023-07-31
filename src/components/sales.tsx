@@ -11,7 +11,7 @@ const [value,setValue]=React.useState<string>('up')
         <img className='itemImg'  src={src} alt="" />
         <div className='itemName' >
 <Link className='itemLink' 
-to={`/home/about/?name=${name}`}>{name}</Link></div>
+to={`about/?name=${name}`}>{name}</Link></div>
         <div className='itemPrice'>{price}p</div>
     </div>
 }) 
@@ -38,7 +38,7 @@ const text:JSX.Element[]=state.item.map(({src,name,price}:bask,index:number)=>{
         <img className='itemImgMac'  src={src} alt="" />
         <div className='itemNameMac' >
 <Link className='itemLink' 
-to={`/home/about/?name=${name}`}>{name}</Link></div>
+to={`about/?name=${name}`}>{name}</Link></div>
         <div className='itemPriceMac'>{price}p</div>
     </div>
 }) 
@@ -65,7 +65,7 @@ const [value,setValue]=React.useState<string>('up')
         <img className='itemImg' src={src} alt="" />
         <div className='itemName'>
 <Link className='itemLink'
- to={`/home/about/?name=${name}`}>{name}</Link></div>
+ to={`about/?name=${name}`}>{name}</Link></div>
         <div className='itemPrice'>{price}p</div>
     </div>
 }) 
@@ -92,7 +92,7 @@ const  text:JSX.Element[]=state.item.map(({src,name,price}:bask,index:number)=>{
        <img className='itemImg' src={src} alt="" />
     <div className='itemName'>
 <Link className='itemLink'
-to={`/home/about/?name=${name}`}>{name}</Link></div>
+to={`about/?name=${name}`}>{name}</Link></div>
     <div className='itemPrice'>{price}p</div>
     </div>
 }) 
@@ -129,7 +129,7 @@ let [imgClass,nameClass,priceClass]:string[]=['','','']
          <img className={imgClass} src={src} alt="" />
          <div className={nameClass}>
  <Link className='itemLink'
-  to={`/home/about/?name=${name}`}>{name}</Link></div>
+  to={`about/?name=${name}`}>{name}</Link></div>
          <div className={priceClass}>{price}p</div>
      </div>
  }) 
