@@ -43,30 +43,29 @@ const BaskList:React.FC=():JSX.Element=>{
     </div>
  }
 const Loading:React.FC=():JSX.Element=>{
-  const load=React.useRef<HTMLDivElement>(null!)
+  const [text,setText]=React.useState<string>('')
   enum style {
     width='100%',
     textAlign='center'
   }
   React.useEffect(()=>{
      setInterval(() => {
-        setTimeout(() => {
-            load.current.innerHTML=''
+      setTimeout(() => {
+        setText('')
         }, 0);
-        setTimeout(() => {
-            load.current.innerHTML='.'
+      setTimeout(() => {
+        setText('.')
         }, 200);
-        setTimeout(() => {
-            load.current.innerHTML='..'
+      setTimeout(() => {
+        setText('..')
         }, 400);
-        setTimeout(() => {
-            load.current.innerHTML='...'
+      setTimeout(() => {
+        setText('...')
         }, 600);
     }, 1000);
   })
      return <div style={style}>
-        <div>Loading</div>
-        <div ref={load}></div>
+        <div>Loading {text}</div>
      </div>
 }
 export default function App():JSX.Element{

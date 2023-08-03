@@ -19,12 +19,12 @@ const user:User[]=useAppSelector((store)=>store.reduce.user)
 const dispatch:Dispatch<AnyAction>=useAppDispatch()
 function press():void {
     let con:number=0
-    console.log(state.name)
     if (state.name!==''&&state.phone!=='') {
         for (let i = 0; i < user.length; i++) {
-          if (user[i].phone==state.phone) {
+          if (user[i].phone==state.phone||user[i].name==state.name) {
             con++
           }
+          
         }
         if (con>0) {
             setState1({error:'уже есть',src:'/regist'})
