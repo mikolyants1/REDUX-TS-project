@@ -32,14 +32,14 @@ const ShopList:React.FC=():JSX.Element=> {
 }
 const Names:React.FC=():JSX.Element=>{
    return <div>
-      <Header />
+     <Header />
      <About />
    </div>
 }
 const BaskList:React.FC=():JSX.Element=>{
     return <div>
        <Header />
-      <Bask2 />
+       <Bask2 />
     </div>
  }
 const Loading:React.FC=():JSX.Element=>{
@@ -63,7 +63,7 @@ const Loading:React.FC=():JSX.Element=>{
         setText('...')
         }, 600);
     }, 1000);
-  })
+  },[])
      return <div style={style}>
         <div>Loading {text}</div>
      </div>
