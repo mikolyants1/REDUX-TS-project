@@ -26,7 +26,7 @@ function press():void {
         if (con>0) {
             setState1({error:'уже есть',src:'/regist'})
         }else{     
-         dispatch(add({name:state.name,phone:state.phone,user:user}));
+         dispatch(add({name:state.name,phone:state.phone,obj:user}));
          setState1({src:'/',error:state1.error})
         }
     }else{

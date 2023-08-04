@@ -16,7 +16,7 @@ interface state{
 interface pay{
     name:string|undefined,
   phone:string|undefined,
-  user:User[]
+  obj:User[]
 }
 interface pay1{
     id:number,
@@ -45,28 +45,28 @@ const slice:Slice<state,{
     name:'shop',
     initialState,
     reducers:{
-        add:(state,action)=>{
-            const {name,phone,user}=action.payload
-            state.user.push({
+        add:({user},{payload})=>{
+            const {name,phone,obj}=payload
+            user.push({
                 name:name,
                 phone:phone,
                 bask:[],
-                id:Object.keys(user).length
+                id:Object.keys(obj).length
             }) 
           
         },
-        add1:(state,action)=>{
-        const  {id,name,price,src}=action.payload
-            state.user[id].bask.push({
+        add1:({user},{payload})=>{
+        const  {id,name,price,src}=payload
+            user[id].bask.push({
                 name:name,
                 price:price,
                 src:src,
             })
 
         },
-        del:(state,action)=>{
-            const {id,index}=action.payload
-          state.user[id].bask.splice(index,1)
+        del:({user},{payload})=>{
+            const {id,index}=payload
+            user[id].bask.splice(index,1)
         }
     }
 })
