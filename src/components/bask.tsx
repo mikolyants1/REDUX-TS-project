@@ -33,7 +33,7 @@ export default function Bask2():JSX.Element {
             корзина пока пуста
         </div>
        }else{
-        return <div className='itemList'  >
+        return <div className='itemList'>
              {list}
              <div className='baskBack'>
             <Link style={{textDecoration:'none'}} to='/home'>вернуться к покупкам</Link>

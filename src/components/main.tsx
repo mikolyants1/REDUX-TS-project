@@ -50,7 +50,7 @@ function reducer(state:state1,{type}:action):state1 {
         }
         break
         default:
-            return state
+        return state
         break;
     } 
 }

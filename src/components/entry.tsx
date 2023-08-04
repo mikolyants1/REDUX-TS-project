@@ -27,15 +27,12 @@ export default function Entry():JSX.Element {
     function press():void {
         let con:number=0
         if (state.phone!==''&&state.name!=='') {
-            for (let i = 0; i < user.length; i++) {
-              if (user[i].phone==state.phone&&user[i].name==state.name) {
-                con++
-              }
-            }
+        user.forEach(({phone,name}:User)=>{
+        if (phone==state.phone&&name==state.name) con++
+            })
             if (con==0) {
                 setState1({error:'не найден',src:state1.src})
             }else{
-             
              setState1({src:'/home',error:state1.error})
             }
         }else{

@@ -20,16 +20,12 @@ const dispatch:Dispatch<AnyAction>=useAppDispatch()
 function press():void {
     let con:number=0
     if (state.name!==''&&state.phone!=='') {
-        for (let i = 0; i < user.length; i++) {
-          if (user[i].phone==state.phone||user[i].name==state.name) {
-            con++
-          }
-          
-        }
+        user.forEach(({phone,name}:User)=>{
+        if (phone==state.phone||name==state.name) con++
+        })
         if (con>0) {
             setState1({error:'уже есть',src:'/regist'})
-        }else{
-          
+        }else{     
          dispatch(add({name:state.name,phone:state.phone,user:user}));
          setState1({src:'/',error:state1.error})
         }
