@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useAppDispatch,useAppSelector } from '../types/state.js'
 import { add,User } from '../store/slice'
 import { AnyAction, Dispatch } from '@reduxjs/toolkit'
+import { state } from '../store/slice'
 interface state1{
   name:string|undefined,
   phone:string|undefined,
@@ -12,10 +13,13 @@ interface state2{
   src:string,
   error:string
 }
+type state3={
+  reduce:state
+}
 export default function Regist():JSX.Element {
 const [state,setState]=React.useState<state1>({name:'',phone:''})
 const [state1,setState1]=React.useState<state2>({src:'/regist',error:''})
-const user:User[]=useAppSelector((store)=>store.reduce.user)
+const user:User[]=useAppSelector((store:state3)=>store.reduce.user)
 const dispatch:Dispatch<AnyAction>=useAppDispatch()
 function press():void {
     let con:number=0

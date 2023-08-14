@@ -10,7 +10,7 @@ export interface User{
   bask:bask[],
   id:number
 }
-interface state{
+export interface state{
     user:User[]
 }
 interface pay{
@@ -56,7 +56,7 @@ const slice:Slice<state,{
           
         },
         add1:({user},{payload})=>{
-        const  {id,name,price,src}=payload
+        const {id,name,price,src}=payload
             user[id].bask.push({
                 name:name,
                 price:price,

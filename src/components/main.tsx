@@ -55,10 +55,10 @@ function reducer(state:state1,{type}:action):state1 {
     } 
 }
 function filter():void {
-    const val:string=ser.text.trim().toLocaleLowerCase()
+const val:string=ser.text.trim().toLocaleLowerCase()
 const list:mass[]=item6.filter((item:mass)=>{
 if (item.name.toLocaleLowerCase().indexOf(val)!==-1) {
-        return item
+    return item
     }
 })
 setItems({item:list})

@@ -8,12 +8,19 @@ import { Link } from 'react-router-dom';
 import { AnyAction, Dispatch } from '@reduxjs/toolkit';
 import { URLSearchParams } from 'url';
 import { mass } from './main.js';
-
+import { state } from '../store/slice1.js';
+import { state as st } from '../store/slice.js';
+type state2={
+   phone:state
+}
+type state3={
+   reduce:st
+}
 export default function About():JSX.Element {
    const [cless,setCless]=React.useState<string>('aboutImg')
    const [searchParams]:[URLSearchParams,SetURLSearchParams] = useSearchParams();
-   const id:string=useAppSelector((store)=>store.phone.id)
-   const user:User[]=useAppSelector((store)=>store.reduce.user)
+   const id:string=useAppSelector(({phone:{id}}:state2)=>id)
+   const user:User[]=useAppSelector(({reduce:{user}}:state3)=>user)
    const user1:any=user.find(({phone}:User)=>phone==id)
    const dispatch:Dispatch<AnyAction>=useAppDispatch()
    const Name:any=searchParams.get("name")
@@ -21,9 +28,7 @@ export default function About():JSX.Element {
    const src:string|undefined=item.src
    const price:string|undefined=item.price
     React.useEffect(()=>{
- if (item1.some(({name}:mass)=>name==Name)) {
-   setCless('aboutImgMac')
- }
+ if (item1.some(({name}:mass)=>name==Name)) setCless('aboutImgMac')
   },[])
      return <div style={{width:'100%'}}>
         <div className='aboutDiv'>

@@ -1,5 +1,5 @@
 import {ActionCreatorWithPayload, createSlice,PayloadAction, Slice } from '@reduxjs/toolkit'
-interface state{
+ export interface state{
     current:string,
     id:string
 }
@@ -19,12 +19,11 @@ const slice1:Slice<state,{
     initialState,
     reducers:{  
         add2:(state,action)=>{
-            state.current=action.payload
-           
-           },
+            state.current=action.payload     
+                },
         add3:(state,action)=>{
             state.id=action.payload
-          },
+                },
     }
 })
 export const {add2,add3}:action=slice1.actions

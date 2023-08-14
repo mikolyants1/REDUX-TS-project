@@ -6,19 +6,27 @@ import { item1 } from './items.jsx'
 import { User,bask } from '../store/slice'
 import { AnyAction, Dispatch } from '@reduxjs/toolkit'
 import { mass } from './main.js'
+import { state } from '../store/slice1.js';
+import { state as st } from '../store/slice.js';
+type state2={
+   phone:state
+}
+type state3={
+   reduce:st
+}
 export default function Bask2():JSX.Element {
-    const id:string|undefined=useAppSelector((store)=>store.phone.id)
-    const user:User[]=useAppSelector((store)=>store.reduce.user)
+    const id:string|undefined=useAppSelector(({phone}:state2)=>phone.id)
+    const user:User[]=useAppSelector(({reduce}:state3)=>reduce.user)
     const dispatch:Dispatch<AnyAction>=useAppDispatch()
      const user1:any=user.find(({phone}:User)=>phone==id)
      let [imgClass,divClass]:string[]=['','']
     const list:JSX.Element[]=user1.bask.map(({name,price,src}:bask,index:number)=>{
  if (item1.some(({name:n}:mass)=>n==name)) {
-   imgClass='baskImgMac'
-    divClass='item2'
+  imgClass='baskImgMac'
+  divClass='item2'
 }else{
-    imgClass='baskImg'
-      divClass='item1'
+  imgClass='baskImg'
+  divClass='item1'
 }
    return <div key={index} className={divClass}>
           <img className={imgClass}  src={`../${src}`} alt="" />

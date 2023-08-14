@@ -1,8 +1,11 @@
 import { useAppSelector } from '../types/state.js'
 import {Link } from 'react-router-dom'
-
+import { state } from '../store/slice1.js'
+type state1={
+  phone:state
+}
 export default function Header():JSX.Element {
-    const current:string=useAppSelector((store)=>store.phone.current)
+    const current:string=useAppSelector((store:state1)=>store.phone.current)
     return <div className='header' >    
              <div className='header1' >
                <div className='headerDiv'>
