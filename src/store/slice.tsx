@@ -1,6 +1,6 @@
 import {createSlice,PayloadAction,Slice,ActionCreatorWithPayload } from '@reduxjs/toolkit'
 export type bask={
-    name?:string|undefined,
+    name?:string|null,
     price?:string|undefined,
     src?:string|undefined,
 }
@@ -19,8 +19,8 @@ interface pay{
   obj:User[]
 }
 interface pay1{
-    id:number,
-    name:string|undefined,
+    id:number|undefined,
+    name:string|null,
     price:string|undefined,
     src:string|undefined
 }
@@ -57,12 +57,13 @@ const slice:Slice<state,{
         },
         add1:({user},{payload})=>{
         const {id,name,price,src}=payload
+       if (typeof id=='number'){
             user[id].bask.push({
                 name:name,
                 price:price,
                 src:src,
             })
-
+          }
         },
         del:({user},{payload})=>{
             const {id,index}=payload

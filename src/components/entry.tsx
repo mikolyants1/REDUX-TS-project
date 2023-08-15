@@ -35,7 +35,7 @@ export default function Entry():JSX.Element {
         if (phone==state.phone&&name==state.name) con++
             })
             if (con==0) {
-                setState1({error:'не найден',src:state1.src})
+            setState1({error:'не найден',src:state1.src})
             }else{
              setState1({src:'/home',error:state1.error})
             }
@@ -59,9 +59,9 @@ export default function Entry():JSX.Element {
       }
     return <div>
          <div style={style}>
-            <div style={{height:'15px'}}></div>
+        <div style={{height:'15px'}}></div>
         <div className='info'>
-            <input style={style1}  type="text" list='dataName'
+        <input style={style1}  type="text" list='dataName'
          onChange={(e:ChangeEvent<HTMLInputElement>):void=>{change1(e);dispatch(add2(e.target.value))}} />
          <datalist  id='dataName'>
           {user.map(({name}:User,index:number):JSX.Element=>(
@@ -70,7 +70,7 @@ export default function Entry():JSX.Element {
          </datalist>
          </div>
         <div className='info'>
-            <input style={style1}  type="text" list='dataPhone'
+        <input style={style1}  type="text" list='dataPhone'
          onChange={(e:ChangeEvent<HTMLInputElement>):void=>{change2(e);dispatch(add3(e.target.value))}} />
          <datalist id='dataPhone'>
              {user.map(({phone}:User,index:number):JSX.Element=>(

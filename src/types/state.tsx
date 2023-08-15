@@ -1,4 +1,4 @@
-import React,{FC,ReactNode} from "react"
+import React,{FC,ReactNode,Dispatch} from "react"
 import { useDispatch, useSelector } from "react-redux"
 import type { TypedUseSelectorHook } from "react-redux"
 import store from "../store/store"
@@ -14,11 +14,10 @@ export interface props{
 export interface state1{
     item:Props[]
 }
-
  interface state2{
     state:state1,
     value:string,
-    set:React.SetStateAction<any>
+    set:Dispatch<React.SetStateAction<state1>>
 }
 export const sort:FC<state2>=({state:{item},value,set}):ReactNode=> {
 const [mass,mass1]:number[][]&Props[][]=[[],[]]
@@ -31,7 +30,8 @@ for (let i = 0; i < mass.length; i++) {
         }
       }
      }
-    return set({item:mass1})
+ set({item:mass1})
+ return 
 }
 type RootState = ReturnType<typeof store.getState>
 type AppDispatch = typeof store.dispatch

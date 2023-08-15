@@ -82,7 +82,7 @@ enum style {
  <input type="text" style={style} value={ser.text}
   onChange={(e:ChangeEvent<HTMLInputElement>):void=>setSer({text:e.target.value})} />
  <button className='serBut' onClick={():void=>{dispatch({type:4});filter()}}>search</button>
-        </div>
+    </div>
     <div >
     <Mac show={state.show1} item={item1} />
     <Iphone show={state.show2} item={item2} />

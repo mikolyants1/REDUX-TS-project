@@ -21,12 +21,12 @@ export default function About():JSX.Element {
    const [searchParams]:[URLSearchParams,SetURLSearchParams]=useSearchParams();
    const id:string=useAppSelector(({phone:{id}}:state2)=>id)
    const user:User[]=useAppSelector(({reduce:{user}}:state3)=>user)
-   const user1:any=user.find(({phone}:User):boolean=>phone==id)
+   const user1:User|undefined=user.find(({phone}:User):boolean=>phone==id)
    const dispatch:Dispatch<AnyAction>=useAppDispatch()
-   const Name:any=searchParams.get("name")
-   const item:any=item1.concat(item2,item3,item4).find(({name}:mass):boolean=>name==Name)
-   const src:string|undefined=item.src
-   const price:string|undefined=item.price
+   const Name:string|null=searchParams.get("name")
+   const item:mass|undefined=item1.concat(item2,item3,item4).find(({name}:mass):boolean=>name==Name)
+   const src:string|undefined=item?.src
+   const price:string|undefined=item?.price
     useEffect(():void=>{
  if (item1.some(({name}:mass):boolean=>name==Name)) setCless('aboutImgMac')
   },[])
@@ -37,7 +37,7 @@ export default function About():JSX.Element {
       <div className='aboutPrice' >{price}p</div>  
      <div className='divBut'>
      <button className='aboutBut'
-      onClick={():void=>{dispatch(add1({id:user1.id,name:Name,price:price,src:src}))}} >добавить в корзину
+      onClick={():void=>{dispatch(add1({id:user1?.id,name:Name,price:price,src:src}))}} >добавить в корзину
       </button>
      </div>
      <div className='baskBack'>
