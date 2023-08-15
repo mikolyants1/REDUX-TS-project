@@ -129,7 +129,7 @@ to={`about/?name=${name}`}>{name}</Link></div>
 export const Search:FC<props>=({item,show}):JSX.Element|null=> {
  let [imgClass,nameClass,priceClass]:string[]=['','','']
     const text:JSX.Element[]=item.map(({src,name,price}:bask,i:number):JSX.Element=>{
-        if (item1.some(({name}:mass):boolean=>name==name)) {
+        if (item1.some(({name:n}:mass):boolean=>n==name)) {
             imgClass='itemImgMac'
             nameClass='itemNameMac'
             priceClass='itemPriceMac'
