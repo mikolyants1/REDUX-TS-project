@@ -1,4 +1,5 @@
 import {Provider} from 'react-redux'
+import {FC,useEffect,useState} from 'react'
 import store,{cachedStore} from './store/store'
 import { PersistGate } from 'redux-persist/lib/integration/react'
 import { BrowserRouter as Router,Route,Routes,Outlet} from 'react-router-dom'
@@ -8,58 +9,58 @@ import Entry from './components/entry'
 import About from './components/about'
 import Main from './components/main'
 import Header from './components/header'
-import React from 'react'
-const Home:React.FC=():JSX.Element=> {
+
+const Home:FC=():JSX.Element=> {
    return <div>
        <Outlet />
    </div>
 }
-const Links:React.FC=():JSX.Element=> {
+const Links:FC=():JSX.Element=> {
    return <div>
    <Entry />
    </div>
 }
-const Shop:React.FC=():JSX.Element=>{
+const Shop:FC=():JSX.Element=>{
     return <div>
         <Outlet />
     </div>
 }
-const ShopList:React.FC=():JSX.Element=> {
+const ShopList:FC=():JSX.Element=> {
     return <div>
     <Header />
     <Main />
    </div>
 }
-const Names:React.FC=():JSX.Element=>{
+const Names:FC=():JSX.Element=>{
    return <div>
      <Header />
      <About />
    </div>
 }
-const BaskList:React.FC=():JSX.Element=>{
+const BaskList:FC=():JSX.Element=>{
     return <div>
        <Header />
        <Bask2 />
     </div>
  }
-const Loading:React.FC=():JSX.Element=>{
-  const [text,setText]=React.useState<string>('')
+const Loading:FC=():JSX.Element=>{
+  const [text,setText]=useState<string>('')
   enum style {
     width='100%',
     textAlign='center'
   }
-  React.useEffect(()=>{
-     setInterval(() => {
-      setTimeout(() => {
+  useEffect(():void=>{
+     setInterval(():void => {
+      setTimeout(():void => {
         setText('')
         }, 0);
-      setTimeout(() => {
+      setTimeout(():void => {
         setText('.')
         }, 200);
-      setTimeout(() => {
+      setTimeout(():void => {
         setText('..')
         }, 400);
-      setTimeout(() => {
+      setTimeout(():void => {
         setText('...')
         }, 600);
     }, 1000);
