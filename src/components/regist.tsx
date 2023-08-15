@@ -1,4 +1,4 @@
-import React from'react'
+import {useState,ChangeEvent} from'react'
 import { Link } from 'react-router-dom'
 import { useAppDispatch,useAppSelector } from '../types/state.js'
 import { add,User } from '../store/slice'
@@ -17,14 +17,14 @@ type state3={
   reduce:state
 }
 export default function Regist():JSX.Element {
-const [state,setState]=React.useState<state1>({name:'',phone:''})
-const [state1,setState1]=React.useState<state2>({src:'/regist',error:''})
+const [state,setState]=useState<state1>({name:'',phone:''})
+const [state1,setState1]=useState<state2>({src:'/regist',error:''})
 const user:User[]=useAppSelector((store:state3)=>store.reduce.user)
 const dispatch:Dispatch<AnyAction>=useAppDispatch()
 function press():void {
     let con:number=0
     if (state.name!==''&&state.phone!=='') {
-        user.forEach(({phone,name}:User)=>{
+        user.forEach(({phone,name}:User):void=>{
         if (phone==state.phone||name==state.name) con++
         })
         if (con>0) {
@@ -48,13 +48,13 @@ enum style{
          <div className='user'>
             <div style={{height:'15px'}}></div>
         <div className='info'>
-            <input style={style}
-            onChange={(e:React.ChangeEvent<HTMLInputElement>)=>setState({name:e.target.value,phone:state.phone})}
+          <input style={style}
+          onChange={(e:ChangeEvent<HTMLInputElement>):void=>setState({name:e.target.value,phone:state.phone})}
           type="text" />
           </div>
         <div className='info'>
-            <input style={style}
-             onChange={(e:React.ChangeEvent<HTMLInputElement>)=>setState({phone:e.target.value,name:state.name})}
+          <input style={style}
+          onChange={(e:ChangeEvent<HTMLInputElement>):void=>setState({phone:e.target.value,name:state.name})}
            type="text" />
            </div>
      <div className='reg2'>

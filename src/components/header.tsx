@@ -5,7 +5,7 @@ type state1={
   phone:state
 }
 export default function Header():JSX.Element {
-    const current:string=useAppSelector((store:state1)=>store.phone.current)
+    const current:string=useAppSelector(({phone:{current}}:state1)=>current)
     return <div className='header' >    
              <div className='header1' >
                <div className='headerDiv'>

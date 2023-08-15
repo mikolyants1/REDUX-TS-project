@@ -1,4 +1,4 @@
-import React from "react"
+import React,{FC,ReactNode} from "react"
 import { useDispatch, useSelector } from "react-redux"
 import type { TypedUseSelectorHook } from "react-redux"
 import store from "../store/store"
@@ -20,21 +20,18 @@ export interface state1{
     value:string,
     set:React.SetStateAction<any>
 }
-export const sort:React.FC<state2>=({state,value,set}):React.ReactNode=> {
-    const mass:number[]=[]
-    for (let i = 0; i < state.item.length; i++) {
-      mass.push(parseInt(state.item[i].price))
-    }
-    const mass1:Props[]=[]
-value=='down'?mass.sort((x,y)=>y-x):mass.sort((x,y)=>x-y)
-    for (let i = 0; i < mass.length; i++) {
-        for (let ind = 0; ind < state.item.length; ind++) {
-           if (mass[i]==parseInt(state.item[ind].price)) {
-            mass1.push(state.item[ind])
-           }
+export const sort:FC<state2>=({state:{item},value,set}):ReactNode=> {
+const [mass,mass1]:number[][]&Props[][]=[[],[]]
+item.forEach(({price}:Props):number=>mass.push(parseInt(price)))
+mass.sort((x:number,y:number):number=>value=='down'?y-x:x-y)
+for (let i = 0; i < mass.length; i++) {
+  for (let ind = 0; ind < item.length; ind++) {
+    if (mass[i]==parseInt(item[ind].price)) {
+        mass1.push(item[ind])
         }
-       }
-     return set({item:mass1})
+      }
+     }
+    return set({item:mass1})
 }
 type RootState = ReturnType<typeof store.getState>
 type AppDispatch = typeof store.dispatch

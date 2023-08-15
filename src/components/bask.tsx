@@ -18,10 +18,10 @@ export default function Bask2():JSX.Element {
     const id:string|undefined=useAppSelector(({phone}:state2)=>phone.id)
     const user:User[]=useAppSelector(({reduce}:state3)=>reduce.user)
     const dispatch:Dispatch<AnyAction>=useAppDispatch()
-     const user1:any=user.find(({phone}:User)=>phone==id)
+     const user1:any=user.find(({phone}:User):boolean=>phone==id)
      let [imgClass,divClass]:string[]=['','']
-    const list:JSX.Element[]=user1.bask.map(({name,price,src}:bask,index:number)=>{
- if (item1.some(({name:n}:mass)=>n==name)) {
+    const list:JSX.Element[]=user1.bask.map(({name,price,src}:bask,index:number):JSX.Element=>{
+ if (item1.some(({name:n}:mass):boolean=>n==name)) {
   imgClass='baskImgMac'
   divClass='item2'
 }else{
@@ -33,7 +33,11 @@ export default function Bask2():JSX.Element {
         <div className='baskName' >{name}</div>
         <div className='baskPrice'>{price}</div>
         <div style={{width:'80%',margin:'auto'}}><button style={{width:'50%'}}>купить</button>
-        <button style={{width:'50%'}} onClick={()=>{dispatch(del({id:user1.id,index:index}))}}>удалить</button></div>
+        <button style={{width:'50%'}}
+         onClick={():void=>{dispatch(del({id:user1.id,index:index}))}}>
+          удалить
+        </button>
+        </div>
       </div>
        })
       

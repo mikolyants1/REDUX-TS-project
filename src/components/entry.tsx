@@ -1,4 +1,4 @@
-import React from 'react'
+import {useState,ChangeEvent} from 'react'
 import { Link } from 'react-router-dom'
 import { useAppDispatch,useAppSelector } from '../types/state.js'
 import { add2,add3} from '../store/slice1'
@@ -18,20 +18,20 @@ type state3={
     reduce:state
 }
 export default function Entry():JSX.Element {
-    const [state,setState]=React.useState<state1>({name:'',phone:''})
-    const [state1,setState1]=React.useState<state2>({src:'/',error:''})
+    const [state,setState]=useState<state1>({name:'',phone:''})
+    const [state1,setState1]=useState<state2>({src:'/',error:''})
     const user:User[]=useAppSelector(({reduce:{user}}:state3)=>user)
     const dispatch:Dispatch<AnyAction>=useAppDispatch()
-    function change1(e:React.ChangeEvent<HTMLInputElement>):void {
+    const change1=(e:ChangeEvent<HTMLInputElement>):void=> {
         setState({name:e.target.value,phone:state.phone})
     }
-    function change2(e:React.ChangeEvent<HTMLInputElement>):void {
+    const change2=(e:ChangeEvent<HTMLInputElement>):void=> {
         setState({phone:e.target.value,name:state.name})
     }
     function press():void {
         let con:number=0
         if (state.phone!==''&&state.name!=='') {
-        user.forEach(({phone,name}:User)=>{
+        user.forEach(({phone,name}:User):void=>{
         if (phone==state.phone&&name==state.name) con++
             })
             if (con==0) {
@@ -62,18 +62,18 @@ export default function Entry():JSX.Element {
             <div style={{height:'15px'}}></div>
         <div className='info'>
             <input style={style1}  type="text" list='dataName'
-         onChange={(e:React.ChangeEvent<HTMLInputElement>)=>{change1(e);dispatch(add2(e.target.value))}} />
+         onChange={(e:ChangeEvent<HTMLInputElement>):void=>{change1(e);dispatch(add2(e.target.value))}} />
          <datalist  id='dataName'>
-          {user.map(({name}:User,index:number)=>(
+          {user.map(({name}:User,index:number):JSX.Element=>(
             <option key={index} value={name}>{name}</option>
           ))}
          </datalist>
          </div>
         <div className='info'>
             <input style={style1}  type="text" list='dataPhone'
-         onChange={(e:React.ChangeEvent<HTMLInputElement>)=>{change2(e);dispatch(add3(e.target.value))}} />
+         onChange={(e:ChangeEvent<HTMLInputElement>):void=>{change2(e);dispatch(add3(e.target.value))}} />
          <datalist id='dataPhone'>
-             {user.map(({phone}:User,index:number)=>(
+             {user.map(({phone}:User,index:number):JSX.Element=>(
             <option key={index} value={phone}>{phone}</option>
           ))}
          </datalist>
