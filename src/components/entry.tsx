@@ -29,18 +29,18 @@ export default function Entry():JSX.Element {
         setState({phone:e.target.value,name:state.name})
     }
     function press():void {
-        let con:number=0
-        if (state.phone!==''&&state.name!=='') {
-        user.forEach(({phone,name}:User):void=>{
-        if (phone==state.phone&&name==state.name) con++
-            })
-            if (con==0) {
-            setState1({error:'не найден',src:state1.src})
-            }else{
-             setState1({src:'/home',error:state1.error})
-            }
+    let con:number=0
+    if (state.phone!==''&&state.name!=='') {
+    user.forEach(({phone,name}:User):void=>{
+    if (phone==state.phone&&name==state.name) con++
+        })
+    if (con==0) {
+    setState1({error:'не найден',src:state1.src})
         }else{
-            setState1({src:'/',error:state1.error})
+    setState1({src:'/home',error:state1.error})
+        }
+        }else{
+        setState1({src:'/',error:state1.error})
         }
     }
     enum style {
@@ -73,7 +73,7 @@ export default function Entry():JSX.Element {
         <input style={style1}  type="text" list='dataPhone'
          onChange={(e:ChangeEvent<HTMLInputElement>):void=>{change2(e);dispatch(add3(e.target.value))}} />
          <datalist id='dataPhone'>
-             {user.map(({phone}:User,index:number):JSX.Element=>(
+          {user.map(({phone}:User,index:number):JSX.Element=>(
             <option key={index} value={phone}>{phone}</option>
           ))}
          </datalist>

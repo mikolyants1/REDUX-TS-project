@@ -3,6 +3,7 @@ export type bask={
     name?:string|null,
     price?:string|undefined,
     src?:string|undefined,
+    color?:string|undefined
 }
 export interface User{
   name:string|undefined,
@@ -14,7 +15,7 @@ export interface state{
     user:User[]
 }
 interface pay{
-    name:string|undefined,
+  name:string|undefined,
   phone:string|undefined,
   obj:User[]
 }
@@ -22,7 +23,8 @@ interface pay1{
     id:number|undefined,
     name:string|null,
     price:string|undefined,
-    src:string|undefined
+    src:string|undefined,
+    color:string|undefined
 }
 interface pay2{
     id:number,
@@ -34,7 +36,7 @@ type action={
     del:ActionCreatorWithPayload<pay2,'shop/del'>,
 }
 const initialState:state={
-    user:[],
+  user:[],
 }
 
 const slice:Slice<state,{
@@ -56,12 +58,13 @@ const slice:Slice<state,{
           
         },
         add1:({user},{payload})=>{
-        const {id,name,price,src}=payload
+        const {id,name,price,src,color}=payload
        if (typeof id=='number'){
             user[id].bask.push({
                 name:name,
                 price:price,
                 src:src,
+                color:color
             })
           }
         },

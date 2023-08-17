@@ -1,21 +1,29 @@
 import {useState,ChangeEvent,FC,ReactNode} from 'react'
 import {Link } from 'react-router-dom'
 import { item1 } from './items'
-import { bask } from '../store/slice'
 import { sort,props,state1 } from '../types/state'
-import { mass } from './main'
+import {mass } from './items'
  export function Iphone({item,show}:props):JSX.Element|null {
 const [state,setState]=useState<state1>({item:item})
 const [value,setValue]=useState<string>('up')
-const text:JSX.Element[]=state.item.map(({src,name,price}:bask,i:number):JSX.Element=>(
-     <div className='item' key={i}>
-        <img className='itemImg'  src={src} alt="" />
-        <div className='itemName' >
-<Link className='itemLink' 
-to={`about/?name=${name}`}>{name}</Link></div>
-        <div className='itemPrice'>{price}p</div>
+const overOut=(item:string,i:number):void=>{
+    const img:NodeListOf<HTMLImageElement>=document.querySelectorAll('#Iphone')
+     img[i].src=item
+    }
+    const text:JSX.Element[]=state.item.map(({src,name,price,src1}:mass,i:number):JSX.Element=>{
+        return <div className='item' key={i}>
+            <img className='itemImg' id='Iphone'
+             onMouseOver={():void=>overOut(src1,i)}
+              onMouseOut={():void=>overOut(src,i)} src={src} alt="" />
+            <div className='itemName' >
+    <Link className='itemLink' 
+    to={`about/?name=${name}`}>
+        {name}
+    </Link>
     </div>
-)) 
+    <div className='itemPrice'>{price}p</div>
+        </div>
+    }) 
 if (show==1) {
     return <div>
        <div className='sel'>
@@ -37,9 +45,15 @@ if (show==1) {
 export function Mac({item,show}:props):JSX.Element|null {
 const [state,setState]=useState<state1>({item:item})
 const [value,setValue]=useState<string>('up')
-const text:JSX.Element[]=state.item.map(({src,name,price}:bask,i:number):JSX.Element=>(
-     <div className='item' key={i}>
-        <img className='itemImgMac'  src={src} alt="" />
+const overOut=(item:string,i:number):void=>{
+const img:NodeListOf<HTMLImageElement>=document.querySelectorAll('#Mac')
+ img[i].src=item
+}
+const text:JSX.Element[]=state.item.map(({src,name,price,src1}:mass,i:number):JSX.Element=>{
+    return <div className='item' key={i}>
+        <img className='itemImgMac' id='Mac'
+         onMouseOver={():void=>overOut(src1,i)}
+          onMouseOut={():void=>overOut(src,i)} src={src} alt="" />
         <div className='itemNameMac' >
 <Link className='itemLink' 
 to={`about/?name=${name}`}>
@@ -48,7 +62,7 @@ to={`about/?name=${name}`}>
 </div>
 <div className='itemPriceMac'>{price}p</div>
     </div>
-)) 
+}) 
 if (show==1) {
     return <div > 
          <div className='sel'>
@@ -70,18 +84,24 @@ if (show==1) {
 export  function Ipad({item,show}:props):JSX.Element|null {
 const [state,setState]=useState<state1>({item:item})
 const [value,setValue]=useState<string>('up')
-   const text:JSX.Element[]=state.item.map(({src,name,price}:bask,i:number):JSX.Element=>(
-     <div className='item' key={i}>
-        <img className='itemImg' src={src} alt="" />
-        <div className='itemName'>
-<Link className='itemLink'
- to={`about/?name=${name}`}>
-    {name}
- </Link>
- </div>
+const overOut=(item:string,i:number):void=>{
+    const img:NodeListOf<HTMLImageElement>=document.querySelectorAll('#Ipad')
+     img[i].src=item
+    }
+    const text:JSX.Element[]=state.item.map(({src,name,price,src1}:mass,i:number):JSX.Element=>{
+        return <div className='item' key={i}>
+            <img className='itemImg' id='Ipad'
+             onMouseOver={():void=>overOut(src1,i)}
+              onMouseOut={():void=>overOut(src,i)} src={src} alt="" />
+            <div className='itemName' >
+    <Link className='itemLink' 
+    to={`about/?name=${name}`}>
+        {name}
+    </Link>
+    </div>
     <div className='itemPrice'>{price}p</div>
-</div>
-   )) 
+        </div>
+    }) 
 if (show==1) {
     return <div>
         <div className='sel'>
@@ -103,19 +123,24 @@ if (show==1) {
  export  function Watch({item,show}:props):JSX.Element|null {
 const [state,setState]=useState<state1>({item:item})
 const [value,setValue]=useState<string>('up')
-const  text:JSX.Element[]=state.item.map(({src,name,price}:bask,i:number):JSX.Element=>(
-     <div className='item' key={i}>
-       <img className='itemImg' src={src} alt="" />
-    <div className='itemName'>
-<Link className='itemLink'
-to={`about/?name=${name}`}>
-    {name}
-</Link>
-</div>
-<div className='itemPrice'>{price}p</div>
-</div>
-)) 
-
+const overOut=(item:string,i:number):void=>{
+    const img:NodeListOf<HTMLImageElement>=document.querySelectorAll('#Watch')
+     img[i].src=item
+    }
+const text:JSX.Element[]=state.item.map(({src,name,price,src1}:mass,i:number):JSX.Element=>{
+        return <div className='item' key={i}>
+            <img className='itemImg' id='Watch'
+             onMouseOver={():void=>overOut(src1,i)}
+              onMouseOut={():void=>overOut(src,i)} src={src} alt="" />
+            <div className='itemName' >
+    <Link className='itemLink' 
+    to={`about/?name=${name}`}>
+        {name}
+    </Link>
+    </div>
+    <div className='itemPrice'>{price}p</div>
+        </div>
+    }) 
 if (show==1) {
     return <div >
         <div className='sel'>
@@ -137,7 +162,7 @@ if (show==1) {
 }
 export const Search:FC<props>=({item,show}):JSX.Element|null=> {
  let [imgClass,nameClass,priceClass]:string[]=['','','']
-const text:JSX.Element[]=item.map(({src,name,price}:bask,i:number):JSX.Element=>{
+const text:JSX.Element[]=item.map(({src,name,price}:mass,i:number):JSX.Element=>{
 if (item1.some(({name:n}:mass):boolean=>n==name)) {
             imgClass='itemImgMac'
             nameClass='itemNameMac'

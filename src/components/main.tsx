@@ -1,6 +1,7 @@
 import {useState,useReducer,ChangeEvent} from 'react'
 import {Iphone,Mac,Watch,Ipad,Search} from './sales'
 import { item1,item2,item3,item4 } from './items'
+import { mass } from './items'
 interface state1{
     show1:number,
     show2:number,
@@ -11,11 +12,7 @@ interface state1{
 interface action{
      type:number
 }
-export type mass={
-    src:string,
-    name:string,
-    price:string
-}
+
 interface state2{
     text:string
 }
@@ -54,12 +51,10 @@ function reducer(state:state1,{type}:action):state1 {
         break;
     } 
 }
-function filter():void {
+const filter=():void=>{
 const val:string=ser.text.trim().toLocaleLowerCase()
 const list:mass[]=item6.filter((item:mass):mass|undefined=>{
-if (item.name.toLocaleLowerCase().indexOf(val)!==-1) {
-    return item
-    }
+if (item.name.toLowerCase().indexOf(val)!==-1) return item
 })
 setItems({item:list})
 }
