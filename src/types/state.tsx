@@ -1,11 +1,13 @@
-import React,{FC,ReactNode,Dispatch} from "react"
+import {Dispatch,SetStateAction} from "react"
 import { useDispatch, useSelector } from "react-redux"
 import type { TypedUseSelectorHook } from "react-redux"
 import store from "../store/store"
  type Props={
     src:string,
     name:string,
-    price:string
+    price:string,
+    src1:string,
+    src2:string
 }
 export interface props{
     item:Props[],
@@ -17,21 +19,18 @@ export interface state1{
  interface state2{
     state:state1,
     value:string,
-    set:Dispatch<React.SetStateAction<state1>>
+    set:Dispatch<SetStateAction<state1>>
 }
-export const sort:FC<state2>=({state:{item},value,set}):ReactNode=> {
+export const sort=({state:{item},value,set}:state2):void=>{
 const [mass,mass1]:number[][]&Props[][]=[[],[]]
 item.forEach(({price}:Props):number=>mass.push(parseInt(price)))
 mass.sort((x:number,y:number):number=>value=='down'?y-x:x-y)
-for (let i = 0; i < mass.length; i++) {
-  for (let ind = 0; ind < item.length; ind++) {
-    if (mass[i]==parseInt(item[ind].price)) {
-        mass1.push(item[ind])
-        }
-      }
-     }
+for (let i:number = 0; i < mass.length; i++) {
+item.forEach((x:Props):void=>{
+if (mass[i]==parseInt(x.price)) mass1.push(x)
+    })
+   }
  set({item:mass1})
- return 
 }
 type RootState = ReturnType<typeof store.getState>
 type AppDispatch = typeof store.dispatch

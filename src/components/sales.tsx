@@ -1,4 +1,4 @@
-import {useState,ChangeEvent,FC,ReactNode} from 'react'
+import {useState,ChangeEvent,FC} from 'react'
 import {Link } from 'react-router-dom'
 import { item1 } from './items'
 import { sort,props,state1 } from '../types/state'
@@ -28,7 +28,7 @@ if (show==1) {
     return <div>
        <div className='sel'>
         <button
-         onClick={():ReactNode=>sort({state:state,value:value,set:setState})}>
+         onClick={():void=>sort({state:state,value:value,set:setState})}>
             отсортировать
         </button> 
          <select className='select' value={value}
@@ -67,7 +67,7 @@ if (show==1) {
     return <div > 
          <div className='sel'>
             <button 
-            onClick={():ReactNode=>sort({state:state,value:value,set:setState})}>
+            onClick={():void=>sort({state:state,value:value,set:setState})}>
                 отсортировать
             </button> 
          <select className='select' value={value}
@@ -86,7 +86,7 @@ const [state,setState]=useState<state1>({item:item})
 const [value,setValue]=useState<string>('up')
 const overOut=(item:string,i:number):void=>{
     const img:NodeListOf<HTMLImageElement>=document.querySelectorAll('#Ipad')
-     img[i].src=item
+    img[i].src=item
     }
     const text:JSX.Element[]=state.item.map(({src,name,price,src1}:mass,i:number):JSX.Element=>{
         return <div className='item' key={i}>
@@ -106,7 +106,7 @@ if (show==1) {
     return <div>
         <div className='sel'>
             <button 
-            onClick={():ReactNode=>sort({state:state,value:value,set:setState})}>
+            onClick={():void=>sort({state:state,value:value,set:setState})}>
                 отсортировать
             </button> 
          <select className='select' value={value}
@@ -145,7 +145,7 @@ if (show==1) {
     return <div >
         <div className='sel'>
         <button 
-        onClick={():ReactNode=>sort({state:state,value:value,set:setState})}>
+        onClick={():void=>sort({state:state,value:value,set:setState})}>
             отсортировать
         </button> 
          <select className='select' value={value} 
@@ -164,14 +164,14 @@ export const Search:FC<props>=({item,show}):JSX.Element|null=> {
  let [imgClass,nameClass,priceClass]:string[]=['','','']
 const text:JSX.Element[]=item.map(({src,name,price}:mass,i:number):JSX.Element=>{
 if (item1.some(({name:n}:mass):boolean=>n==name)) {
-            imgClass='itemImgMac'
-            nameClass='itemNameMac'
-            priceClass='itemPriceMac'
-         }else{
-            imgClass='itemImg'
-            nameClass='itemName'
-            priceClass='itemPrice'
-         }
+    imgClass='itemImgMac'
+    nameClass='itemNameMac'
+    priceClass='itemPriceMac'
+    }else{
+    imgClass='itemImg'
+    nameClass='itemName'
+    priceClass='itemPrice'
+    }
 return <div className='item' key={i}>
 <img className={imgClass} src={src} alt="" />
 <div className={nameClass}>
