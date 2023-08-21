@@ -1,4 +1,4 @@
-import {useState,useEffect,useRef,useReducer}  from 'react'
+import {useState,useEffect,useRef,useReducer,MutableRefObject}  from 'react'
 import { SetURLSearchParams,useSearchParams } from 'react-router-dom'
 import { add1 } from '../store/slice.js';
 import { useAppDispatch,useAppSelector } from '../types/state.js';
@@ -30,7 +30,7 @@ export default function About():JSX.Element {
    const [cless1,setCless1]=useState<string>('imgDiv')
    const [cless2,setCless2]=useState<string>('aboutDiv')
    const [color,setColor]=useState<string>('black')
-   const [state1,move]=useReducer(reducer,{style1:'black',style2:'black',style3:'black'})
+   const [state1,move]=useReducer(reducer,{style1:'rgb(240, 47, 156)',style2:'black',style3:'black'})
    const [page,setPage]=useState<number>(0)
    const [jump,setJump]=useState<number>(360)
    const black=useRef<HTMLDivElement>(null!)
@@ -47,23 +47,23 @@ export default function About():JSX.Element {
    const src1:string|undefined=item?.src1
    const src2:string|undefined=item?.src2
    const price:string|undefined=item?.price 
-   function reducer(state:styles,action:action):styles{
-      switch (action.type) {
-         case 0:
-         setColor('black')
-         return {style1:'rgb(240, 47, 156)',style2:'black',style3:'black'}
-         break;
-         case 1:
-         setColor('grey')
-         return {style1:'black',style2:'rgb(240, 47, 156)',style3:'black'}
-         break;
-         case 2:
-         setColor('white')
-         return {style1:'black',style2:'black',style3:'rgb(240, 47, 156)'}
-         break;
-         default:
-         return state
-         break;
+   function reducer(state:styles,{type}:action):styles{
+   switch (type) {
+      case 0:
+      setColor('black')
+      return {style1:'rgb(240, 47, 156)',style2:'black',style3:'black'}
+      break;
+      case 1:
+      setColor('grey')
+      return {style1:'black',style2:'rgb(240, 47, 156)',style3:'black'}
+      break;
+      case 2:
+      setColor('white')
+      return {style1:'black',style2:'black',style3:'rgb(240, 47, 156)'}
+      break;
+      default:
+      return state
+      break;
       }
    }
    enum style {
@@ -87,9 +87,11 @@ export default function About():JSX.Element {
    }
       },[])
    useEffect(():void=>{
-    black.current.style.border=`2px solid ${state1.style1}`
-    grey.current.style.border=`2px solid ${state1.style2}`
-    white.current.style.border=`2px solid ${state1.style3}`
+   const [{current:b},{current:g},{current:w}]
+   :MutableRefObject<HTMLDivElement>[]=[black,grey,white]
+    b.style.border=`2px solid ${state1.style1}`
+    g.style.border=`2px solid ${state1.style2}`
+    w.style.border=`2px solid ${state1.style3}`
    },[state1])
    useEffect(():void=>{
    const scroll=document.querySelector(`.${cless1}`) as HTMLElement  
@@ -108,15 +110,15 @@ export default function About():JSX.Element {
           </button>
          </div>
          <div className={cless1}>
-         <div className={cless}>
-         <img style={style}  src={`${src}`} alt="" />
+           <div className={cless}>
+             <img style={style}  src={`${src}`} alt="" />
          </div>
-         <div className={cless}>
-         <img style={style}  src={`${src1}`} alt="" />
-         </div>
-         <div className={cless}>
-         <img style={style} src={`${src2}`} alt="" />
-         </div>
+           <div className={cless}>
+             <img style={style}  src={`${src1}`} alt="" />
+           </div>
+             <div className={cless}> 
+               <img style={style} src={`${src2}`} alt="" />
+            </div>
          </div>
       <div className='aboutName'>{Name}</div>  
       <div className='aboutPrice'>{price}p</div>  
