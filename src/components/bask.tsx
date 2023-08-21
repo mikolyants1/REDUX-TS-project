@@ -24,6 +24,9 @@ enum style1{
   width='50%',
   height='25px',
 }
+enum style2 {
+  color='grey'
+}
 const list:JSX.Element[]|undefined=user1?.bask.map(({name,price,src,color}:bask,i:number):JSX.Element=>{
  if (item1.some(({name:n}:mass):boolean=>n==name)) {
   imgClass='baskImgMac'
@@ -36,7 +39,10 @@ const list:JSX.Element[]|undefined=user1?.bask.map(({name,price,src,color}:bask,
           <img className={imgClass}  src={`../${src}`} alt="" />
         <div className='baskName' >{name}</div>
         <div className='baskPrice'>{price}</div>
-        <div className='baskColor'>цвет:{color}</div>
+        <div className='baskColor'>
+          <span style={style2}>Цвет:</span>
+          {color}
+          </div>
         <div style={{width:'80%',margin:'auto'}}>
         <button style={style1}>купить</button>
         <button style={style1}

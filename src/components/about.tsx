@@ -29,7 +29,7 @@ export default function About():JSX.Element {
    const [cless,setCless]=useState<string>('aboutImg')
    const [cless1,setCless1]=useState<string>('imgDiv')
    const [cless2,setCless2]=useState<string>('aboutDiv')
-   const [color,setColor]=useState<string>('black')
+   const [color,setColor]=useState<string>('Black')
    const [state1,move]=useReducer(reducer,{style1:'rgb(240, 47, 156)',style2:'black',style3:'black'})
    const [page,setPage]=useState<number>(0)
    const [jump,setJump]=useState<number>(360)
@@ -50,15 +50,15 @@ export default function About():JSX.Element {
    function reducer(state:styles,{type}:action):styles{
    switch (type) {
       case 0:
-      setColor('black')
+      setColor('Black')
       return {style1:'rgb(240, 47, 156)',style2:'black',style3:'black'}
       break;
       case 1:
-      setColor('grey')
+      setColor('Grey')
       return {style1:'black',style2:'rgb(240, 47, 156)',style3:'black'}
       break;
       case 2:
-      setColor('white')
+      setColor('White')
       return {style1:'black',style2:'black',style3:'rgb(240, 47, 156)'}
       break;
       default:
@@ -84,14 +84,14 @@ export default function About():JSX.Element {
       setCless1('imgDivMac')
       setCless2('aboutDivMac')
       setJump(450)
-   }
-      },[])
+     }
+   },[])
    useEffect(():void=>{
-   const [{current:b},{current:g},{current:w}]
+   const [{current:{style:b}},{current:{style:g}},{current:{style:w}}]
    :MutableRefObject<HTMLDivElement>[]=[black,grey,white]
-    b.style.border=`2px solid ${state1.style1}`
-    g.style.border=`2px solid ${state1.style2}`
-    w.style.border=`2px solid ${state1.style3}`
+    b.border=`2px solid ${state1.style1}`
+    g.border=`2px solid ${state1.style2}`
+    w.border=`2px solid ${state1.style3}`
    },[state1])
    useEffect(():void=>{
    const scroll=document.querySelector(`.${cless1}`) as HTMLElement  
@@ -111,10 +111,10 @@ export default function About():JSX.Element {
          </div>
          <div className={cless1}>
            <div className={cless}>
-             <img style={style}  src={`${src}`} alt="" />
+             <img style={style} src={`${src}`} alt="" />
          </div>
            <div className={cless}>
-             <img style={style}  src={`${src1}`} alt="" />
+             <img style={style} src={`${src1}`} alt="" />
            </div>
              <div className={cless}> 
                <img style={style} src={`${src2}`} alt="" />

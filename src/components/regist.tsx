@@ -21,6 +21,12 @@ const [state,setState]=useState<state1>({name:'',phone:''})
 const [state1,setState1]=useState<state2>({src:'/regist',error:''})
 const user:User[]=useAppSelector((store:state3)=>store.reduce.user)
 const dispatch:Dispatch<AnyAction>=useAppDispatch()
+const setName=(e:ChangeEvent<HTMLInputElement>):void=>{
+  setState({name:e.target.value,phone:state.phone})
+}
+const setNumber=(e:ChangeEvent<HTMLInputElement>):void=>{
+  setState({phone:e.target.value,name:state.name})
+}
 function press():void {
     let con:number=0
     if (state.name!==''&&state.phone!=='') {
@@ -49,17 +55,17 @@ enum style{
             <div style={{height:'15px'}}></div>
         <div className='info'>
           <input style={style}
-          onChange={(e:ChangeEvent<HTMLInputElement>):void=>setState({name:e.target.value,phone:state.phone})}
-          type="text" />
+           onChange={setName}
+           type="text" />
           </div>
         <div className='info'>
           <input style={style}
-          onChange={(e:ChangeEvent<HTMLInputElement>):void=>setState({phone:e.target.value,name:state.name})}
+           onChange={setNumber}
            type="text" />
            </div>
      <div className='reg2'>
         <button className='but1' onClick={press}>
-        <Link to={`${state1.src}`} className='link1' >зарегестрироваться</Link>
+        <Link to={`${state1.src}`} className='link1'>зарегестрироваться</Link>
         </button>
         </div> 
         <div className='error'>{state1.error}</div>

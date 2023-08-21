@@ -22,10 +22,10 @@ export default function Entry():JSX.Element {
     const [state1,setState1]=useState<state2>({src:'/',error:''})
     const user:User[]=useAppSelector(({reduce:{user}}:state3)=>user)
     const dispatch:Dispatch<AnyAction>=useAppDispatch()
-    const change1=(e:ChangeEvent<HTMLInputElement>):void=> {
+    const change1=(e:ChangeEvent<HTMLInputElement>):void=>{
         setState({name:e.target.value,phone:state.phone})
     }
-    const change2=(e:ChangeEvent<HTMLInputElement>):void=> {
+    const change2=(e:ChangeEvent<HTMLInputElement>):void=>{
         setState({phone:e.target.value,name:state.name})
     }
     function press():void {
@@ -80,7 +80,7 @@ export default function Entry():JSX.Element {
          </div>
      <div className='reg1'>
         <button className='but1' onClick={press}>
-        <Link to={`${state1.src}`} className='link1' >войти</Link>
+        <Link to={`${state1.src}`} className='link1'>войти</Link>
         </button>
         </div> 
      <div className='error'>{state1.error}</div>

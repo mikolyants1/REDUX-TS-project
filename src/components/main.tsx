@@ -79,10 +79,10 @@ enum style {
  <button className='serBut' onClick={():void=>{dispatch({type:4});filter()}}>search</button>
     </div>
     <div >
-    <Mac show={state.show1} item={item1} />
-    <Iphone show={state.show2} item={item2} />
-    <Ipad show={state.show3} item={item3} />
-    <Watch show={state.show4} item={item4}  />
+    <Mac show={state.show1} item={item1} id='Mac' />
+    <Iphone show={state.show2} item={item2} id='Iphone' />
+    <Ipad show={state.show3} item={item3} id='Ipad' />
+    <Watch show={state.show4} item={item4} id='Watch'  />
     <Search show={state.show5} item={items.item}  />
     </div>
     </div>

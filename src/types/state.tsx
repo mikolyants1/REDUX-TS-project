@@ -11,7 +11,8 @@ import store from "../store/store"
 }
 export interface props{
     item:Props[],
-    show:number
+    show:number,
+    id?:string|undefined
 }
 export interface state1{
     item:Props[]
@@ -32,6 +33,10 @@ if (mass[i]==parseInt(x.price)) mass1.push(x)
    }
  set({item:mass1})
 }
+export const overOut=(item:string,i:number,id:string|undefined):void=>{
+const img:NodeListOf<HTMLImageElement>=document.querySelectorAll(`#${id}`)
+img[i].src=item
+    }
 type RootState = ReturnType<typeof store.getState>
 type AppDispatch = typeof store.dispatch
 export const useAppDispatch: () => AppDispatch = useDispatch

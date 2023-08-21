@@ -33,6 +33,7 @@ import mac072 from '../img/mac072.jpg'
 import mac092 from '../img/mac092.jpg'
 import mac091 from '../img/mac091.jpg'
 import mac101 from '../img/mac101.jpg'
+
 export const item1:Array<mass>=[
     {src:mac1,name:'MacBook pro 16',price:'149 000',src1:mac011,src2:mac012},
     {src:mac2,name:'MacBook Air 14',price:'130 000',src1:mac021,src2:mac022},

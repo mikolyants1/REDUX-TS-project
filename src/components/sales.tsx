@@ -1,20 +1,16 @@
 import {useState,ChangeEvent,FC} from 'react'
 import {Link } from 'react-router-dom'
 import { item1 } from './items'
-import { sort,props,state1 } from '../types/state'
+import { sort,props,state1,overOut } from '../types/state'
 import {mass } from './items'
- export function Iphone({item,show}:props):JSX.Element|null {
+ export function Iphone({item,show,id}:props):JSX.Element|null {
 const [state,setState]=useState<state1>({item:item})
 const [value,setValue]=useState<string>('up')
-const overOut=(item:string,i:number):void=>{
-    const img:NodeListOf<HTMLImageElement>=document.querySelectorAll('#Iphone')
-     img[i].src=item
-    }
     const text:JSX.Element[]=state.item.map(({src,name,price,src1}:mass,i:number):JSX.Element=>{
         return <div className='item' key={i}>
-            <img className='itemImg' id='Iphone'
-             onMouseOver={():void=>overOut(src1,i)}
-              onMouseOut={():void=>overOut(src,i)} src={src} alt="" />
+            <img className='itemImg' id={id}
+             onMouseOver={():void=>overOut(src1,i,id)}
+              onMouseOut={():void=>overOut(src,i,id)} src={src} alt="" />
             <div className='itemName' >
     <Link className='itemLink' 
     to={`about/?name=${name}`}>
@@ -42,18 +38,14 @@ if (show==1) {
     }
     return null
 }
-export function Mac({item,show}:props):JSX.Element|null {
+export function Mac({item,show,id}:props):JSX.Element|null {
 const [state,setState]=useState<state1>({item:item})
 const [value,setValue]=useState<string>('up')
-const overOut=(item:string,i:number):void=>{
-const img:NodeListOf<HTMLImageElement>=document.querySelectorAll('#Mac')
- img[i].src=item
-}
 const text:JSX.Element[]=state.item.map(({src,name,price,src1}:mass,i:number):JSX.Element=>{
     return <div className='item' key={i}>
-        <img className='itemImgMac' id='Mac'
-         onMouseOver={():void=>overOut(src1,i)}
-          onMouseOut={():void=>overOut(src,i)} src={src} alt="" />
+        <img className='itemImgMac' id={id}
+         onMouseOver={():void=>overOut(src1,i,id)}
+          onMouseOut={():void=>overOut(src,i,id)} src={src} alt="" />
         <div className='itemNameMac' >
 <Link className='itemLink' 
 to={`about/?name=${name}`}>
@@ -81,18 +73,14 @@ if (show==1) {
     }
     return null
 }
-export  function Ipad({item,show}:props):JSX.Element|null {
+export  function Ipad({item,show,id}:props):JSX.Element|null {
 const [state,setState]=useState<state1>({item:item})
 const [value,setValue]=useState<string>('up')
-const overOut=(item:string,i:number):void=>{
-    const img:NodeListOf<HTMLImageElement>=document.querySelectorAll('#Ipad')
-    img[i].src=item
-    }
     const text:JSX.Element[]=state.item.map(({src,name,price,src1}:mass,i:number):JSX.Element=>{
         return <div className='item' key={i}>
-            <img className='itemImg' id='Ipad'
-             onMouseOver={():void=>overOut(src1,i)}
-              onMouseOut={():void=>overOut(src,i)} src={src} alt="" />
+            <img className='itemImg' id={id}
+             onMouseOver={():void=>overOut(src1,i,id)}
+              onMouseOut={():void=>overOut(src,i,id)} src={src} alt="" />
             <div className='itemName' >
     <Link className='itemLink' 
     to={`about/?name=${name}`}>
@@ -120,18 +108,14 @@ if (show==1) {
     }
     return null
 }
- export  function Watch({item,show}:props):JSX.Element|null {
+ export function Watch({item,show,id}:props):JSX.Element|null {
 const [state,setState]=useState<state1>({item:item})
 const [value,setValue]=useState<string>('up')
-const overOut=(item:string,i:number):void=>{
-    const img:NodeListOf<HTMLImageElement>=document.querySelectorAll('#Watch')
-     img[i].src=item
-    }
 const text:JSX.Element[]=state.item.map(({src,name,price,src1}:mass,i:number):JSX.Element=>{
         return <div className='item' key={i}>
-            <img className='itemImg' id='Watch'
-             onMouseOver={():void=>overOut(src1,i)}
-              onMouseOut={():void=>overOut(src,i)} src={src} alt="" />
+            <img className='itemImg' id={id}
+             onMouseOver={():void=>overOut(src1,i,id)}
+              onMouseOut={():void=>overOut(src,i,id)} src={src} alt="" />
             <div className='itemName' >
     <Link className='itemLink' 
     to={`about/?name=${name}`}>
