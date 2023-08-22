@@ -24,6 +24,9 @@ const [ser,setSer]=useState<state2>({text:''})
 const [state,dispatch]=useReducer(reducer,{show1:1,show2:0,show3:0,show4:0,show5:0})
 const item6:Array<mass>=item1.concat(item2,item3,item4)
 const [items,setItems]=useState<state3>({item:item6})
+const change=(e:ChangeEvent<HTMLInputElement>):void=>{
+    setSer({text:e.target.value})
+}
 function reducer(state:state1,{type}:action):state1 {
     switch (type) {
     case 0:
@@ -66,24 +69,27 @@ enum style {
     fontSize='20px',
     backgroundColor='rgb(240, 240, 240)',
 }
-    return <div className='main'>
-    <nav className='catalog'>
-<div className='cat1' onClick={():void=>dispatch({type:0})}>Mac</div>
-<div className='cat1' onClick={():void=>dispatch({type:1})}>Iphone</div>
-<div className='cat1' onClick={():void=>dispatch({type:2})}>Ipad</div>
-<div className='cat1' onClick={():void=>dispatch({type:3})}>Watch</div>
-    </nav>
-    <div className='ser'>
- <input type="text" style={style} value={ser.text}
-  onChange={(e:ChangeEvent<HTMLInputElement>):void=>setSer({text:e.target.value})} />
- <button className='serBut' onClick={():void=>{dispatch({type:4});filter()}}>search</button>
-    </div>
-    <div >
-    <Mac show={state.show1} item={item1} id='Mac' />
-    <Iphone show={state.show2} item={item2} id='Iphone' />
-    <Ipad show={state.show3} item={item3} id='Ipad' />
-    <Watch show={state.show4} item={item4} id='Watch'  />
-    <Search show={state.show5} item={items.item}  />
-    </div>
-    </div>
+return <div className='main'>
+        <nav className='catalog'>
+         <div className='cat1' onClick={():void=>dispatch({type:0})}>Mac</div>
+         <div className='cat1' onClick={():void=>dispatch({type:1})}>Iphone</div>
+         <div className='cat1' onClick={():void=>dispatch({type:2})}>Ipad</div>
+         <div className='cat1' onClick={():void=>dispatch({type:3})}>Watch</div>
+       </nav>
+         <div className='ser'>
+           <input type="text" style={style} 
+           value={ser.text} onChange={change} />
+           <button className='serBut'
+           onClick={():void=>{dispatch({type:4});filter()}}>
+            search
+           </button>
+        </div>
+          <div>
+           <Mac show={state.show1} item={item1} id='Mac' />
+           <Iphone show={state.show2} item={item2} id='Iphone' />
+           <Ipad show={state.show3} item={item3} id='Ipad' />
+           <Watch show={state.show4} item={item4} id='Watch'  />
+           <Search show={state.show5} item={items.item}  />
+        </div>
+      </div>
 }

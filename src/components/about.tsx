@@ -89,60 +89,62 @@ export default function About():JSX.Element {
    useEffect(():void=>{
    const [{current:{style:b}},{current:{style:g}},{current:{style:w}}]
    :MutableRefObject<HTMLDivElement>[]=[black,grey,white]
-    b.border=`2px solid ${state1.style1}`
-    g.border=`2px solid ${state1.style2}`
-    w.border=`2px solid ${state1.style3}`
+   const {style1,style2,style3}:styles=state1
+    b.border=`2px solid ${style1}`
+    g.border=`2px solid ${style2}`
+    w.border=`2px solid ${style3}`
    },[state1])
    useEffect(():void=>{
    const scroll=document.querySelector(`.${cless1}`) as HTMLElement  
    scroll.style.transform=`translateX(${page*-jump}px)`
    },[page])
    return <div style={{width:'100%'}}>
-        <div className={cless2}>
-         <div className='scroll'>
-         <button className='prev'
-          onClick={():void=>setPage((x:number):number=>x==0?2:x-1)}>
-            <img style={style1} src={img} alt="" />
-          </button>
-         <button className='next'
-          onClick={():void=>setPage((x:number):number=>x==2?0:x+1)}>
-            <img style={style1} src={img} alt="" />
-          </button>
-         </div>
-         <div className={cless1}>
-           <div className={cless}>
-             <img style={style} src={`${src}`} alt="" />
-         </div>
-           <div className={cless}>
-             <img style={style} src={`${src1}`} alt="" />
-           </div>
-             <div className={cless}> 
-               <img style={style} src={`${src2}`} alt="" />
+            <div className={cless2}>
+              <div className='scroll'>
+               <button className='prev'
+                 onClick={():void=>setPage((x:number):number=>x==0?2:x-1)}>
+                 <img style={style1} src={img} alt="" />
+               </button>
+               <button className='next'
+                  onClick={():void=>setPage((x:number):number=>x==2?0:x+1)}>
+                  <img style={style1} src={img} alt="" />
+               </button>
+              </div>
+                <div className={cless1}>
+                  <div className={cless}>
+                    <img style={style} src={`${src}`} alt="" />
+                  </div>
+                  <div className={cless}>
+                    <img style={style} src={`${src1}`} alt="" />
+                  </div>
+                  <div className={cless}> 
+                    <img style={style} src={`${src2}`} alt="" />
+                  </div>
+               </div>
+               <div className='aboutName'>{Name}</div>  
+               <div className='aboutPrice'>{price}p</div>  
+               <div className='color'>
+               <div className='color0'>цвет</div>
+               <div className='color1'>
+               <div className='black' ref={black}
+                 onClick={():void=>move({type:0})}></div>
+               <div className='grey' ref={grey}
+                 onClick={():void=>move({type:1})}></div>
+               <div className='white' ref={white}
+                 onClick={():void=>move({type:2})}></div>
+              </div>
             </div>
+            <div className='divBut'>
+             <button className='aboutBut'
+              onClick={():void=>{dispatch(add1({id:user1?.id,name:Name,price:price,src:src,color:color}))}}>
+               добавить в корзину
+             </button>
+          </div>
+          <div className='baskBack'>
+           <Link style={{textDecoration:'none'}} to='/home'>
+              вернуться на главную
+           </Link>
          </div>
-      <div className='aboutName'>{Name}</div>  
-      <div className='aboutPrice'>{price}p</div>  
-      <div className='color'>
-       <div className='color0'>цвет</div>
-       <div className='color1'>
-       <div className='black' ref={black}
-       onClick={():void=>move({type:0})}></div>
-       <div className='grey' ref={grey}
-       onClick={():void=>move({type:1})}></div>
-       <div className='white' ref={white}
-       onClick={():void=>move({type:2})}></div>
-       <div></div>
-       </div>
-      </div>
-     <div className='divBut'>
-     <button className='aboutBut'
-      onClick={():void=>{dispatch(add1({id:user1?.id,name:Name,price:price,src:src,color:color}))}}>
-         добавить в корзину
-      </button>
-     </div>
-     <div className='baskBack'>
-       <Link style={{textDecoration:'none'}} to='/home'>вернуться на главную</Link>
-        </div>
-        </div> 
-     </div>
+      </div> 
+   </div>
 }

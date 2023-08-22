@@ -58,38 +58,38 @@ export default function Entry():JSX.Element {
         backgroundColor='rgb(241, 241, 241)',
       }
     return <div>
-         <div style={style}>
-        <div style={{height:'15px'}}></div>
-        <div className='info'>
-        <input style={style1}  type="text" list='dataName'
-         onChange={(e:ChangeEvent<HTMLInputElement>):void=>{change1(e);dispatch(add2(e.target.value))}} />
-         <datalist  id='dataName'>
-          {user.map(({name}:User,index:number):JSX.Element=>(
-            <option key={index} value={name}>{name}</option>
-          ))}
-         </datalist>
-         </div>
-        <div className='info'>
-        <input style={style1}  type="text" list='dataPhone'
-         onChange={(e:ChangeEvent<HTMLInputElement>):void=>{change2(e);dispatch(add3(e.target.value))}} />
-         <datalist id='dataPhone'>
-          {user.map(({phone}:User,index:number):JSX.Element=>(
-            <option key={index} value={phone}>{phone}</option>
-          ))}
-         </datalist>
-         </div>
-     <div className='reg1'>
-        <button className='but1' onClick={press}>
-        <Link to={`${state1.src}`} className='link1'>войти</Link>
-        </button>
-        </div> 
-     <div className='error'>{state1.error}</div>
-     <div className='if'>или</div>
-     <div className='if' >
-        <Link style={{textDecoration:'none'}} to='/regist'>зарегестрироваться</Link>
-        </div>
-         </div>
-        
-        
-    </div>
+             <div style={style}>
+              <div style={{height:'15px'}}></div>
+               <div className='info'>
+                <input style={style1}  type="text" list='dataName'
+                 onChange={(e:ChangeEvent<HTMLInputElement>):void=>{change1(e);dispatch(add2(e.target.value))}} />
+                <datalist  id='dataName'>
+                 {user.map(({name}:User,index:number):JSX.Element=>(
+                  <option key={index} value={name}>{name}</option>
+                 ))}
+               </datalist>
+              </div>
+                <div className='info'>
+                  <input style={style1}  type="text" list='dataPhone'
+                   onChange={(e:ChangeEvent<HTMLInputElement>):void=>{change2(e);dispatch(add3(e.target.value))}} />
+                  <datalist id='dataPhone'>
+                   {user.map(({phone}:User,index:number):JSX.Element=>(
+                   <option key={index} value={phone}>{phone}</option>
+                    ))}
+                 </datalist>
+               </div>
+                 <div className='reg1'>
+                  <button className='but1' onClick={press}>
+                   <Link to={`${state1.src}`} className='link1'>войти</Link>
+                  </button>
+                 </div> 
+                   <div className='error'>{state1.error}</div>
+                   <div className='if'>или</div>
+                   <div className='if' >
+                    <Link style={{textDecoration:'none'}} to='/regist'>
+                      зарегестрироваться
+                    </Link>
+                  </div>
+               </div>    
+            </div>
 }

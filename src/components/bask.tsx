@@ -36,23 +36,22 @@ const list:JSX.Element[]|undefined=user1?.bask.map(({name,price,src,color}:bask,
   divClass='item1'
 }
    return <div key={i} className={divClass}>
-          <img className={imgClass}  src={`../${src}`} alt="" />
-        <div className='baskName' >{name}</div>
-        <div className='baskPrice'>{price}</div>
-        <div className='baskColor'>
-          <span style={style2}>Цвет:</span>
-          {color}
+            <img className={imgClass}  src={`../${src}`} alt="" />
+            <div className='baskName' >{name}</div>
+            <div className='baskPrice'>{price}</div>
+            <div className='baskColor'>
+              <span style={style2}>Цвет:</span>
+               {color}
+            </div>
+              <div style={{width:'80%',margin:'auto'}}>
+                <button style={style1}>купить</button>
+                <button style={style1}
+                 onClick={():void=>{dispatch(del({id:user1.id,index:i}))}}>
+                  удалить
+                </button>
+             </div>
           </div>
-        <div style={{width:'80%',margin:'auto'}}>
-        <button style={style1}>купить</button>
-        <button style={style1}
-         onClick={():void=>{dispatch(del({id:user1.id,index:i}))}}>
-          удалить
-        </button>
-        </div>
-      </div>
-       })
-      
+       }) 
        if (user1?.bask.length==0) {
         return <div className='baskLost'>
             корзина пока пуста

@@ -50,27 +50,29 @@ enum style{
   border='1px solid grey',
   backgroundColor='rgb(241, 241, 241)',
 }
-    return <div>
-         <div className='user'>
+  return <div>
+           <div className='user'>
             <div style={{height:'15px'}}></div>
-        <div className='info'>
-          <input style={style}
-           onChange={setName}
-           type="text" />
-          </div>
-        <div className='info'>
-          <input style={style}
-           onChange={setNumber}
-           type="text" />
+            <div className='info'>
+             <input style={style}
+              onChange={setName}
+              type="text" />
+            </div>
+             <div className='info'>
+              <input style={style}
+               onChange={setNumber}
+               type="text" />
+            </div>
+              <div className='reg2'>
+               <button className='but1' onClick={press}>
+                <Link to={`${state1.src}`} className='link1'>
+                  зарегестрироваться
+                </Link>
+              </button>
+             </div> 
+               <div className='error'>{state1.error}</div>
            </div>
-     <div className='reg2'>
-        <button className='but1' onClick={press}>
-        <Link to={`${state1.src}`} className='link1'>зарегестрироваться</Link>
-        </button>
-        </div> 
-        <div className='error'>{state1.error}</div>
         </div>
-         </div>
         
         
 
