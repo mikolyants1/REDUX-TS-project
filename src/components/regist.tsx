@@ -1,6 +1,6 @@
 import {useState,ChangeEvent} from'react'
 import { Link } from 'react-router-dom'
-import { useAppDispatch,useAppSelector } from '../types/state.js'
+import { useAppDispatch,useAppSelector,DivEntry } from '../types/state.js'
 import { add,User } from '../store/slice'
 import { AnyAction, Dispatch } from '@reduxjs/toolkit'
 import { state } from '../store/slice'
@@ -52,13 +52,13 @@ enum style{
 }
   return <div>
            <div className='user'>
-            <div style={{height:'15px'}}></div>
+            <div style={DivEntry}></div>
             <div className='info'>
              <input style={style}
               onChange={setName}
               type="text" />
             </div>
-             <div className='info'>
+            <div className='info'>
               <input style={style}
                onChange={setNumber}
                type="text" />

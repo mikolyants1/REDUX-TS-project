@@ -10,12 +10,18 @@ export default function Header():JSX.Element {
     return <div className='header' >    
              <div className='header1'>
                <div className='headerDiv'>
-                <Link className='headerLink' to='/'>{current}</Link>
+                  <Link className='headerLink' to='/'>
+                    {current}
+                  </Link>
                </div>
-                <div className='headerName'>SmartShop</div>
-                 <div className='headerDiv'>
-                  <Link className='headerLink' to='/home/bask'>корзина</Link>
-                </div>
+               <div className='headerName'>
+                  SmartShop
+               </div>
+               <div className='headerDiv'>
+                  <Link className='headerLink' to='/home/bask'>
+                    корзина
+                  </Link>
+               </div>
              </div>
-    </div>
+           </div>
 }

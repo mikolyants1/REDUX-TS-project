@@ -1,13 +1,14 @@
 import {createSlice,PayloadAction,Slice,ActionCreatorWithPayload } from '@reduxjs/toolkit'
+import {union, union3 } from '../types/state'
 export type bask={
-    name?:string|null,
-    price?:string|undefined,
-    src?:string|undefined,
-    color?:string|undefined
+    name?:union3,
+    price?:union,
+    src?:union,
+    color?:union
 }
 export interface User{
-  name:string|undefined,
-  phone:string|undefined,
+  name:union,
+  phone:union,
   bask:bask[],
   id:number
 }
@@ -15,16 +16,16 @@ export interface state{
     user:User[]
 }
 interface pay{
-  name:string|undefined,
-  phone:string|undefined,
+  name:union,
+  phone:union,
   obj:User[]
 }
 interface pay1{
     id:number|undefined,
-    name:string|null,
-    price:string|undefined,
-    src:string|undefined,
-    color:string|undefined
+    name:union3,
+    price:union,
+    src:union,
+    color:union
 }
 interface pay2{
     id:number,
@@ -37,7 +38,7 @@ type action={
 }
 const initialState:state={
   user:[],
-}
+} 
 
 const slice:Slice<state,{
     add:(state:state,action:PayloadAction<pay>)=>void,

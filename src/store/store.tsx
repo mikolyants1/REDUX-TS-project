@@ -18,7 +18,9 @@ const combine:Reducer=combineReducers({
     reduce:slice,
     phone:slice1
 })
-const persist:Reducer<EmptyObject & {reduce:state,phone:state} & PersistPartial,AnyAction>=persistReducer(config,combine)
+const persist:Reducer<EmptyObject 
+& {reduce:state,phone:state} & 
+PersistPartial,AnyAction>=persistReducer(config,combine)
 const store:ToolkitStore=configureStore({
     reducer:persist
 })

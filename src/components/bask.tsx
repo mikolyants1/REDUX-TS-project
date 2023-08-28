@@ -1,24 +1,25 @@
 
 import { Link } from 'react-router-dom'
 import { del} from '../store/slice'
-import { useAppDispatch,useAppSelector } from '../types/state.js'
+import { useAppDispatch,useAppSelector,LinkStyle,union,union1 } from '../types/state.js'
 import { item1 } from './items.jsx'
 import { User,bask } from '../store/slice'
 import { AnyAction, Dispatch } from '@reduxjs/toolkit'
 import { mass } from './items.js'
 import { state } from '../store/slice1.js';
 import { state as st } from '../store/slice.js';
-type state2={
+interface state2 {
    phone:state
 }
-type state3={
+interface state3 {
    reduce:st
 }
+type List=JSX.Element[]|undefined
 export default function Bask2():JSX.Element {
-const id:string|undefined=useAppSelector(({phone}:state2)=>phone.id)
+const id:union=useAppSelector(({phone}:state2)=>phone.id)
 const user:User[]=useAppSelector(({reduce}:state3)=>reduce.user)
 const dispatch:Dispatch<AnyAction>=useAppDispatch()
-const user1:User|undefined=user.find(({phone}:User):boolean=>phone==id)
+const user1:union1=user.find(({phone}:User):boolean=>phone==id)
 let [imgClass,divClass]:string[]=['','']
 enum style1{
   width='50%',
@@ -27,7 +28,11 @@ enum style1{
 enum style2 {
   color='grey'
 }
-const list:JSX.Element[]|undefined=user1?.bask.map(({name,price,src,color}:bask,i:number):JSX.Element=>{
+enum style3 {
+  width='80%',
+  margin='auto'
+}
+const list:List=user1?.bask.map(({name,price,src,color}:bask,i:number):JSX.Element=>{
  if (item1.some(({name:n}:mass):boolean=>n==name)) {
   imgClass='baskImgMac'
   divClass='item2'
@@ -43,7 +48,7 @@ const list:JSX.Element[]|undefined=user1?.bask.map(({name,price,src,color}:bask,
               <span style={style2}>Цвет:</span>
                {color}
             </div>
-              <div style={{width:'80%',margin:'auto'}}>
+              <div style={style3}>
                 <button style={style1}>купить</button>
                 <button style={style1}
                  onClick={():void=>{dispatch(del({id:user1.id,index:i}))}}>
@@ -58,11 +63,12 @@ const list:JSX.Element[]|undefined=user1?.bask.map(({name,price,src,color}:bask,
         </div>
        }else{
         return <div className='itemList'>
-             {list}
-             <div className='baskBack'>
-            <Link style={{textDecoration:'none'}} to='/home'>вернуться к покупкам</Link>
-        </div>
-        </div>
-       }
-  
+                  {list}
+                  <div className='baskBack'>
+                    <Link style={LinkStyle} to='/home'>
+                      вернуться к покупкам
+                    </Link>
+                  </div>
+               </div>
+           }
 }

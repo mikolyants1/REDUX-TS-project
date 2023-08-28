@@ -1,6 +1,8 @@
 import {Dispatch,SetStateAction} from "react"
 import { useDispatch, useSelector } from "react-redux"
 import type { TypedUseSelectorHook } from "react-redux"
+import { mass } from "../components/items"
+import { User } from "../store/slice"
 import store from "../store/store"
  type Props={
     src:string,
@@ -9,10 +11,22 @@ import store from "../store/store"
     src1:string,
     src2:string
 }
+export type func=JSX.Element|null
+export type union=string|undefined
+export type union1=User|undefined
+export type union2=mass|undefined
+export type union3=string|null
+export type union4=number|undefined
+export enum LinkStyle {
+    textDecoration='none'
+}
+export enum DivEntry {
+    height='15px'
+}
 export interface props{
     item:Props[],
     show:number,
-    id?:string|undefined
+    id?:union
 }
 export interface state1{
     item:Props[]
@@ -33,7 +47,7 @@ if (mass[i]==parseInt(x.price)) mass1.push(x)
    }
  set({item:mass1})
 }
-export const overOut=(item:string,i:number,id:string|undefined):void=>{
+export const overOut=(item:string,i:number,id:union):void=>{
 const img:NodeListOf<HTMLImageElement>=document.querySelectorAll(`#${id}`)
 img[i].src=item
     }

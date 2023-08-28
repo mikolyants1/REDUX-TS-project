@@ -1,5 +1,6 @@
 import {useState,useReducer,ChangeEvent} from 'react'
 import {Iphone,Mac,Watch,Ipad,Search} from './sales'
+import { union2} from '../types/state'
 import { item1,item2,item3,item4 } from './items'
 import { mass } from './items'
 interface state1{
@@ -28,7 +29,7 @@ const change=(e:ChangeEvent<HTMLInputElement>):void=>{
     setSer({text:e.target.value})
 }
 function reducer(state:state1,{type}:action):state1 {
-    switch (type) {
+switch (type) {
     case 0:
         return {show1:1,show2:0,show3:0,show4:0,show5:0}
         break;
@@ -56,7 +57,7 @@ function reducer(state:state1,{type}:action):state1 {
 }
 const filter=():void=>{
 const val:string=ser.text.trim().toLocaleLowerCase()
-const list:mass[]=item6.filter((item:mass):mass|undefined=>{
+const list:mass[]=item6.filter((item:mass):union2=>{
 if (item.name.toLowerCase().indexOf(val)!==-1) return item
 })
 setItems({item:list})

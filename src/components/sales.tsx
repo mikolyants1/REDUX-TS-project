@@ -1,9 +1,9 @@
 import {useState,ChangeEvent,FC} from 'react'
 import {Link } from 'react-router-dom'
 import { item1 } from './items'
-import { sort,props,state1,overOut } from '../types/state'
+import { sort,props,state1,overOut,func } from '../types/state'
 import {mass } from './items'
-export function Iphone({item,show,id}:props):JSX.Element|null {
+export function Iphone({item,show,id}:props):func {
 const [state,setState]=useState<state1>({item:item})
 const [value,setValue]=useState<string>('up')
 const change=(e:ChangeEvent<HTMLSelectElement>):void=>{
@@ -32,17 +32,19 @@ if (show==1) {
             отсортировать
         </button> 
          <select className='select'
-         value={value} onChange={change}>
+           value={value} onChange={change}>
             <option value="up">по возрастанию</option>
             <option value="down">по убыванию</option>
          </select>
          </div>
-        <div className='main1'>{text}</div>
+        <div className='main1'>
+           {text}
+        </div>
     </div>
     }
     return null
 }
-export function Mac({item,show,id}:props):JSX.Element|null {
+export function Mac({item,show,id}:props):func {
 const [state,setState]=useState<state1>({item:item})
 const [value,setValue]=useState<string>('up')
 const change=(e:ChangeEvent<HTMLSelectElement>):void=>{
@@ -81,7 +83,7 @@ if (show==1) {
     }
     return null
 }
-export function Ipad({item,show,id}:props):JSX.Element|null {
+export function Ipad({item,show,id}:props):func {
 const [state,setState]=useState<state1>({item:item})
 const [value,setValue]=useState<string>('up')
 const change=(e:ChangeEvent<HTMLSelectElement>):void=>{
@@ -120,7 +122,7 @@ if (show==1) {
     }
     return null
 }
- export function Watch({item,show,id}:props):JSX.Element|null {
+export function Watch({item,show,id}:props):func {
 const [state,setState]=useState<state1>({item:item})
 const [value,setValue]=useState<string>('up')
 const change=(e:ChangeEvent<HTMLSelectElement>):void=>{
@@ -160,8 +162,8 @@ if (show==1) {
      return null
     
 }
-export const Search:FC<props>=({item,show}):JSX.Element|null=> {
- let [imgClass,nameClass,priceClass]:string[]=['','','']
+export const Search:FC<props>=({item,show}):func=> {
+let [imgClass,nameClass,priceClass]:string[]=['','','']
 const text:JSX.Element[]=item.map(({src,name,price}:mass,i:number):JSX.Element=>{
 if (item1.some(({name:n}:mass):boolean=>n==name)) {
     imgClass='itemImgMac'

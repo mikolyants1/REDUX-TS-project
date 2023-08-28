@@ -1,6 +1,6 @@
 import {useState,ChangeEvent} from 'react'
 import { Link } from 'react-router-dom'
-import { useAppDispatch,useAppSelector } from '../types/state.js'
+import { useAppDispatch,useAppSelector,LinkStyle,DivEntry } from '../types/state.js'
 import { add2,add3} from '../store/slice1'
 import { User } from '../store/slice'
 import { AnyAction, Dispatch } from '@reduxjs/toolkit'
@@ -59,10 +59,10 @@ export default function Entry():JSX.Element {
       }
     return <div>
              <div style={style}>
-              <div style={{height:'15px'}}></div>
+              <div style={DivEntry}></div>
                <div className='info'>
                 <input style={style1}  type="text" list='dataName'
-                 onChange={(e:ChangeEvent<HTMLInputElement>):void=>{change1(e);dispatch(add2(e.target.value))}} />
+                  onChange={(e:ChangeEvent<HTMLInputElement>):void=>{change1(e);dispatch(add2(e.target.value))}} />
                 <datalist  id='dataName'>
                  {user.map(({name}:User,index:number):JSX.Element=>(
                   <option key={index} value={name}>{name}</option>
@@ -71,7 +71,7 @@ export default function Entry():JSX.Element {
               </div>
                 <div className='info'>
                   <input style={style1}  type="text" list='dataPhone'
-                   onChange={(e:ChangeEvent<HTMLInputElement>):void=>{change2(e);dispatch(add3(e.target.value))}} />
+                    onChange={(e:ChangeEvent<HTMLInputElement>):void=>{change2(e);dispatch(add3(e.target.value))}} />
                   <datalist id='dataPhone'>
                    {user.map(({phone}:User,index:number):JSX.Element=>(
                    <option key={index} value={phone}>{phone}</option>
@@ -86,7 +86,7 @@ export default function Entry():JSX.Element {
                    <div className='error'>{state1.error}</div>
                    <div className='if'>или</div>
                    <div className='if' >
-                    <Link style={{textDecoration:'none'}} to='/regist'>
+                    <Link style={LinkStyle} to='/regist'>
                       зарегестрироваться
                     </Link>
                   </div>
