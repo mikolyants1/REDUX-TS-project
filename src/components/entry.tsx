@@ -28,6 +28,12 @@ export default function Entry():JSX.Element {
     const change2=(e:ChangeEvent<HTMLInputElement>):void=>{
         setState({phone:e.target.value,name:state.name})
     }
+    const setName=(e:ChangeEvent<HTMLInputElement>):void=>{
+      dispatch(add2(e.target.value))
+    }
+    const setNum=(e:ChangeEvent<HTMLInputElement>):void=>{
+      dispatch(add3(e.target.value))
+    }
     function press():void {
     let con:number=0
     if (state.phone!==''&&state.name!=='') {
@@ -62,7 +68,7 @@ export default function Entry():JSX.Element {
               <div style={DivEntry}></div>
                <div className='info'>
                 <input style={style1}  type="text" list='dataName'
-                  onChange={(e:ChangeEvent<HTMLInputElement>):void=>{change1(e);dispatch(add2(e.target.value))}} />
+                 onChange={(e:ChangeEvent<HTMLInputElement>):void=>{change1(e);setName(e)}} />
                 <datalist  id='dataName'>
                  {user.map(({name}:User,index:number):JSX.Element=>(
                   <option key={index} value={name}>{name}</option>
@@ -71,7 +77,7 @@ export default function Entry():JSX.Element {
               </div>
                 <div className='info'>
                   <input style={style1}  type="text" list='dataPhone'
-                    onChange={(e:ChangeEvent<HTMLInputElement>):void=>{change2(e);dispatch(add3(e.target.value))}} />
+                   onChange={(e:ChangeEvent<HTMLInputElement>):void=>{change2(e);setNum(e)}} />
                   <datalist id='dataPhone'>
                    {user.map(({phone}:User,index:number):JSX.Element=>(
                    <option key={index} value={phone}>{phone}</option>
@@ -80,11 +86,18 @@ export default function Entry():JSX.Element {
                </div>
                  <div className='reg1'>
                   <button className='but1' onClick={press}>
-                   <Link to={`${state1.src}`} className='link1'>войти</Link>
+                    <Link to={`${state1.src}`}
+                      className='link1'>
+                        войти
+                    </Link>
                   </button>
                  </div> 
-                   <div className='error'>{state1.error}</div>
-                   <div className='if'>или</div>
+                   <div className='error'>
+                     {state1.error}
+                   </div>
+                   <div className='if'>
+                      или
+                   </div>
                    <div className='if' >
                     <Link style={LinkStyle} to='/regist'>
                       зарегестрироваться

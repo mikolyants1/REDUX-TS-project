@@ -176,7 +176,7 @@ background-color: rgb(197, 197, 197);
  }
  .color{
     margin: auto;
-    width: 60%;
+    width: 70%;
     display: flex;
  }
  .color0{
@@ -185,7 +185,7 @@ background-color: rgb(197, 197, 197);
     width: 60px;
  }
  .color1{
-    width: 100%;
+    width: 60%;
     display: flex;
     justify-content: space-between;
  }

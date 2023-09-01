@@ -31,7 +31,7 @@ export interface props{
 export interface state1{
     item:Props[]
 }
- interface state2{
+export interface state2{
     state:state1,
     value:string,
     set:Dispatch<SetStateAction<state1>>

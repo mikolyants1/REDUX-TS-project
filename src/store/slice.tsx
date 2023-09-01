@@ -20,7 +20,7 @@ interface pay{
   phone:union,
   obj:User[]
 }
-interface pay1{
+export interface pay1{
     id:number|undefined,
     name:union3,
     price:union,

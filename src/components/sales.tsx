@@ -1,7 +1,7 @@
 import {useState,ChangeEvent,FC} from 'react'
 import {Link } from 'react-router-dom'
 import { item1 } from './items'
-import { sort,props,state1,overOut,func } from '../types/state'
+import { sort,props,state1,overOut,func,state2 } from '../types/state'
 import {mass } from './items'
 export function Iphone({item,show,id}:props):func {
 const [state,setState]=useState<state1>({item:item})
@@ -9,6 +9,14 @@ const [value,setValue]=useState<string>('up')
 const change=(e:ChangeEvent<HTMLSelectElement>):void=>{
     setValue(e.target.value)
         }
+const setSort=():void=>{
+ const obj:state2={
+  state:state,
+  value:value,
+  set:setState
+    }
+  sort(obj)
+}
 const text:JSX.Element[]=state.item.map(({src,name,price,src1}:mass,i:number):JSX.Element=>(
      <div className='item' key={i}>
        <img className='itemImg' id={id}
@@ -21,20 +29,26 @@ const text:JSX.Element[]=state.item.map(({src,name,price,src1}:mass,i:number):JS
             {name}
           </Link>
         </div>
-         <div className='itemPrice'>{price}p</div>
+         <div className='itemPrice'>
+          {price}p
+         </div>
     </div>
          )) 
 if (show==1) {
     return <div>
        <div className='sel'>
         <button
-         onClick={():void=>sort({state:state,value:value,set:setState})}>
+         onClick={setSort}>
             отсортировать
         </button> 
          <select className='select'
            value={value} onChange={change}>
-            <option value="up">по возрастанию</option>
-            <option value="down">по убыванию</option>
+            <option value="up">
+              по возрастанию
+            </option>
+            <option value="down">
+              по убыванию
+            </option>
          </select>
          </div>
         <div className='main1'>
@@ -50,6 +64,14 @@ const [value,setValue]=useState<string>('up')
 const change=(e:ChangeEvent<HTMLSelectElement>):void=>{
     setValue(e.target.value)
       }
+const setSort=():void=>{
+  const obj:state2={
+    state:state,
+    value:value,
+    set:setState
+    }
+  sort(obj)
+  }   
 const text:JSX.Element[]=state.item.map(({src,name,price,src1}:mass,i:number):JSX.Element=>(
      <div className='item' key={i}>
         <img className='itemImgMac' id={id}
@@ -62,23 +84,30 @@ const text:JSX.Element[]=state.item.map(({src,name,price,src1}:mass,i:number):JS
           {name}
         </Link>
        </div>
-       <div className='itemPriceMac'>{price}p</div>
+       <div className='itemPriceMac'>
+         {price}p
+       </div>
     </div>
      )) 
 if (show==1) {
     return <div > 
          <div className='sel'>
-            <button 
-            onClick={():void=>sort({state:state,value:value,set:setState})}>
+            <button onClick={setSort} >
                 отсортировать
             </button> 
          <select className='select'
           value={value} onChange={change}>
-            <option value="up">по возрастанию</option>
-            <option value="down">по убыванию</option>
+            <option value="up">
+              по возрастанию
+            </option>
+            <option value="down">
+              по убыванию
+            </option>
          </select>
          </div>
-        <div className='main1'>{text}</div>
+        <div className='main1'>
+          {text}
+        </div>
     </div>
     }
     return null
@@ -89,6 +118,14 @@ const [value,setValue]=useState<string>('up')
 const change=(e:ChangeEvent<HTMLSelectElement>):void=>{
     setValue(e.target.value)
 }
+const setSort=():void=>{
+  const obj:state2={
+   state:state,
+   value:value,
+   set:setState
+     }
+   sort(obj)
+ }
 const text:JSX.Element[]=state.item.map(({src,name,price,src1}:mass,i:number):JSX.Element=>(
      <div className='item' key={i}>
       <img className='itemImg' id={id}
@@ -101,23 +138,30 @@ const text:JSX.Element[]=state.item.map(({src,name,price,src1}:mass,i:number):JS
          {name}
         </Link>
      </div>
-        <div className='itemPrice'>{price}p</div>
+        <div className='itemPrice'>
+          {price}p
+        </div>
     </div>
         )) 
 if (show==1) {
     return <div>
         <div className='sel'>
-            <button 
-            onClick={():void=>sort({state:state,value:value,set:setState})}>
+            <button onClick={setSort}>
                 отсортировать
             </button> 
          <select className='select'
           value={value} onChange={change}>
-            <option value="up">по возрастанию</option>
-            <option value="down">по убыванию</option>
+            <option value="up">
+              по возрастанию
+            </option>
+            <option value="down">
+              по убыванию
+            </option>
          </select>
          </div>
-        <div className='main1'>{text}</div>
+        <div className='main1'>
+          {text}
+        </div>
     </div>
     }
     return null
@@ -128,6 +172,14 @@ const [value,setValue]=useState<string>('up')
 const change=(e:ChangeEvent<HTMLSelectElement>):void=>{
     setValue(e.target.value)
 }
+const setSort=():void=>{
+  const obj:state2={
+   state:state,
+   value:value,
+   set:setState
+     }
+   sort(obj)
+ } 
 const text:JSX.Element[]=state.item.map(({src,name,price,src1}:mass,i:number):JSX.Element=>(
      <div className='item' key={i}>
        <img className='itemImg' id={id}
@@ -140,20 +192,25 @@ const text:JSX.Element[]=state.item.map(({src,name,price,src1}:mass,i:number):JS
             {name}
           </Link>
         </div>
-        <div className='itemPrice'>{price}p</div>
+        <div className='itemPrice'>
+          {price}p
+        </div>
     </div>
       )) 
 if (show==1) {
     return <div >
         <div className='sel'>
-        <button 
-        onClick={():void=>sort({state:state,value:value,set:setState})}>
+        <button  onClick={setSort}>
             отсортировать
         </button> 
          <select className='select'
          value={value} onChange={change}>
-            <option value="up">по возрастанию</option>
-            <option value="down">по убыванию</option>
+            <option value="up">
+              по возрастанию
+            </option>
+            <option value="down">
+              по убыванию
+            </option>
          </select>
          </div>
         <div className='main1'>{text}</div>
@@ -182,13 +239,17 @@ return <div className='item' key={i}>
     {name}
   </Link>
   </div>
-    <div className={priceClass}>{price}p</div>
+    <div className={priceClass}>
+      {price}p
+    </div>
   </div>
  }) 
 if (show==1) {
-     return <div>
-         <div className='main1'>{text}</div>
-     </div>
-     }
+  return <div>
+           <div className='main1'>
+            {text}
+          </div>
+        </div>
+      }
     return null
 }

@@ -70,7 +70,9 @@ enum style{
                 </Link>
               </button>
              </div> 
-               <div className='error'>{state1.error}</div>
+              <div className='error'>
+                {state1.error}
+              </div>
            </div>
         </div>
         

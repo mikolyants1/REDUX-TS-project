@@ -10,12 +10,12 @@ import About from './components/about'
 import Main from './components/main'
 import Header from './components/header'
 
-const Home:FC=():JSX.Element=> {
+const Home:FC=():JSX.Element=>{
    return <div>
        <Outlet />
    </div>
 }
-const Links:FC=():JSX.Element=> {
+const Links:FC=():JSX.Element=>{
    return <div>
    <Entry />
    </div>
@@ -25,7 +25,7 @@ const Shop:FC=():JSX.Element=>{
         <Outlet />
     </div>
 }
-const ShopList:FC=():JSX.Element=> {
+const ShopList:FC=():JSX.Element=>{
     return <div>
     <Header />
     <Main />
@@ -49,20 +49,20 @@ const Loading:FC=():JSX.Element=>{
     width='100%',
     textAlign='center'
   }
-  useEffect(():void=>{
-     setInterval(():void => {
-      setTimeout(():void => {
-        setText('')
-        }, 0);
-      setTimeout(():void => {
-        setText('.')
-        }, 200);
-      setTimeout(():void => {
-        setText('..')
-        }, 400);
-      setTimeout(():void => {
-        setText('...')
-        }, 600);
+useEffect(():void=>{
+  setInterval(():void => {
+    setTimeout(():void => {
+      setText('')
+      }, 0);
+    setTimeout(():void => {
+      setText('.')
+      }, 200);
+    setTimeout(():void => {
+      setText('..')
+      }, 400);
+    setTimeout(():void => {
+      setText('...')
+      }, 600);
     }, 1000);
   },[])
      return <div style={style}>
@@ -70,7 +70,8 @@ const Loading:FC=():JSX.Element=>{
      </div>
 }
 export default function App():JSX.Element{
-  return <Provider store={store}>
+  return (
+         <Provider store={store}>
            <PersistGate persistor={cachedStore} loading={<Loading />} >
              <Router>
                <Routes>
@@ -87,4 +88,5 @@ export default function App():JSX.Element{
            </Router>
          </PersistGate>
        </Provider>
+        )
 }

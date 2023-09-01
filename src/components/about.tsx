@@ -1,14 +1,14 @@
-import {useState,useEffect,useRef,useReducer,MutableRefObject}  from 'react'
+import {useState,useEffect,useRef,useReducer,MutableRefObject,Dispatch,SetStateAction}  from 'react'
 import { SetURLSearchParams,useSearchParams } from 'react-router-dom'
 import { add1 ,User} from '../store/slice.js';
 import { useAppDispatch,useAppSelector,LinkStyle,union2,union1 } from '../types/state.js';
 import { item1,item2,item3,item4 } from './items.jsx';
 import { Link } from 'react-router-dom';
-import { AnyAction, Dispatch } from '@reduxjs/toolkit';
+import { AnyAction, Dispatch as Dis } from '@reduxjs/toolkit';
 import { URLSearchParams } from 'url';
 import { mass } from './items.js';
 import { state } from '../store/slice1.js';
-import { state as st } from '../store/slice.js';
+import { state as st,pay1} from '../store/slice.js';
 interface state2 {
    phone:state
 }
@@ -39,7 +39,7 @@ export default function About():JSX.Element {
    const id:string=useAppSelector(({phone:{id}}:state2)=>id)
    const user:User[]=useAppSelector(({reduce:{user}}:state3)=>user)
    const user1:union1=user.find(({phone}:User):boolean=>phone==id)
-   const dispatch:Dispatch<AnyAction>=useAppDispatch()
+   const dispatch:Dis<AnyAction>=useAppDispatch()
    const Name:string|null=searchParams.get("name")
    const item:union2=item1.concat(item2,item3,item4).find(({name}:mass):boolean=>name==Name)
    if (!item) return <div>...</div>
@@ -62,6 +62,16 @@ export default function About():JSX.Element {
       return state
       break;
       }
+   }
+   const setBask=():void=>{
+    const obj:pay1={
+      id:user1?.id,
+      name:Name,
+      price:price,
+      src:src,
+      color:color
+    }
+    dispatch(add1(obj))
    }
    enum style {
    width='90%',
@@ -101,14 +111,18 @@ export default function About():JSX.Element {
    return <div style={style2}>
             <div className={cless2}>
               <div className='scroll'>
-               <button className='prev'
-                 onClick={():void=>setPage((x:number):number=>x==0?2:x-1)}>
-                 <img style={style1} src={img} alt="" />
-               </button>
-               <button className='next'
-                 onClick={():void=>setPage((x:number):number=>x==2?0:x+1)}>
-                 <img style={style1} src={img} alt="" />
-               </button>
+                <ScrollBut 
+                 set={setPage}
+                 className='prev'
+                 img={img}
+                 style={style1}
+                 />
+                <ScrollBut 
+                 set={setPage}
+                 className='next'
+                 img={img}
+                 style={style1}
+                 />
               </div>
                 <div className={cless1}>
                   <div className={cless}>
@@ -121,10 +135,16 @@ export default function About():JSX.Element {
                     <img style={style} src={`${src2}`} alt="" />
                   </div>
                </div>
-               <div className='aboutName'>{Name}</div>  
-               <div className='aboutPrice'>{price}p</div>  
+               <div className='aboutName'>
+                 {Name}
+               </div>  
+               <div className='aboutPrice'>
+                 {price}p
+               </div>  
                <div className='color'>
-                 <div className='color0'>цвет</div>
+                 <div className='color0'>
+                   цвет
+                 </div>
                  <div className='color1'>
                    <div className='black' ref={black}
                      onClick={():void=>move({type:0})}>
@@ -139,7 +159,7 @@ export default function About():JSX.Element {
                </div>
             <div className='divBut'>
              <button className='aboutBut'
-              onClick={():void=>{dispatch(add1({id:user1?.id,name:Name,price:price,src:src,color:color}))}}>
+              onClick={setBask}>
                добавить в корзину
              </button>
           </div>
@@ -150,4 +170,33 @@ export default function About():JSX.Element {
          </div>
       </div> 
    </div>
+}
+type style={
+  width:string,
+  height:string,
+  marginTop:string,
+  marginLeft:string,
+  borderRadius:string
+  }
+interface props {
+  set:Dispatch<SetStateAction<number>>,
+  className:string,
+  img:string,
+  style:style
+}
+function ScrollBut({set,className,img,style}:props):JSX.Element{
+const press=():void=>{
+  if (className=='next') {
+  set((x:number):number=>x==2?0:x+1)
+  }else{
+  set((x:number):number=>x==0?2:x-1)
+  }
+}
+  return <>
+  <button className={className}
+    onClick={press}>
+    <img style={style} src={img} alt="" />
+  </button>
+  </>
+
 }

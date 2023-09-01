@@ -42,10 +42,16 @@ const list:List=user1?.bask.map(({name,price,src,color}:bask,i:number):JSX.Eleme
 }
    return <div key={i} className={divClass}>
             <img className={imgClass}  src={`../${src}`} alt="" />
-            <div className='baskName' >{name}</div>
-            <div className='baskPrice'>{price}</div>
+            <div className='baskName'>
+              {name}
+            </div>
+            <div className='baskPrice'>
+              {price}
+            </div>
             <div className='baskColor'>
-              <span style={style2}>Цвет:</span>
+              <span style={style2}>
+                Цвет:
+              </span>
                {color}
             </div>
               <div style={style3}>
