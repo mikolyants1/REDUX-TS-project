@@ -1,5 +1,5 @@
 import {createSlice,PayloadAction,Slice,ActionCreatorWithPayload } from '@reduxjs/toolkit'
-import {union, union3 } from '../types/state'
+import {union, union3 ,union4} from '../types/state'
 export type bask={
     name?:union3,
     price?:union,
@@ -21,7 +21,7 @@ interface pay{
   obj:User[]
 }
 export interface pay1{
-    id:number|undefined,
+    id:union4,
     name:union3,
     price:union,
     src:union,
