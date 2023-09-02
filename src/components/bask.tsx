@@ -15,12 +15,25 @@ interface state3 {
    reduce:st
 }
 type List=JSX.Element[]|undefined
+type obj={
+  id:number,
+  index:number
+}
 export default function Bask2():JSX.Element {
 const id:union=useAppSelector(({phone}:state2)=>phone.id)
 const user:User[]=useAppSelector(({reduce}:state3)=>reduce.user)
 const dispatch:Dispatch<AnyAction>=useAppDispatch()
 const user1:union1=user.find(({phone}:User):boolean=>phone==id)
 let [imgClass,divClass]:string[]=['','']
+const remove=(i:number):void=>{
+if (typeof user1?.id!=='undefined'){
+ const obj:obj={
+  id:user1.id,
+  index:i
+     }
+ dispatch(del(obj))
+    }
+}
 enum style1{
   width='50%',
   height='25px',
@@ -55,9 +68,11 @@ const list:List=user1?.bask.map(({name,price,src,color}:bask,i:number):JSX.Eleme
                {color}
             </div>
               <div style={style3}>
-                <button style={style1}>купить</button>
+                <button style={style1}>
+                   купить
+                </button>
                 <button style={style1}
-                 onClick={():void=>{dispatch(del({id:user1.id,index:i}))}}>
+                 onClick={():void=>remove(i)}>
                   удалить
                 </button>
              </div>

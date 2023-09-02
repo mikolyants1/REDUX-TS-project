@@ -1,5 +1,5 @@
 import {useState,useReducer,ChangeEvent} from 'react'
-import {Iphone,Mac,Watch,Ipad,Search} from './sales'
+import {Catalog,Search} from './sales'
 import { union2} from '../types/state'
 import { item1,item2,item3,item4 } from './items'
 import { mass } from './items'
@@ -91,29 +91,29 @@ return <div className='main'>
        </nav>
          <div className='ser'>
            <input type="text" style={style} 
-           value={ser.text} onChange={change} />
+            value={ser.text} onChange={change} />
            <button className='serBut'
            onClick={():void=>{dispatch({type:4});filter()}}>
             search
            </button>
         </div>
           <div>
-           <Mac
+           <Catalog
             show={state.show1}
             item={item1}
             id='Mac'
             />
-           <Iphone
+           <Catalog
             show={state.show2}
             item={item2}
             id='Iphone'
             />
-           <Ipad
+           <Catalog
             show={state.show3} 
             item={item3} 
             id='Ipad' 
             />
-           <Watch 
+           <Catalog
             show={state.show4} 
             item={item4} 
             id='Watch'  
