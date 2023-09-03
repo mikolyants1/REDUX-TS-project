@@ -1,6 +1,7 @@
-import {useState,ChangeEvent} from 'react'
+import {useState,ChangeEvent,useEffect,useRef} from 'react'
+import back from '../img/back1.jpg'
 import { Link } from 'react-router-dom'
-import { useAppDispatch,useAppSelector,LinkStyle,DivEntry } from '../types/state.js'
+import { useAppDispatch,useAppSelector,LinkStyle,DivEntry,style } from '../types/state.js'
 import { add2,add3} from '../store/slice1'
 import { User } from '../store/slice'
 import { AnyAction, Dispatch } from '@reduxjs/toolkit'
@@ -22,6 +23,16 @@ export default function Entry():JSX.Element {
     const [state1,setState1]=useState<state2>({src:'/',error:''})
     const user:User[]=useAppSelector(({reduce:{user}}:state3)=>user)
     const dispatch:Dispatch<AnyAction>=useAppDispatch()
+    const entry=useRef<HTMLDivElement>(null!)
+    useEffect(():void=>{
+    const {style}=document.querySelector('body') as HTMLElement
+    style.background=`url(${back}) no-repeat`
+    style.backgroundSize='100vw 100vh'
+    },[])
+    useEffect(():void=>{
+    const height:number=state1.error!==''?320:300
+    entry.current.style.height=`${height}px`
+    },[state1.error])
     const change1=(e:ChangeEvent<HTMLInputElement>):void=>{
         setState({name:e.target.value,phone:state.phone})
     }
@@ -49,41 +60,33 @@ export default function Entry():JSX.Element {
         setState1({src:'/',error:state1.error})
         }
     }
-    enum style {
-        margin='100px auto',
-        width='300px',
-        height='200px',
-        backgroundColor='rgb(210,210,210)',
-        borderRadius='20px'
-    }
-    enum style1 {
-        width='100%',
-        height='100%',
-        borderRadius='10px',
-        border='1px solid grey',
-        backgroundColor='rgb(241, 241, 241)',
-      }
     return <div>
-             <div style={style}>
-              <div style={DivEntry}></div>
+             <div ref={entry}
+              className='login'>
+              <div style={DivEntry}>
+                Login
+              </div>
                <div className='info'>
-                <input style={style1}  type="text" list='dataName'
-                 onChange={(e:ChangeEvent<HTMLInputElement>):void=>{change1(e);setName(e)}} />
-                <datalist  id='dataName'>
-                 {user.map(({name}:User,index:number):JSX.Element=>(
-                  <option key={index} value={name}>{name}</option>
+                <input style={style} type="text" placeholder='login'
+                 list='dataName' onChange={(e):void=>{change1(e);setName(e)}} />
+                <datalist id='dataName'>
+                 {user.map(({name}:User,i:number):JSX.Element=>(
+                  <option key={i} value={name}>{name}</option>
                  ))}
                </datalist>
               </div>
                 <div className='info'>
-                  <input style={style1}  type="text" list='dataPhone'
-                   onChange={(e:ChangeEvent<HTMLInputElement>):void=>{change2(e);setNum(e)}} />
+                  <input style={style} type="text" placeholder='password'
+                   list='dataPhone' onChange={(e):void=>{change2(e);setNum(e)}} />
                   <datalist id='dataPhone'>
-                   {user.map(({phone}:User,index:number):JSX.Element=>(
-                   <option key={index} value={phone}>{phone}</option>
+                   {user.map(({phone}:User,i:number):JSX.Element=>(
+                   <option key={i} value={phone}>{phone}</option>
                     ))}
                  </datalist>
                </div>
+               <div className='error'>
+                     {state1.error}
+                   </div>
                  <div className='reg1'>
                   <button className='but1' onClick={press}>
                     <Link to={`${state1.src}`}
@@ -92,9 +95,6 @@ export default function Entry():JSX.Element {
                     </Link>
                   </button>
                  </div> 
-                   <div className='error'>
-                     {state1.error}
-                   </div>
                    <div className='if'>
                       или
                    </div>

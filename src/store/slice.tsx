@@ -1,10 +1,10 @@
 import {createSlice,PayloadAction,Slice,ActionCreatorWithPayload } from '@reduxjs/toolkit'
 import {union, union3 ,union4} from '../types/state'
 export type bask={
-    name?:union3,
-    price?:union,
-    src?:union,
-    color?:union
+    name:union3,
+    price:union,
+    src:union,
+    color:union
 }
 export interface User{
   name:union,

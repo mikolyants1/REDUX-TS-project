@@ -1,7 +1,7 @@
- import {useState,useEffect,useRef,useReducer,MutableRefObject,Dispatch,SetStateAction}  from 'react'
+import {useState,useEffect,useRef,useReducer,MutableRefObject,Dispatch,SetStateAction}  from 'react'
 import { SetURLSearchParams,useSearchParams } from 'react-router-dom'
 import { add1 ,User} from '../store/slice.js';
-import { useAppDispatch,useAppSelector,LinkStyle,union2,union1 } from '../types/state.js';
+import { useAppDispatch,useAppSelector,LinkStyle,union2,union1,union3 } from '../types/state.js';
 import { item1,item2,item3,item4 } from './items.jsx';
 import { Link } from 'react-router-dom';
 import { AnyAction, Dispatch as Dis } from '@reduxjs/toolkit';
@@ -40,7 +40,7 @@ export default function About():JSX.Element {
    const user:User[]=useAppSelector(({reduce:{user}}:state3)=>user)
    const user1:union1=user.find(({phone}:User):boolean=>phone==id)
    const dispatch:Dis<AnyAction>=useAppDispatch()
-   const Name:string|null=searchParams.get("name")
+   const Name:union3=searchParams.get("name")
    const item:union2=item1.concat(item2,item3,item4).find(({name}:mass):boolean=>name==Name)
    if (!item) return <div>...</div>
    const {src,src1,src2,price}:union2=item
@@ -63,6 +63,7 @@ export default function About():JSX.Element {
       break;
       }
    }
+  
    const setBask=():void=>{
     const obj:pay1={
       id:user1?.id,
@@ -193,8 +194,8 @@ const press=():void=>{
   }
 }
   return <>
-  <button className={className}
-    onClick={press}>
+  <button onClick={press}
+    className={className}>
     <img style={style} src={img} alt="" />
   </button>
   </>

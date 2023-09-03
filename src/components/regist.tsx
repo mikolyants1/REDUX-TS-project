@@ -1,12 +1,13 @@
-import {useState,ChangeEvent} from'react'
+import {useState,ChangeEvent,useEffect,useRef} from'react'
+import back from '../img/back.jpg'
 import { Link } from 'react-router-dom'
-import { useAppDispatch,useAppSelector,DivEntry } from '../types/state.js'
+import { useAppDispatch,useAppSelector,DivEntry,union,style } from '../types/state.js'
 import { add,User } from '../store/slice'
 import { AnyAction, Dispatch } from '@reduxjs/toolkit'
 import { state } from '../store/slice'
 interface state1{
-  name:string|undefined,
-  phone:string|undefined,
+  name:union,
+  phone:union,
   
 }
 interface state2{
@@ -21,6 +22,16 @@ const [state,setState]=useState<state1>({name:'',phone:''})
 const [state1,setState1]=useState<state2>({src:'/regist',error:''})
 const user:User[]=useAppSelector((store:state3)=>store.reduce.user)
 const dispatch:Dispatch<AnyAction>=useAppDispatch()
+const regist=useRef<HTMLDivElement>(null!)
+useEffect(():void=>{
+const {style}=document.querySelector('body') as HTMLElement
+style.background=`url(${back}) no-repeat`
+style.backgroundSize='100vw 100vh'
+  },[])
+useEffect(():void=>{
+const height:number=state1.error!==''?260:240
+regist.current.style.height=`${height}px`
+  },[state1.error])
 const setName=(e:ChangeEvent<HTMLInputElement>):void=>{
   setState({name:e.target.value,phone:state.phone})
 }
@@ -34,7 +45,7 @@ function press():void {
         if (phone==state.phone||name==state.name) con++
         })
         if (con>0) {
-            setState1({error:'уже есть',src:'/regist'})
+          setState1({error:'уже есть',src:'/regist'})
         }else{     
          dispatch(add({name:state.name,phone:state.phone,obj:user}));
          setState1({src:'/',error:state1.error})
@@ -43,36 +54,30 @@ function press():void {
         setState1({src:'/regist',error:state1.error})
     }
 }
-enum style{
-  width='100%',
-  height='100%',
-  borderRadius='10px',
-  border='1px solid grey',
-  backgroundColor='rgb(241, 241, 241)',
-}
   return <div>
-           <div className='user'>
-            <div style={DivEntry}></div>
+          <div ref={regist}
+            className='user'>
+              <div style={DivEntry}>
+                Regist
+              </div>
             <div className='info'>
-             <input style={style}
-              onChange={setName}
-              type="text" />
+             <input placeholder='login' style={style}
+              onChange={setName} type="text" />
             </div>
             <div className='info'>
-              <input style={style}
-               onChange={setNumber}
-               type="text" />
+              <input placeholder='password' style={style}
+               onChange={setNumber} type="text" />
             </div>
-              <div className='reg2'>
+            <div className='error'>
+                {state1.error}
+              </div>
+              <div className='reg1'>
                <button className='but1' onClick={press}>
                 <Link to={`${state1.src}`} className='link1'>
                   зарегестрироваться
                 </Link>
               </button>
              </div> 
-              <div className='error'>
-                {state1.error}
-              </div>
            </div>
         </div>
         

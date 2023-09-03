@@ -27,10 +27,7 @@ const user1:union1=user.find(({phone}:User):boolean=>phone==id)
 let [imgClass,divClass]:string[]=['','']
 const remove=(i:number):void=>{
 if (typeof user1?.id!=='undefined'){
- const obj:obj={
-  id:user1.id,
-  index:i
-     }
+ const obj:obj={id:user1.id,index:i}
  dispatch(del(obj))
     }
 }

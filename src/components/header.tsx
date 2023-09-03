@@ -18,7 +18,8 @@ export default function Header():JSX.Element {
                   SmartShop
                </div>
                <div className='headerDiv'>
-                  <Link className='headerLink' to='/home/bask'>
+                  <Link  to='/home/bask'
+                    className='headerLink'>
                     корзина
                   </Link>
                </div>

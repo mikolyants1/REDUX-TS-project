@@ -65,9 +65,11 @@ useEffect(():void=>{
       }, 600);
     }, 1000);
   },[])
-     return <div style={style}>
-        <div>Loading {text}</div>
-     </div>
+return <div style={style}>
+         <div>
+           Loading {text}
+         </div>
+       </div>
 }
 export default function App():JSX.Element{
   return (

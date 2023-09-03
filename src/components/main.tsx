@@ -1,4 +1,4 @@
-import {useState,useReducer,ChangeEvent} from 'react'
+import {useState,useReducer,ChangeEvent,useEffect} from 'react'
 import {Catalog,Search} from './sales'
 import { union2} from '../types/state'
 import { item1,item2,item3,item4 } from './items'
@@ -25,6 +25,10 @@ const [ser,setSer]=useState<state2>({text:''})
 const [state,dispatch]=useReducer(reducer,{show1:1,show2:0,show3:0,show4:0,show5:0})
 const item5:Array<mass>=[...item1,...item2,...item3,...item4]
 const [items,setItems]=useState<state3>({item:item5})
+useEffect(():void=>{
+const {style}=document.querySelector('body') as HTMLElement
+style.background='none'
+},[])
 const change=(e:ChangeEvent<HTMLInputElement>):void=>{
     setSer({text:e.target.value})
 }
@@ -93,30 +97,26 @@ return <div className='main'>
            <input type="text" style={style} 
             value={ser.text} onChange={change} />
            <button className='serBut'
-           onClick={():void=>{dispatch({type:4});filter()}}>
-            search
+             onClick={():void=>{dispatch({type:4});filter()}}>
+               search
            </button>
         </div>
           <div>
            <Catalog
             show={state.show1}
             item={item1}
-            id='Mac'
             />
            <Catalog
             show={state.show2}
             item={item2}
-            id='Iphone'
             />
            <Catalog
             show={state.show3} 
-            item={item3} 
-            id='Ipad' 
+            item={item3}  
             />
            <Catalog
             show={state.show4} 
             item={item4} 
-            id='Watch'  
             />
            <Search 
             show={state.show5} 
