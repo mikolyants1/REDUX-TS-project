@@ -9,6 +9,7 @@ import { URLSearchParams } from 'url';
 import { mass } from './items.js';
 import { state } from '../store/slice1.js';
 import { state as st,pay1} from '../store/slice.js';
+import img from '../img/arr.png'
 interface state2 {
    phone:state
 }
@@ -24,7 +25,6 @@ interface action {
    type:number
 }
 export default function About():JSX.Element {
-   const img:string='https://zabavnikus.ru/wp-content/uploads/4/6/d/46db6b99ec911f6e90a2b62e43c53ccd.png'
    const [cless,setCless]=useState<string>('aboutImg')
    const [cless1,setCless1]=useState<string>('imgDiv')
    const [cless2,setCless2]=useState<string>('aboutDiv')
@@ -62,8 +62,7 @@ export default function About():JSX.Element {
       return state
       break;
       }
-   }
-  
+   } 
    const setBask=():void=>{
     const obj:pay1={
       id:user1?.id,
@@ -115,13 +114,11 @@ export default function About():JSX.Element {
                 <ScrollBut 
                  set={setPage}
                  className='prev'
-                 img={img}
                  style={style1}
                  />
                 <ScrollBut 
                  set={setPage}
                  className='next'
-                 img={img}
                  style={style1}
                  />
               </div>
@@ -182,10 +179,9 @@ type style={
 interface props {
   set:Dispatch<SetStateAction<number>>,
   className:string,
-  img:string,
   style:style
 }
-function ScrollBut({set,className,img,style}:props):JSX.Element{
+function ScrollBut({set,className,style}:props):JSX.Element{
 const press=():void=>{
   if (className=='next') {
   set((x:number):number=>x==2?0:x+1)
