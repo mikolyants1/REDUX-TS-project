@@ -1,4 +1,4 @@
-import {useState,ChangeEvent,useEffect,useRef} from 'react'
+import {useState,ChangeEvent,useEffect,useRef,FC} from 'react'
 import back from '../img/back1.jpg'
 import { Link } from 'react-router-dom'
 import { useAppDispatch,useAppSelector,LinkStyle,DivEntry,style } from '../types/state.js'
@@ -66,24 +66,20 @@ export default function Entry():JSX.Element {
               <div style={DivEntry}>
                 Login
               </div>
-               <div className='info'>
-                <input style={style} type="text" placeholder='login'
-                 list='dataName' onChange={(e):void=>{change1(e);setName(e)}} />
-                <datalist id='dataName'>
-                 {user.map(({name}:User,i:number):JSX.Element=>(
-                  <option key={i} value={name}>{name}</option>
-                 ))}
-               </datalist>
-              </div>
-                <div className='info'>
-                  <input style={style} type="text" placeholder='password'
-                   list='dataPhone' onChange={(e):void=>{change2(e);setNum(e)}} />
-                  <datalist id='dataPhone'>
-                   {user.map(({phone}:User,i:number):JSX.Element=>(
-                   <option key={i} value={phone}>{phone}</option>
-                    ))}
-                 </datalist>
-               </div>
+              <Login
+               user={user}
+               data='name'
+               chan={change1}
+               set={setName}
+               place='login'
+              />
+              <Login
+               user={user}
+               data='phone'
+               chan={change2}
+               set={setNum}
+               place='password'
+              />
                <div className='error'>
                      {state1.error}
                    </div>
@@ -105,4 +101,25 @@ export default function Entry():JSX.Element {
                   </div>
                </div>    
             </div>
+}
+interface props {
+  user:User[],
+  data:string,
+  chan:(e:ChangeEvent<HTMLInputElement>)=>void,
+  set:(e:ChangeEvent<HTMLInputElement>)=>void,
+  place:string
+}
+
+const Login:FC<props>=({user,data,chan,set,place}):JSX.Element=>{
+const list:JSX.Element[]=user.map(({name,phone}:User,i:number):JSX.Element=>{
+if (data=='name') return <option key={i} value={name}></option>
+else return <option key={i} value={phone}></option>
+})
+return <div className='info'>
+     <input style={style} type="text" placeholder={place}
+      list={data} onChange={(e):void=>{chan(e);set(e)}} />
+    <datalist id={data}>
+       {list}
+    </datalist>
+  </div>
 }

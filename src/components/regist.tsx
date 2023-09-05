@@ -1,9 +1,9 @@
-import {useState,ChangeEvent,useEffect,useRef} from'react'
+import {useState,ChangeEvent,useEffect,useRef,Dispatch,SetStateAction} from'react'
 import back from '../img/back.jpg'
 import { Link } from 'react-router-dom'
 import { useAppDispatch,useAppSelector,DivEntry,union,style } from '../types/state.js'
 import { add,User } from '../store/slice'
-import { AnyAction, Dispatch } from '@reduxjs/toolkit'
+import { AnyAction, Dispatch as Dis } from '@reduxjs/toolkit'
 import { state } from '../store/slice'
 interface state1{
   name:union,
@@ -21,7 +21,7 @@ export default function Regist():JSX.Element {
 const [state,setState]=useState<state1>({name:'',phone:''})
 const [state1,setState1]=useState<state2>({src:'/regist',error:''})
 const user:User[]=useAppSelector((store:state3)=>store.reduce.user)
-const dispatch:Dispatch<AnyAction>=useAppDispatch()
+const dispatch:Dis<AnyAction>=useAppDispatch()
 const regist=useRef<HTMLDivElement>(null!)
 useEffect(():void=>{
 const {style}=document.querySelector('body') as HTMLElement
@@ -32,17 +32,11 @@ useEffect(():void=>{
 const height:number=state1.error!==''?260:240
 regist.current.style.height=`${height}px`
   },[state1.error])
-const setName=(e:ChangeEvent<HTMLInputElement>):void=>{
-  setState({name:e.target.value,phone:state.phone})
-}
-const setNumber=(e:ChangeEvent<HTMLInputElement>):void=>{
-  setState({phone:e.target.value,name:state.name})
-}
 function press():void {
     let con:number=0
     if (state.name!==''&&state.phone!=='') {
-        user.forEach(({phone,name}:User):void=>{
-        if (phone==state.phone||name==state.name) con++
+      user.forEach(({phone,name}:User):void=>{
+      if (phone==state.phone||name==state.name) con++
         })
         if (con>0) {
           setState1({error:'уже есть',src:'/regist'})
@@ -60,14 +54,16 @@ function press():void {
               <div style={DivEntry}>
                 Regist
               </div>
-            <div className='info'>
-             <input placeholder='login' style={style}
-              onChange={setName} type="text" />
-            </div>
-            <div className='info'>
-              <input placeholder='password' style={style}
-               onChange={setNumber} type="text" />
-            </div>
+              <SetUser
+               set={setState}
+               state={state}
+               place='login'
+               />
+              <SetUser
+               set={setState}
+               state={state}
+               place='password'
+               />
             <div className='error'>
                 {state1.error}
               </div>
@@ -80,7 +76,22 @@ function press():void {
              </div> 
            </div>
         </div>
-        
-        
-
-}
+  }
+interface props {
+ set:Dispatch<SetStateAction<state1>>,
+ state:state1,
+ place:string
+  }
+function SetUser({set,state,place}:props):JSX.Element{
+const setData=(e:ChangeEvent<HTMLInputElement>):void=>{
+  if (place=='login'){
+    set({name:e.target.value,phone:state.phone})
+  }else{
+    set({phone:e.target.value,name:state.name})
+  }
+    }
+return <div className='info'>
+    <input placeholder={place} style={style}
+      onChange={setData} type="text" />
+   </div>
+  }

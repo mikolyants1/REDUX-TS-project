@@ -1,378 +1,366 @@
-body{
-  font-family: system-ui, -apple-system, BlinkMacSystemFont,
-   'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-   
- }
- .main{
-    min-width: 410px;
-     width: 100%;
-     
- }
- .catalog{
-     width: 100%;
-     display: flex;
- }
- .login{
-    margin:150px auto;
-    width:300px;
-    height:300px;
-    background:transparent;
-    backdrop-filter:blur(15px);
-    border-radius:20px;
-    border: 1px solid rgb(193, 192, 192);
- }
- .cat1{
-height: 25px;
-background-color: rgb(197, 197, 197);
- width: 100%;
- padding: 10px 0px;
- text-align: center;
- border: 1px solid black;
- font-size: 21px;
- }
- .headerDiv{
-     font-size:20px;
-     margin-top:25px
- }
- .headerLink{
-     color:white;
-     text-decoration:none
- }
- .headerName{
-     font-size:35px;
-     margin-top:10px;
-     letter-spacing:1px
- }
- .itemList{
-     width:400px;
-     margin:auto
- }
- .main1{
-     width: 95%;
-     margin:30px auto;
-     display: grid;
-     row-gap: 70px;
-     column-gap: 60px;
-     grid-template-columns: repeat(auto-fill,minmax(200px,1fr));
- }
- .item{
-     width: 100%;
-     height: 230px;
- }
- .item1{
-     margin: 30px auto;
-     width: 100%;
-     height: 490px;
- }
- .item2{
-     margin: 30px auto;
-     width: 100%;
-     height: 400px;
- }
- .ser{
-     width: 100%;
-     height: 25px;
-     display: flex;
- }
- .serInput{
-     border: 1px solid grey;
-     width: 93%;
-     height: 26px;
-     text-align: center;
-     font-size: 20px;
-     background-color: rgb(240, 240, 240);
- }
- .serBut{
-     width: 100px;
-     height: 30px;
- }
- .header{
-    min-width: 410px;
-     width:100%;
-     height:80px;
-     background-color:black;
-     color:white
- }
- .header1{
-     display:flex;
-     justify-content:space-between;
-     width:90%;
-     margin:auto;
-     height:40px
- }
- .error{
-     margin-top:10px;
-     margin-bottom: 10px;
-     width:100%;
-     text-align:center;
-     color:red
- }
- .itemName{
-     width:200px;
-     text-align:center
- }
- .itemLink{
-     color:rgb(135, 135, 135);
-     text-decoration:none;
-     font-size:22px
- }
- .itemImg{
-     width:200px;
-     height:100%;
-     margin:auto
- }
- .itemImgMac{
-     width:260px;
-     height:72%;
-     margin:30px auto
- }
- .itemNameMac{
-     width:260px;
-     text-align:center
- }
- .itemPriceMac{
-    font-weight: bold;
-     width:260px;
-     text-align:center;
-     color:rgb(12, 12, 12)
-     
- }
- .itemPrice{
-    font-weight: bold;
-     width:200px;
-     text-align:center;
-     color:rgb(5, 5, 5)
- }
- .sel{
-     margin-top: 1px;
- }
- .select{
-     height: 20px;
-     background-color: rgb(237, 237, 237);
-     border-radius: 0 0 2px 2px;
-     margin-top: 2px;
- }
- .aboutDiv{
-    overflow: hidden;
-    position: relative;
-     width:370px;
-     margin:20px auto
- }
- .aboutDivMac{
-    overflow: hidden;
-    position: relative;
-     width:450px;
-     margin:20px auto
- }
- .scroll{
-    z-index: 100;
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+body .main {
+  min-width: 410px;
+  width: 100%;
+}
+body .main .catalog {
+  width: 100%;
+  display: flex;
+}
+body .main .catalog .cat1 {
+  height: 25px;
+  background-color: rgb(197, 197, 197);
+  width: 100%;
+  padding: 10px 0px;
+  text-align: center;
+  border: 1px solid black;
+  font-size: 21px;
+}
+body .main .ser {
+  width: 100%;
+  height: 25px;
+  display: flex;
+}
+body .main .ser .serBut {
+  width: 100px;
+  height: 30px;
+}
+body .main .main1 {
+  width: 95%;
+  margin: 30px auto;
+  display: grid;
+  row-gap: 70px;
+  -moz-column-gap: 60px;
+       column-gap: 60px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+body .main .main1 .item {
+  width: 100%;
+  height: 230px;
+}
+body .main .main1 .item .itemName {
+  width: 200px;
+  text-align: center;
+}
+body .main .main1 .item .itemLink {
+  color: rgb(135, 135, 135);
+  text-decoration: none;
+  font-size: 22px;
+}
+body .main .main1 .item .itemImg {
+  width: 200px;
+  height: 100%;
+  margin: auto;
+}
+body .main .main1 .item .itemImgMac {
+  width: 260px;
+  height: 72%;
+  margin: 30px auto;
+}
+body .main .main1 .item .itemNameMac {
+  width: 260px;
+  text-align: center;
+}
+body .main .main1 .item .itemPriceMac {
+  font-weight: bold;
+  width: 260px;
+  text-align: center;
+  color: rgb(12, 12, 12);
+}
+body .main .main1 .item .itemPrice {
+  font-weight: bold;
+  width: 200px;
+  text-align: center;
+  color: rgb(5, 5, 5);
+}
+body .main .sel {
+  margin-top: 1px;
+}
+body .main .sel .select {
+  height: 20px;
+  background-color: rgb(237, 237, 237);
+  border-radius: 0 0 2px 2px;
+  margin-top: 2px;
+}
+body .login {
+  margin: 150px auto;
+  width: 300px;
+  height: 300px;
+  background: transparent;
+  -webkit-backdrop-filter: blur(15px);
+          backdrop-filter: blur(15px);
+  border-radius: 20px;
+  border: 1px solid rgb(193, 192, 192);
+}
+body .user {
+  margin: 150px auto;
+  width: 300px;
+  height: 240px;
+  background: transparent;
+  -webkit-backdrop-filter: blur(15px);
+          backdrop-filter: blur(15px);
+  border-radius: 20px;
+  border: 1px solid rgb(193, 192, 192);
+}
+body .info {
+  width: 80%;
+  height: 30px;
+  margin: 25px auto;
+}
+body .reg1 {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 40px;
+}
+body .reg1 .but1 {
+  width: 80%;
+  height: 100%;
+  text-align: center;
+  border-radius: 15px;
+  color: black;
+  font-weight: bold;
+  font-size: 16px;
+  background-color: white;
+  border: 1px solid grey;
+}
+body .reg1 .but1 .link1 {
+  text-decoration: none;
+  color: black;
+}
+body .itemList {
+  width: 400px;
+  margin: auto;
+}
+body .itemList .baskBack {
+  width: 100%;
+  text-align: center;
+  margin-top: 50px;
+  font-size: 22px;
+}
+body .item1 {
+  margin: 30px auto;
+  width: 100%;
+  height: 490px;
+}
+body .item2 {
+  margin: 30px auto;
+  width: 100%;
+  height: 400px;
+}
+body .header {
+  min-width: 410px;
+  width: 100%;
+  height: 80px;
+  background-color: black;
+  color: white;
+}
+body .header .header1 {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  margin: auto;
+  height: 40px;
+}
+body .header .header1 .headerDiv {
+  font-size: 20px;
+  margin-top: 25px;
+}
+body .header .header1 .headerDiv .headerLink {
+  color: white;
+  text-decoration: none;
+}
+body .header .header1 .headerName {
+  font-size: 35px;
+  margin-top: 10px;
+  letter-spacing: 1px;
+}
+body .error {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+  text-align: center;
+  color: red;
+}
+body .aboutDiv {
+  overflow: hidden;
+  position: relative;
+  width: 370px;
+  margin: 20px auto;
+}
+body .aboutDiv .imgDiv {
+  transition: 1s;
+  width: 1110px;
+  display: flex;
+  height: 400px;
+}
+body .aboutDiv .imgDiv .aboutImg {
+  width: 360px;
+  height: 400px;
+}
+body .aboutDivMac {
+  overflow: hidden;
+  position: relative;
+  width: 450px;
+  margin: 20px auto;
+}
+body .aboutDivMac .imgDivMac {
+  transition: 1s;
+  width: 1350px;
+  display: flex;
+  height: 340px;
+}
+body .aboutDivMac .imgDivMac .aboutImgMac {
+  width: 450px;
+  height: 280px;
+}
+body .scroll {
+  z-index: 100;
+  width: 100%;
+  position: absolute;
+  margin-top: 200px;
+  display: flex;
+  justify-content: space-between;
+}
+body .scroll .prev {
+  border-radius: 50%;
+  border: none;
+  height: 50px;
+  width: 50px;
+  opacity: 0.5;
+  rotate: 180deg;
+}
+body .scroll .next {
+  border-radius: 50%;
+  border: none;
+  height: 50px;
+  width: 50px;
+  opacity: 0.5;
+}
+body .color {
+  margin: auto;
+  width: 70%;
+  display: flex;
+}
+body .color .color0 {
+  font-size: 20px;
+  margin-top: 1px;
+  width: 60px;
+}
+body .color .color1 {
+  width: 60%;
+  display: flex;
+  justify-content: space-between;
+}
+body .color .color1 .grey {
+  border-radius: 50%;
+  border: 1px solid rgb(4, 4, 4);
+  width: 30px;
+  height: 30px;
+  background-color: grey;
+}
+body .color .color1 .white {
+  border-radius: 50%;
+  border: 1px solid rgb(4, 4, 4);
+  width: 30px;
+  height: 30px;
+  background-color: rgb(254, 253, 253);
+}
+body .color .color1 .black {
+  border-radius: 50%;
+  border: 1px solid rgb(4, 4, 4);
+  width: 30px;
+  height: 30px;
+  background-color: black;
+}
+body .aboutPrice {
+  margin: auto;
+  width: 80%;
+  text-align: center;
+  font-size: 20px;
+  color: rgb(5, 5, 5);
+  font-weight: bold;
+}
+body .aboutName {
+  width: 100%;
+  text-align: center;
+  font-size: 24px;
+  color: grey;
+}
+body .divBut {
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
+}
+body .divBut .aboutBut {
+  margin: auto;
+  width: 80%;
+  height: 40px;
+  font-size: 18px;
+  border-radius: 10px;
+  border: 1px solid grey;
+}
+body .baskColor {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 10px;
+}
+body .baskImg {
+  margin-left: 35px;
+  width: 80%;
+  height: 350px;
+}
+body .baskImgMac {
+  width: 100%;
+  height: 250px;
+}
+body .baskName {
+  text-align: center;
+  width: 100%;
+  font-size: 22px;
+  color: grey;
+}
+body .baskPrice {
+  text-align: center;
+  width: 100%;
+  font-size: 20px;
+  color: rgb(15, 15, 15);
+  font-weight: bold;
+}
+body .baskLost {
+  width: 100%;
+  text-align: center;
+  margin-top: 150px;
+  font-size: 30px;
+}
+body .if {
+  text-align: center;
+  width: 100%;
+  margin-top: 10px;
+  color: white;
+}
+body input::-moz-placeholder {
+  font-size: 17px;
+  color: white;
+  padding: 5px;
+}
+body input::placeholder {
+  font-size: 17px;
+  color: white;
+  padding: 5px;
+}
+@media (max-width: 500px) {
+  body .header {
     width: 100%;
-    position: absolute;
-    margin-top: 200px;
-    display: flex;
-    justify-content: space-between;
- }
- 
- .imgDiv{
-    transition: 1s;
-    width: 1110px;
-    display: flex; 
-    height: 400px;
- }
- .imgDivMac{
-    transition: 1s;
-    width: 1350px;
-    display:flex;
-    height: 340px;
- }
- .color{
+  }
+  body .main1 {
+    display: block;
+    width: 200px;
     margin: auto;
-    width: 70%;
-    display: flex;
- }
- .color0{
-    font-size: 20px;
-    margin-top: 1px;
-    width: 60px;
- }
- .color1{
-    width: 60%;
-    display: flex;
-    justify-content: space-between;
- }
- .grey{
-    border-radius: 50%;
-    border: 1px solid rgb(4, 4, 4);
-    width: 30px;
-    height: 30px;
-    background-color: grey;
- }
- .white{
-    border-radius: 50%;
-    border: 1px solid rgb(4, 4, 4);
-    width: 30px;
-    height: 30px;
-    background-color: rgb(254, 253, 253);
- }
- .black{
-    border-radius: 50%;
-    border: 1px solid rgb(4, 4, 4);
-    width: 30px;
-    height: 30px;
-    background-color: black;
- }
- .aboutImg{
-     width:360px;
-     height:400px
- }
- .aboutImgMac{
-     width:450px;
-     height:280px
- }
- .aboutPrice{
-     margin: auto;
-     width:80%;
-     text-align:center;
-     font-size:20px;
-     color:rgb(5, 5, 5);
-     font-weight: bold;
- }
- .aboutName{
-     width:100%;
-     text-align:center;
-     font-size:24px;
-     color:grey
- }
- .divBut{
-     width:100%;
-     margin-top:10px;
-     display:flex
- }
- .aboutBut{
-     margin: auto;
-     width:80%;
-     height:40px;
-     font-size: 18px;
-     border-radius: 10px;
-     border: 1px solid grey;
- }
- .baskColor{
-    width: 100%;
-    text-align: center;
-    margin-bottom: 10px;
- }
- .baskImg{
-    margin-left: 35px;
-     width:80%;
-     height:350px
- }
- .baskImgMac{
-     width:100%;
-     height:250px
- }
- .baskName{
-     text-align:center;
-     width:100%;
-     font-size:22px;
-     color: grey;
- }
- .baskPrice{
-     text-align:center;
-     width:100%;
-     font-size:20px;
-     color:rgb(15, 15, 15);
-     font-weight: bold;
- }
- .baskLost{
-     width:100%;
-     text-align:center;
-     margin-top:150px;
-     font-size:30px
- }
- .baskBack{
-     width:100%;
-     text-align:center;
-     margin-top:50px;
-     font-size:22px
- }
- .if{
-     text-align:center;
-     width:100%;
-     margin-top:10px;
-     color: white;
- }
- .user{
-    margin:150px auto;
-    width:300px;
-    height:240px;
-    background:transparent;
-    backdrop-filter:blur(15px);
-    border-radius:20px;
-    border: 1px solid rgb(193, 192, 192);
- }
- .prev{
-border-radius: 50%;
-border:none;
-height: 50px;
-width:50px ;
-opacity: 0.5;
-rotate:180deg
- }
- input::placeholder{
-    font-size: 17px;
-    color: white;
-    padding: 5px;
- }
- .next{
-    border-radius: 50%;
-    border:none;
-    height: 50px;
-    width: 50px;
-    opacity: 0.5;
- }
- .info{
-     width:80%;
-     height:30px;
-     margin:25px auto;
- }
- .reg1{
-    display: flex;
-    justify-content: center;
-     width: 100%;
-     height: 40px;
- }
- .reg2{
-     width: 160px;
-     height: 40px;
-     margin: auto;
- }
- .but1{
-     width: 80%;
-     height: 100%;
-    text-align: center;
-    border-radius: 15px;
-    color: black;
-    font-weight: bold;
-    font-size: 16px;
-    background-color: white;
- border: 1px solid grey;
- }
- .link1{
-     text-decoration: none;
-     color: black;
- }
- @media (max-width:500px) {
-     .header{
-         width: 100%;
-     }
-     .main1{
-         display: block;
-         width: 200px;
-         margin: auto;
-     }
-     .item{
-         margin:100px auto;
-     }
- }
- 
- 
+  }
+  body .item {
+    margin: 100px auto;
+  }
+}/*# sourceMappingURL=style.css.map */

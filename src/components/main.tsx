@@ -28,6 +28,7 @@ const [items,setItems]=useState<state3>({item:item5})
 useEffect(():void=>{
 const {style}=document.querySelector('body') as HTMLElement
 style.background='none'
+style.backgroundSize='none'
 },[])
 const change=(e:ChangeEvent<HTMLInputElement>):void=>{
     setSer({text:e.target.value})

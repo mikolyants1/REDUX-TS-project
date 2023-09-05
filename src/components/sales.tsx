@@ -53,7 +53,7 @@ const text:JSX.Element[]=state.item.map(({src,name,price,src1}:mass,i:number):JS
            </div>
         }) 
 if (show==1) {
-    return <div>
+return <div>
        <div className='sel'>
         <button
          onClick={sort}>
