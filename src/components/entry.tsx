@@ -33,11 +33,8 @@ export default function Entry():JSX.Element {
     const height:number=state1.error!==''?320:300
     entry.current.style.height=`${height}px`
     },[state1.error])
-    const change1=(e:ChangeEvent<HTMLInputElement>):void=>{
-        setState({name:e.target.value,phone:state.phone})
-    }
-    const change2=(e:ChangeEvent<HTMLInputElement>):void=>{
-        setState({phone:e.target.value,name:state.name})
+    const change=({target}:ChangeEvent<HTMLInputElement>):void=>{
+    setState((prev:state1):state1=>({...prev,[target.name]:target.value}))
     }
     const setName=(e:ChangeEvent<HTMLInputElement>):void=>{
       dispatch(add2(e.target.value))
@@ -52,12 +49,12 @@ export default function Entry():JSX.Element {
     if (phone==state.phone&&name==state.name) con++
         })
     if (con==0) {
-    setState1({error:'не найден',src:state1.src})
+    setState1((prev:state2):state2=>({...prev,error:'не найден'}))
         }else{
-    setState1({src:'/home',error:state1.error})
+    setState1((prev:state2):state2=>({...prev,src:'/home'}))
         }
         }else{
-        setState1({src:'/',error:state1.error})
+        setState1((prev:state2):state2=>({...prev,src:'/'}))
         }
     }
     return <div>
@@ -69,14 +66,14 @@ export default function Entry():JSX.Element {
               <Login
                user={user}
                data='name'
-               chan={change1}
+               chan={change}
                set={setName}
                place='login'
               />
               <Login
                user={user}
                data='phone'
-               chan={change2}
+               chan={change}
                set={setNum}
                place='password'
               />
@@ -116,7 +113,7 @@ if (data=='name') return <option key={i} value={name}></option>
 else return <option key={i} value={phone}></option>
 })
 return <div className='info'>
-     <input style={style} type="text" placeholder={place}
+     <input name={data} style={style} type="text" placeholder={place}
       list={data} onChange={(e):void=>{chan(e);set(e)}} />
     <datalist id={data}>
        {list}

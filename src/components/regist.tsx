@@ -42,10 +42,10 @@ function press():void {
           setState1({error:'уже есть',src:'/regist'})
         }else{     
          dispatch(add({name:state.name,phone:state.phone,obj:user}));
-         setState1({src:'/',error:state1.error})
+         setState1((prev:state2):state2=>({...prev,src:'/'}))
         }
     }else{
-        setState1({src:'/regist',error:state1.error})
+        setState1((prev:state2):state2=>({...prev,src:'/regist'}))
     }
 }
   return <div>
@@ -56,13 +56,13 @@ function press():void {
               </div>
               <SetUser
                set={setState}
-               state={state}
                place='login'
+               name='name'
                />
               <SetUser
                set={setState}
-               state={state}
                place='password'
+               name='phone'
                />
             <div className='error'>
                 {state1.error}
@@ -79,19 +79,15 @@ function press():void {
   }
 interface props {
  set:Dispatch<SetStateAction<state1>>,
- state:state1,
- place:string
+ place:string,
+ name:string
   }
-function SetUser({set,state,place}:props):JSX.Element{
-const setData=(e:ChangeEvent<HTMLInputElement>):void=>{
-  if (place=='login'){
-    set({name:e.target.value,phone:state.phone})
-  }else{
-    set({phone:e.target.value,name:state.name})
-  }
+function SetUser({set,place,name}:props):JSX.Element{
+const setData=({target}:ChangeEvent<HTMLInputElement>):void=>{
+  set((prev:state1):state1=>({...prev,[target.name]:target.value}))
     }
 return <div className='info'>
-    <input placeholder={place} style={style}
+    <input name={name} placeholder={place} style={style}
       onChange={setData} type="text" />
    </div>
   }

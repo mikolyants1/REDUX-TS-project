@@ -26,7 +26,8 @@ export enum style {
     border='1px solid grey',
     color='white',
     borderRadius='15px',
-    background='none'
+    background='none',
+    outline='none'
   }
 export enum DivEntry {
     height='25px',
