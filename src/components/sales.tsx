@@ -1,4 +1,4 @@
-import {useState,ChangeEvent,useEffect, MouseEvent} from 'react'
+import {useState,ChangeEvent,useEffect,MouseEvent} from 'react'
 import {Link } from 'react-router-dom'
 import { item1 } from './items'
 import {props,state1,func} from '../types/state'
@@ -16,8 +16,8 @@ const {item}:state1=state
 let key:number
 const [mass1,obj]:mass[][]&any=[[],{}]
 item.forEach(({price,name}:mass):void=>{
-    key=parseInt(price)
-    obj[key]=name
+  key=parseInt(price)
+  obj[key]=name
   })
 const mass:string[]=Array.from(Object.values(obj))
 if (value=='down') mass.reverse()
@@ -31,8 +31,9 @@ for (let i:number = 0; i < mass.length; i++) {
 const imgChan=(item:string,e:MouseEvent<HTMLImageElement>):void=>{
   e.currentTarget.src=item
   }
+const {item}:state1=state
 let [imgClass,nameClass,priceClass]:string[]=['','','']
-const text:JSX.Element[]=state.item.map((item:mass,i:number):JSX.Element=>{
+const text:JSX.Element[]=item.map((item:mass,i:number):JSX.Element=>{
   const {src,name,price,src1}:mass=item
   if (item1.some(({name:n}:mass):boolean=>n==name)) {
     imgClass='itemImgMac'

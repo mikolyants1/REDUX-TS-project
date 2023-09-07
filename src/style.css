@@ -351,7 +351,7 @@ body input::placeholder {
   color: white;
   padding: 5px;
 }
-@media (max-width: 500px) {
+@media (max-width: 560px) {
   body .header {
     width: 100%;
   }
@@ -361,6 +361,9 @@ body input::placeholder {
     margin: auto;
   }
   body .item {
-    margin: 100px auto;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 }/*# sourceMappingURL=style.css.map */
