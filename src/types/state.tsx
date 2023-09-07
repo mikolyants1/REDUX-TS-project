@@ -34,7 +34,7 @@ export enum DivEntry {
 }
 export type reduce=null|mass[]
 export interface props{
-    show:mass[]|null,
+    show:reduce,
     id?:union
 }
 export interface state1{
