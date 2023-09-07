@@ -24,6 +24,11 @@ interface styles {
 interface action {
    type:number
 }
+type refType=MutableRefObject<HTMLDivElement>
+interface obj {
+  ref:refType,
+  name:string
+}
 export default function About():JSX.Element {
    const [cless,setCless]=useState<string>('aboutImg')
    const [cless1,setCless1]=useState<string>('imgDiv')
@@ -35,6 +40,7 @@ export default function About():JSX.Element {
    const black=useRef<HTMLDivElement>(null!)
    const white=useRef<HTMLDivElement>(null!)
    const grey=useRef<HTMLDivElement>(null!)
+   const refObj:obj[]=[{ref:black,name:'black'},{ref:grey,name:'grey'},{ref:white,name:'white'}]
    const [searchParams]:[URLSearchParams,SetURLSearchParams]=useSearchParams();
    const id:string=useAppSelector(({phone:{id}}:state2)=>id)
    const user:User[]=useAppSelector(({reduce:{user}}:state3)=>user)
@@ -44,6 +50,7 @@ export default function About():JSX.Element {
    const item:union2=item1.concat(item2,item3,item4).find(({name}:mass):boolean=>name==Name)
    if (!item) return <div>...</div>
    const {src,src1,src2,price}:union2=item
+   const srcArr:string[]=[src,src1,src2]
    function reducer(state:styles,{type}:action):styles{
    switch (type) {
       case 0:
@@ -98,7 +105,7 @@ export default function About():JSX.Element {
    },[])
    useEffect(():void=>{
    const [{current:{style:b}},{current:{style:g}},{current:{style:w}}]
-   :MutableRefObject<HTMLDivElement>[]=[black,grey,white]
+   :refType[]=[black,grey,white]
    const {style1,style2,style3}:styles=state1
     b.border=`2px solid ${style1}`
     g.border=`2px solid ${style2}`
@@ -123,15 +130,11 @@ export default function About():JSX.Element {
                  />
               </div>
                 <div className={cless1}>
-                  <div className={cless}>
-                    <img style={style} src={`${src}`} alt="" />
-                  </div>
-                  <div className={cless}>
-                    <img style={style} src={`${src1}`} alt="" />
-                  </div>
-                  <div className={cless}> 
-                    <img style={style} src={`${src2}`} alt="" />
-                  </div>
+                  {srcArr.map((item:string,i:number):JSX.Element=>(
+                    <div className={cless} key={i}>
+                      <img style={style} src={`${item}`} alt="" />
+                    </div>
+                    ))}
                </div>
                <div className='aboutName'>
                  {Name}
@@ -144,15 +147,11 @@ export default function About():JSX.Element {
                    цвет
                  </div>
                  <div className='color1'>
-                   <div className='black' ref={black}
-                     onClick={():void=>move({type:0})}>
-                   </div>
-                   <div className='grey' ref={grey}
-                     onClick={():void=>move({type:1})}>
-                   </div>
-                   <div className='white' ref={white}
-                     onClick={():void=>move({type:2})}>
-                   </div>
+                  {refObj.map(({name,ref}:obj,i:number):JSX.Element=>(
+                    <div className={`${name}`} ref={ref}
+                      key={i} onClick={():void=>move({type:i})}>
+                    </div>
+                   ))}
                  </div>
                </div>
             <div className='divBut'>

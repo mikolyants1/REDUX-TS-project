@@ -14,6 +14,11 @@ interface state2{
   src:string,
   error:string
 }
+interface user {
+  name:union,
+  phone:union,
+  obj:User[]
+}
 type state3={
   reduce:state
 }
@@ -39,9 +44,14 @@ function press():void {
       if (phone==state.phone||name==state.name) con++
         })
         if (con>0) {
-          setState1({error:'уже есть',src:'/regist'})
-        }else{     
-         dispatch(add({name:state.name,phone:state.phone,obj:user}));
+        setState1({error:'уже есть',src:'/regist'})
+        }else{ 
+         const obj:user={
+          name:state.name,
+          phone:state.phone,
+          obj:user
+          }   
+         dispatch(add(obj));
          setState1((prev:state2):state2=>({...prev,src:'/'}))
         }
     }else{
@@ -84,7 +94,7 @@ interface props {
   }
 function SetUser({set,place,name}:props):JSX.Element{
 const setData=({target}:ChangeEvent<HTMLInputElement>):void=>{
-  set((prev:state1):state1=>({...prev,[target.name]:target.value}))
+set((prev:state1):state1=>({...prev,[target.name]:target.value}))
     }
 return <div className='info'>
     <input name={name} placeholder={place} style={style}

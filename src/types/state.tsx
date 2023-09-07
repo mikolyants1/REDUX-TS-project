@@ -3,13 +3,8 @@ import type { TypedUseSelectorHook } from "react-redux"
 import { mass } from "../components/items"
 import { User } from "../store/slice"
 import store from "../store/store"
-export type Props={
-    src:string,
-    name:string,
-    price:string,
-    src1:string,
-    src2:string
-}
+
+
 export type func=JSX.Element|null
 export type union=string|undefined
 export type union1=User|undefined
@@ -37,13 +32,13 @@ export enum DivEntry {
     width='100%',
     marginTop='10px'
 }
+export type reduce=null|mass[]
 export interface props{
-    item:Props[],
-    show:number,
+    show:mass[]|null,
     id?:union
 }
 export interface state1{
-    item:Props[]
+    item:mass[]
 }
 type RootState = ReturnType<typeof store.getState>
 type AppDispatch = typeof store.dispatch

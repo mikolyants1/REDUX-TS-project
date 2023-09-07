@@ -49,7 +49,7 @@ const slice:Slice<state,{
     initialState,
     reducers:{
         add:({user},{payload})=>{
-            const {name,phone,obj}=payload
+        const {name,phone,obj}:pay=payload
             user.push({
                 name:name,
                 phone:phone,
@@ -59,8 +59,8 @@ const slice:Slice<state,{
           
         },
         add1:({user},{payload})=>{
-        const {id,name,price,src,color}=payload
-       if (typeof id=='number'){
+        const {id,name,price,src,color}:pay1=payload
+         if (typeof id=='number'){
             user[id].bask.push({
                 name:name,
                 price:price,
@@ -70,7 +70,7 @@ const slice:Slice<state,{
           }
         },
         del:({user},{payload})=>{
-            const {id,index}=payload
+            const {id,index}:pay2=payload
             user[id].bask.splice(index,1)
         }
     }
