@@ -210,11 +210,11 @@ body .aboutDivMac .imgDivMac {
   transition: 1s;
   width: 1350px;
   display: flex;
-  height: 340px;
+  height: 280px;
 }
 body .aboutDivMac .imgDivMac .aboutImgMac {
   width: 450px;
-  height: 280px;
+  height: 250px;
 }
 body .scroll {
   z-index: 100;

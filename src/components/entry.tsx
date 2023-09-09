@@ -1,6 +1,6 @@
 import {useState,ChangeEvent,useEffect,useRef,FC} from 'react'
 import back from '../img/back1.jpg'
-import { Link } from 'react-router-dom'
+import { Link,Navigate } from 'react-router-dom'
 import { useAppDispatch,useAppSelector,LinkStyle,DivEntry,style } from '../types/state.js'
 import { add2,add3} from '../store/slice1'
 import { User } from '../store/slice'
@@ -12,7 +12,7 @@ interface state1{
     
 }
 interface state2{
-    src:string,
+    auth:boolean,
     error:string
 }
 type state3={
@@ -20,7 +20,7 @@ type state3={
 }
 export default function Entry():JSX.Element {
     const [state,setState]=useState<state1>({name:'',phone:''})
-    const [state1,setState1]=useState<state2>({src:'/',error:''})
+    const [state1,setState1]=useState<state2>({auth:false,error:''})
     const user:User[]=useAppSelector(({reduce:{user}}:state3)=>user)
     const dispatch:Dispatch<AnyAction>=useAppDispatch()
     const entry=useRef<HTMLDivElement>(null!)
@@ -51,11 +51,14 @@ export default function Entry():JSX.Element {
     if (con==0) {
     setState1((prev:state2):state2=>({...prev,error:'не найден'}))
         }else{
-    setState1((prev:state2):state2=>({...prev,src:'/home'}))
+    setState1((prev:state2):state2=>({...prev,auth:true}))
         }
-        }else{
-        setState1((prev:state2):state2=>({...prev,src:'/'}))
-        }
+    }else{
+    setState1((prev:state2):state2=>({...prev,auth:false}))
+      }
+    }
+    if (state1.auth) {
+      return <Navigate to='/home' />
     }
     return <div>
              <div ref={entry}
@@ -81,11 +84,8 @@ export default function Entry():JSX.Element {
                      {state1.error}
                    </div>
                  <div className='reg1'>
-                  <button className='but1' onClick={press}>
-                    <Link to={`${state1.src}`}
-                      className='link1'>
+                  <button className='but1' onClick={press}>     
                         войти
-                    </Link>
                   </button>
                  </div> 
                    <div className='if'>

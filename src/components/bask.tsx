@@ -27,7 +27,7 @@ const user1:union1=user.find(({phone}:User):boolean=>phone==id)
 let [imgClass,divClass]:string[]=['','']
 const remove=(i:number):void=>{
 if (typeof user1?.id!=='undefined'){
- const obj:obj={id:user1.id,index:i}
+const obj:obj={id:user1.id,index:i}
  dispatch(del(obj))
     }
 }
@@ -62,7 +62,7 @@ const list:List=user1?.bask.map(({name,price,src,color}:bask,i:number):JSX.Eleme
               <span style={style2}>
                 Цвет:
               </span>
-               {color}
+               {color?.toUpperCase()}
             </div>
               <div style={style3}>
                 <button style={style1}>

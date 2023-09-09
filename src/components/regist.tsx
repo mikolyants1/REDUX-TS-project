@@ -1,6 +1,6 @@
 import {useState,ChangeEvent,useEffect,useRef,Dispatch,SetStateAction} from'react'
 import back from '../img/back.jpg'
-import { Link } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import { useAppDispatch,useAppSelector,DivEntry,union,style } from '../types/state.js'
 import { add,User } from '../store/slice'
 import { AnyAction, Dispatch as Dis } from '@reduxjs/toolkit'
@@ -11,7 +11,7 @@ interface state1{
   
 }
 interface state2{
-  src:string,
+  auth:boolean,
   error:string
 }
 interface user {
@@ -24,7 +24,7 @@ type state3={
 }
 export default function Regist():JSX.Element {
 const [state,setState]=useState<state1>({name:'',phone:''})
-const [state1,setState1]=useState<state2>({src:'/regist',error:''})
+const [state1,setState1]=useState<state2>({auth:false,error:''})
 const user:User[]=useAppSelector((store:state3)=>store.reduce.user)
 const dispatch:Dis<AnyAction>=useAppDispatch()
 const regist=useRef<HTMLDivElement>(null!)
@@ -44,7 +44,7 @@ function press():void {
       if (phone==state.phone||name==state.name) con++
         })
         if (con>0) {
-        setState1({error:'уже есть',src:'/regist'})
+        setState1({auth:false,error:'уже есть'})
         }else{ 
          const obj:user={
           name:state.name,
@@ -52,12 +52,15 @@ function press():void {
           obj:user
           }   
          dispatch(add(obj));
-         setState1((prev:state2):state2=>({...prev,src:'/'}))
+         setState1((prev:state2):state2=>({...prev,auth:true}))
         }
     }else{
-        setState1((prev:state2):state2=>({...prev,src:'/regist'}))
+        setState1((prev:state2):state2=>({...prev,auth:false}))
     }
 }
+ if (state1.auth) {
+   return <Navigate to='/' />
+ }
   return <div>
           <div ref={regist}
             className='user'>
@@ -79,9 +82,7 @@ function press():void {
               </div>
               <div className='reg1'>
                <button className='but1' onClick={press}>
-                <Link to={`${state1.src}`} className='link1'>
                   зарегестрироваться
-                </Link>
               </button>
              </div> 
            </div>

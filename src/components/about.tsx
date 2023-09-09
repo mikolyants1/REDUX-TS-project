@@ -22,7 +22,12 @@ interface styles {
    style3:string
 }
 interface action {
-   type:number
+   type:string
+}
+interface className {
+  one:string,
+  two:string,
+  three:string
 }
 type refType=MutableRefObject<HTMLDivElement>
 interface obj {
@@ -30,10 +35,8 @@ interface obj {
   name:string
 }
 export default function About():JSX.Element {
-   const [cless,setCless]=useState<string>('aboutImg')
-   const [cless1,setCless1]=useState<string>('imgDiv')
-   const [cless2,setCless2]=useState<string>('aboutDiv')
-   const [color,setColor]=useState<string>('Black')
+   const [color,setColor]=useState<string>('black')
+   const [className,setClassName]=useState<className>({one:'aboutImg',two:'imgDiv',three:'aboutDiv'})
    const [state1,move]=useReducer(reducer,{style1:'rgb(240, 47, 156)',style2:'black',style3:'black'})
    const [page,setPage]=useState<number>(0)
    const [jump,setJump]=useState<number>(360)
@@ -48,21 +51,19 @@ export default function About():JSX.Element {
    const dispatch:Dis<AnyAction>=useAppDispatch()
    const Name:union3=searchParams.get("name")
    const item:union2=item1.concat(item2,item3,item4).find(({name}:mass):boolean=>name==Name)
-   if (!item) return <div>...</div>
+   if (!item) return <div>error</div>
    const {src,src1,src2,price}:union2=item
    const srcArr:string[]=[src,src1,src2]
    function reducer(state:styles,{type}:action):styles{
+   setColor(type)
    switch (type) {
-      case 0:
-      setColor('Black')
+      case 'black':
       return {style1:'rgb(240, 47, 156)',style2:'black',style3:'black'}
       break;
-      case 1:
-      setColor('Grey')
+      case 'grey':
       return {style1:'black',style2:'rgb(240, 47, 156)',style3:'black'}
       break;
-      case 2:
-      setColor('White')
+      case 'white':
       return {style1:'black',style2:'black',style3:'rgb(240, 47, 156)'}
       break;
       default:
@@ -97,10 +98,12 @@ export default function About():JSX.Element {
    }
    useEffect(():void=>{
    if (item1.some(({name}:mass):boolean=>name==Name)){
-      setCless('aboutImgMac')
-      setCless1('imgDivMac')
-      setCless2('aboutDivMac')
-      setJump(450)
+     setClassName({
+      one:'aboutImgMac',
+      two:'imgDivMac',
+      three:'aboutDivMac'
+      })
+    setJump(450)
      }
    },[])
    useEffect(():void=>{
@@ -112,11 +115,12 @@ export default function About():JSX.Element {
     w.border=`2px solid ${style3}`
    },[state1])
    useEffect(():void=>{
-   const {style}=document.querySelector(`.${cless1}`) as HTMLElement  
+   const {two}:className=className
+   const {style}=document.querySelector(`.${two}`) as HTMLElement  
    style.transform=`translateX(${page*-jump}px)`
    },[page])
    return <div style={style2}>
-            <div className={cless2}>
+            <div className={className.three}>
               <div className='scroll'>
                 <ScrollBut 
                  set={setPage}
@@ -129,9 +133,9 @@ export default function About():JSX.Element {
                  style={style1}
                  />
               </div>
-                <div className={cless1}>
+                <div className={className.two}>
                   {srcArr.map((item:string,i:number):JSX.Element=>(
-                    <div className={cless} key={i}>
+                    <div className={className.one} key={i}>
                       <img style={style} src={`${item}`} alt="" />
                     </div>
                     ))}
@@ -148,8 +152,8 @@ export default function About():JSX.Element {
                  </div>
                  <div className='color1'>
                   {refObj.map(({name,ref}:obj,i:number):JSX.Element=>(
-                    <div className={`${name}`} ref={ref}
-                      key={i} onClick={():void=>move({type:i})}>
+                    <div className={`${name}`} ref={ref} key={i}
+                     onClick={():void=>move({type:name})}>
                     </div>
                    ))}
                  </div>
