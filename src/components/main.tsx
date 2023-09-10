@@ -16,7 +16,7 @@ style.background='none'
 style.backgroundSize='none'
 },[])
 const change=(e:ChangeEvent<HTMLInputElement>):void=>{
-    setSer({text:e.target.value})
+setSer({text:e.target.value})
 }
 const filter=():void=>{
 const val:string=ser.text.trim().toLocaleLowerCase()

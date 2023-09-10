@@ -15,16 +15,6 @@ const Home:FC=():JSX.Element=>{
        <Outlet />
    </div>
 }
-const Links:FC=():JSX.Element=>{
-   return <div>
-   <Entry />
-   </div>
-}
-const Shop:FC=():JSX.Element=>{
-    return <div>
-        <Outlet />
-    </div>
-}
 const ShopList:FC=():JSX.Element=>{
     return <div>
     <Header />
@@ -78,13 +68,11 @@ export default function App():JSX.Element{
              <Router>
                <Routes>
                  <Route path='/' element={<Home />}>
-                   <Route index element={<Links />} />
-                   <Route path='regist' element={<Regist />} />
-                   <Route path='home' element={<Shop />} >
-                     <Route index element={<ShopList />} />
+                   <Route index element={<ShopList />} />
                      <Route path='about' element={<Names />} />
                      <Route path='bask' element={<BaskList />} />
-                  </Route>
+                     <Route path='regist' element={<Regist />} />
+                     <Route path='home' element={<Entry />} />
                 </Route>
               </Routes>
             </Router>

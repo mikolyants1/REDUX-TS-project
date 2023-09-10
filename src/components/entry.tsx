@@ -44,7 +44,7 @@ export default function Entry():JSX.Element {
     }
     function press():void {
     let con:number=0
-    if (state.phone!==''&&state.name!=='') {
+    if (state.phone!==''&&state.name!==''){
     user.forEach(({phone,name}:User):void=>{
     if (phone==state.phone&&name==state.name) con++
         })
@@ -58,7 +58,7 @@ export default function Entry():JSX.Element {
       }
     }
     if (state1.auth) {
-      return <Navigate to='/home' />
+      return <Navigate to='/' />
     }
     return <div>
              <div ref={entry}

@@ -7,7 +7,9 @@ export function Catalog({show}:props):func{
 if (show) {
 const [state,setState]=useState<state1>({item:show})
 const [value,setValue]=useState<string>('up')
-useEffect(():void=>setState({item:show}),[show])
+useEffect(():void=>{
+  setState({item:show})
+},[show])
 const change=(e:ChangeEvent<HTMLSelectElement>):void=>{
   setValue(e.target.value)
         }

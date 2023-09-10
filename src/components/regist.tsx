@@ -59,7 +59,7 @@ function press():void {
     }
 }
  if (state1.auth) {
-   return <Navigate to='/' />
+   return <Navigate to='/home' />
  }
   return <div>
           <div ref={regist}

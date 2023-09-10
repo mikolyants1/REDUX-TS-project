@@ -3,7 +3,7 @@ import { SetURLSearchParams,useSearchParams } from 'react-router-dom'
 import { add1 ,User} from '../store/slice.js';
 import { useAppDispatch,useAppSelector,LinkStyle,union2,union1,union3 } from '../types/state.js';
 import { item1,item2,item3,item4 } from './items.jsx';
-import { Link } from 'react-router-dom';
+import { Link,Navigate } from 'react-router-dom';
 import { AnyAction, Dispatch as Dis } from '@reduxjs/toolkit';
 import { URLSearchParams } from 'url';
 import { mass } from './items.js';
@@ -39,6 +39,7 @@ export default function About():JSX.Element {
    const [className,setClassName]=useState<className>({one:'aboutImg',two:'imgDiv',three:'aboutDiv'})
    const [state1,move]=useReducer(reducer,{style1:'rgb(240, 47, 156)',style2:'black',style3:'black'})
    const [page,setPage]=useState<number>(0)
+   const [auth,setAuth]=useState<boolean>(false)
    const [jump,setJump]=useState<number>(360)
    const black=useRef<HTMLDivElement>(null!)
    const white=useRef<HTMLDivElement>(null!)
@@ -72,6 +73,7 @@ export default function About():JSX.Element {
       }
    } 
    const setBask=():void=>{
+   if (id){
     const obj:pay1={
       id:user1?.id,
       name:Name,
@@ -80,6 +82,9 @@ export default function About():JSX.Element {
       color:color
     }
     dispatch(add1(obj))
+  }else{
+    setAuth(true)
+  }
    }
    enum style {
    width='90%',
@@ -97,6 +102,9 @@ export default function About():JSX.Element {
    width='100%'
    }
    useEffect(():void=>{
+    const {style}=document.querySelector('body') as HTMLElement
+    style.background='none'
+    style.backgroundSize='none'
    if (item1.some(({name}:mass):boolean=>name==Name)){
      setClassName({
       one:'aboutImgMac',
@@ -107,8 +115,8 @@ export default function About():JSX.Element {
      }
    },[])
    useEffect(():void=>{
-   const [{current:{style:b}},{current:{style:g}},{current:{style:w}}]
-   :refType[]=[black,grey,white]
+   const [{current:{style:b}},{current:{style:g}},
+   {current:{style:w}}]:refType[]=[black,grey,white]
    const {style1,style2,style3}:styles=state1
     b.border=`2px solid ${style1}`
     g.border=`2px solid ${style2}`
@@ -119,6 +127,9 @@ export default function About():JSX.Element {
    const {style}=document.querySelector(`.${two}`) as HTMLElement  
    style.transform=`translateX(${page*-jump}px)`
    },[page])
+   if (auth){
+    return <Navigate to='/home' />
+   }
    return <div style={style2}>
             <div className={className.three}>
               <div className='scroll'>
@@ -165,7 +176,7 @@ export default function About():JSX.Element {
              </button>
           </div>
           <div className='baskBack'>
-           <Link style={LinkStyle} to='/home'>
+           <Link style={LinkStyle} to='/'>
               вернуться на главную
            </Link>
          </div>

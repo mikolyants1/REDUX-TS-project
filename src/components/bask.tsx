@@ -8,6 +8,7 @@ import { AnyAction, Dispatch } from '@reduxjs/toolkit'
 import { mass } from './items.js'
 import { state } from '../store/slice1.js';
 import { state as st } from '../store/slice.js';
+import {useEffect} from 'react'
 interface state2 {
    phone:state
 }
@@ -25,6 +26,11 @@ const user:User[]=useAppSelector(({reduce}:state3)=>reduce.user)
 const dispatch:Dispatch<AnyAction>=useAppDispatch()
 const user1:union1=user.find(({phone}:User):boolean=>phone==id)
 let [imgClass,divClass]:string[]=['','']
+useEffect(():void=>{
+  const {style}=document.querySelector('body') as HTMLElement
+  style.background='none'
+  style.backgroundSize='none'
+  },[])
 const remove=(i:number):void=>{
 if (typeof user1?.id!=='undefined'){
 const obj:obj={id:user1.id,index:i}
@@ -83,7 +89,7 @@ const list:List=user1?.bask.map(({name,price,src,color}:bask,i:number):JSX.Eleme
         return <div className='itemList'>
                   {list}
                   <div className='baskBack'>
-                    <Link style={LinkStyle} to='/home'>
+                    <Link style={LinkStyle} to='/'>
                       вернуться к покупкам
                     </Link>
                   </div>
