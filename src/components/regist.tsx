@@ -1,10 +1,10 @@
 import {useState,ChangeEvent,useEffect,useRef,Dispatch,SetStateAction} from'react'
 import back from '../img/back.jpg'
 import { Navigate } from 'react-router-dom'
-import { useAppDispatch,useAppSelector,DivEntry,union,style } from '../types/state.js'
-import { add,User } from '../store/slice'
-import { AnyAction, Dispatch as Dis } from '@reduxjs/toolkit'
+import {useAppSelector,DivEntry,union,style } from '../types/state.js'
+import { User } from '../store/slice'
 import { state } from '../store/slice'
+import { bind, useActions } from '../store/store.js'
 interface state1{
   name:union,
   phone:union,
@@ -26,7 +26,7 @@ export default function Regist():JSX.Element {
 const [state,setState]=useState<state1>({name:'',phone:''})
 const [state1,setState1]=useState<state2>({auth:false,error:''})
 const user:User[]=useAppSelector((store:state3)=>store.reduce.user)
-const dispatch:Dis<AnyAction>=useAppDispatch()
+const {add}:bind=useActions()
 const regist=useRef<HTMLDivElement>(null!)
 useEffect(():void=>{
 const {style}=document.querySelector('body') as HTMLElement
@@ -51,7 +51,7 @@ function press():void {
           phone:state.phone,
           obj:user
           }   
-         dispatch(add(obj));
+         add(obj);
          setState1((prev:state2):state2=>({...prev,auth:true}))
         }
     }else{
@@ -98,7 +98,7 @@ const setData=({target}:ChangeEvent<HTMLInputElement>):void=>{
 set((prev:state1):state1=>({...prev,[target.name]:target.value}))
     }
 return <div className='info'>
-    <input name={name} placeholder={place} style={style}
-      onChange={setData} type="text" />
+    <input name={name} placeholder={place}
+     style={style} onChange={setData} type="text" />
    </div>
   }

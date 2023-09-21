@@ -1,14 +1,14 @@
 import {useState,useEffect,useRef,useReducer,MutableRefObject,Dispatch,SetStateAction}  from 'react'
 import { SetURLSearchParams,useSearchParams } from 'react-router-dom'
-import { add1 ,User} from '../store/slice.js';
-import { useAppDispatch,useAppSelector,LinkStyle,union2,union1,union3 } from '../types/state.js';
+import {User} from '../store/slice.js';
+import {useAppSelector,LinkStyle,union2,union1,union3 } from '../types/state.js';
 import { item1,item2,item3,item4 } from './items.jsx';
 import { Link,Navigate } from 'react-router-dom';
-import { AnyAction, Dispatch as Dis } from '@reduxjs/toolkit';
 import { URLSearchParams } from 'url';
 import { mass } from './items.js';
 import { state } from '../store/slice1.js';
 import { state as st,pay1} from '../store/slice.js';
+import { useActions,bind } from '../store/store.js';
 import img from '../img/arr.png'
 interface state2 {
    phone:state
@@ -37,7 +37,7 @@ interface obj {
 export default function About():JSX.Element {
    const [color,setColor]=useState<string>('black')
    const [className,setClassName]=useState<className>({one:'aboutImg',two:'imgDiv',three:'aboutDiv'})
-   const [state1,move]=useReducer(reducer,{style1:'rgb(240, 47, 156)',style2:'black',style3:'black'})
+   const [state1,dispatch]=useReducer(reducer,{style1:'rgb(240, 47, 156)',style2:'black',style3:'black'})
    const [page,setPage]=useState<number>(0)
    const [auth,setAuth]=useState<boolean>(false)
    const [jump,setJump]=useState<number>(360)
@@ -49,7 +49,7 @@ export default function About():JSX.Element {
    const id:string=useAppSelector(({phone:{id}}:state2)=>id)
    const user:User[]=useAppSelector(({reduce:{user}}:state3)=>user)
    const user1:union1=user.find(({phone}:User):boolean=>phone==id)
-   const dispatch:Dis<AnyAction>=useAppDispatch()
+   const {add1}:bind=useActions()
    const Name:union3=searchParams.get("name")
    const item:union2=item1.concat(item2,item3,item4).find(({name}:mass):boolean=>name==Name)
    if (!item) return <div>error</div>
@@ -81,7 +81,7 @@ export default function About():JSX.Element {
       src:src,
       color:color
     }
-    dispatch(add1(obj))
+    add1(obj)
   }else{
     setAuth(true)
   }
@@ -164,7 +164,7 @@ export default function About():JSX.Element {
                  <div className='color1'>
                   {refObj.map(({name,ref}:obj,i:number):JSX.Element=>(
                     <div className={`${name}`} ref={ref} key={i}
-                     onClick={():void=>move({type:name})}>
+                     onClick={():void=>dispatch({type:name})}>
                     </div>
                    ))}
                  </div>
@@ -209,5 +209,4 @@ const press=():void=>{
     <img style={style} src={img} alt="" />
   </button>
   </>
-
 }

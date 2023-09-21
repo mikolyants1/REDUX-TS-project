@@ -2,7 +2,7 @@ import {Provider} from 'react-redux'
 import {FC,useEffect,useState} from 'react'
 import store,{cachedStore} from './store/store'
 import { PersistGate } from 'redux-persist/lib/integration/react'
-import { BrowserRouter as Router,Route,Routes,Outlet} from 'react-router-dom'
+import { BrowserRouter as Router,Route,Routes,Outlet, Navigate} from 'react-router-dom'
 import Bask2 from './components/bask'
 import Regist from './components/regist'
 import Entry from './components/entry'
@@ -11,28 +11,11 @@ import Main from './components/main'
 import Header from './components/header'
 
 const Home:FC=():JSX.Element=>{
-   return <div>
-       <Outlet />
-   </div>
-}
-const ShopList:FC=():JSX.Element=>{
-    return <div>
+  return <div>
     <Header />
-    <Main />
-   </div>
+    <Outlet />
+  </div>
 }
-const Names:FC=():JSX.Element=>{
-   return <div>
-     <Header />
-     <About />
-   </div>
-}
-const BaskList:FC=():JSX.Element=>{
-    return <div>
-       <Header />
-       <Bask2 />
-    </div>
- }
 const Loading:FC=():JSX.Element=>{
   const [text,setText]=useState<string>('')
   enum style {
@@ -67,16 +50,19 @@ export default function App():JSX.Element{
            <PersistGate persistor={cachedStore} loading={<Loading />} >
              <Router>
                <Routes>
-                 <Route path='/' element={<Home />}>
-                   <Route index element={<ShopList />} />
-                     <Route path='about' element={<Names />} />
-                     <Route path='bask' element={<BaskList />} />
-                     <Route path='regist' element={<Regist />} />
-                     <Route path='home' element={<Entry />} />
-                </Route>
-              </Routes>
-            </Router>
-          </PersistGate>
-        </Provider>
+                 <Route path='/' element={<Outlet />}>
+                   <Route index element={<Navigate to='shop' />} />
+                   <Route path='regist' element={<Regist />} />
+                   <Route path='home' element={<Entry />} />
+                   <Route path='shop' element={<Home />}>
+                      <Route index element={<Main />} />
+                      <Route path='about' element={<About />} />
+                      <Route path='bask' element={<Bask2 />} />
+                   </Route>
+                 </Route>
+               </Routes>
+             </Router>
+           </PersistGate>
+         </Provider>
         )
 }

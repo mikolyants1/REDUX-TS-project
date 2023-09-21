@@ -1,10 +1,9 @@
 import {useState,ChangeEvent,useEffect,useRef,FC} from 'react'
 import back from '../img/back1.jpg'
 import { Link,Navigate } from 'react-router-dom'
-import { useAppDispatch,useAppSelector,LinkStyle,DivEntry,style } from '../types/state.js'
-import { add2,add3} from '../store/slice1'
+import {useAppSelector,LinkStyle,DivEntry,style } from '../types/state.js'
+import { bind, useActions } from '../store/store.js'
 import { User } from '../store/slice'
-import { AnyAction, Dispatch } from '@reduxjs/toolkit'
 import { state } from '../store/slice'
 interface state1{
     name:string,
@@ -22,7 +21,7 @@ export default function Entry():JSX.Element {
     const [state,setState]=useState<state1>({name:'',phone:''})
     const [state1,setState1]=useState<state2>({auth:false,error:''})
     const user:User[]=useAppSelector(({reduce:{user}}:state3)=>user)
-    const dispatch:Dispatch<AnyAction>=useAppDispatch()
+    const {add2,add3}:bind=useActions()
     const entry=useRef<HTMLDivElement>(null!)
     useEffect(():void=>{
     const {style}=document.querySelector('body') as HTMLElement
@@ -37,10 +36,10 @@ export default function Entry():JSX.Element {
     setState((prev:state1):state1=>({...prev,[target.name]:target.value}))
     }
     const setName=(e:ChangeEvent<HTMLInputElement>):void=>{
-      dispatch(add2(e.target.value))
+      add2(e.target.value)
     }
     const setNum=(e:ChangeEvent<HTMLInputElement>):void=>{
-      dispatch(add3(e.target.value))
+      add3(e.target.value)
     }
     function press():void {
     let con:number=0
