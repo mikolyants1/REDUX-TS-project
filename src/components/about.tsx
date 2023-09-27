@@ -1,15 +1,15 @@
-import {useState,useEffect,useRef,useReducer,MutableRefObject,Dispatch,SetStateAction}  from 'react'
-import { SetURLSearchParams,useSearchParams } from 'react-router-dom'
-import {User} from '../store/slice.js';
-import {useAppSelector,LinkStyle,union2,union1,union3 } from '../types/state.js';
+import {useState,useEffect,useRef,useReducer,Dispatch,SetStateAction}  from 'react'
+import { SetURLSearchParams,useSearchParams,useOutletContext } from 'react-router-dom'
+import {useAppSelector,LinkStyle,union2,union1,union3,MakeArrFromRef,obj} from '../types/state.js';
 import { item1,item2,item3,item4 } from './items.jsx';
 import { Link,Navigate } from 'react-router-dom';
 import { URLSearchParams } from 'url';
 import { mass } from './items.js';
 import { state } from '../store/slice1.js';
 import { state as st,pay1} from '../store/slice.js';
-import { useActions,bind } from '../store/store.js';
+import { useActions,bind,getById } from '../store/store.js';
 import img from '../img/arr.png'
+import { func } from '../App.js';
 interface state2 {
    phone:state
 }
@@ -29,26 +29,24 @@ interface className {
   two:string,
   three:string
 }
-type refType=MutableRefObject<HTMLDivElement>
-interface obj {
-  ref:refType,
-  name:string
+interface datas{
+  color:string,
+  auth:boolean,
+  jump:number
 }
 export default function About():JSX.Element {
-   const [color,setColor]=useState<string>('black')
+   const [data,setData]=useState<datas>({color:'black',auth:false,jump:360})
    const [className,setClassName]=useState<className>({one:'aboutImg',two:'imgDiv',three:'aboutDiv'})
-   const [state1,dispatch]=useReducer(reducer,{style1:'rgb(240, 47, 156)',style2:'black',style3:'black'})
+   const [state,dispatch]=useReducer(reducer,{style1:'rgb(240, 47, 156)',style2:'black',style3:'black'})
+   const setContext:func=useOutletContext()
    const [page,setPage]=useState<number>(0)
-   const [auth,setAuth]=useState<boolean>(false)
-   const [jump,setJump]=useState<number>(360)
    const black=useRef<HTMLDivElement>(null!)
    const white=useRef<HTMLDivElement>(null!)
    const grey=useRef<HTMLDivElement>(null!)
-   const refObj:obj[]=[{ref:black,name:'black'},{ref:grey,name:'grey'},{ref:white,name:'white'}]
+   const refObj:obj[]=MakeArrFromRef([black,grey,white])
    const [searchParams]:[URLSearchParams,SetURLSearchParams]=useSearchParams();
    const id:string=useAppSelector(({phone:{id}}:state2)=>id)
-   const user:User[]=useAppSelector(({reduce:{user}}:state3)=>user)
-   const user1:union1=user.find(({phone}:User):boolean=>phone==id)
+   const user:union1=useAppSelector((store:state3)=>getById(store,id))
    const {add1}:bind=useActions()
    const Name:union3=searchParams.get("name")
    const item:union2=item1.concat(item2,item3,item4).find(({name}:mass):boolean=>name==Name)
@@ -56,7 +54,7 @@ export default function About():JSX.Element {
    const {src,src1,src2,price}:union2=item
    const srcArr:string[]=[src,src1,src2]
    function reducer(state:styles,{type}:action):styles{
-   setColor(type)
+   setData((prev:datas)=>({...prev,color:type}))
    switch (type) {
       case 'black':
       return {style1:'rgb(240, 47, 156)',style2:'black',style3:'black'}
@@ -75,15 +73,15 @@ export default function About():JSX.Element {
    const setBask=():void=>{
    if (id){
     const obj:pay1={
-      id:user1?.id,
+      id:user?.id,
       name:Name,
       price:price,
       src:src,
-      color:color
+      color:data.color
     }
     add1(obj)
   }else{
-    setAuth(true)
+  setData((prev:datas)=>({...prev,auth:true}))
   }
    }
    enum style {
@@ -102,32 +100,30 @@ export default function About():JSX.Element {
    width='100%'
    }
    useEffect(():void=>{
-    const {style}=document.querySelector('body') as HTMLElement
-    style.background='none'
-    style.backgroundSize='none'
+    setContext('none')
    if (item1.some(({name}:mass):boolean=>name==Name)){
      setClassName({
       one:'aboutImgMac',
       two:'imgDivMac',
       three:'aboutDivMac'
       })
-    setJump(450)
+    setData((prev:datas)=>({...prev,jump:450}))
      }
    },[])
    useEffect(():void=>{
-   const [{current:{style:b}},{current:{style:g}},
-   {current:{style:w}}]:refType[]=[black,grey,white]
-   const {style1,style2,style3}:styles=state1
-    b.border=`2px solid ${style1}`
-    g.border=`2px solid ${style2}`
-    w.border=`2px solid ${style3}`
-   },[state1])
+   const {style1,style2,style3}:styles=state
+   const [{ref:{current:b}},{ref:{current:g}},
+   {ref:{current:w}}]:obj[]=refObj
+    b.style.border=`2px solid ${style1}`
+    g.style.border=`2px solid ${style2}`
+    w.style.border=`2px solid ${style3}`
+   },[state])
    useEffect(():void=>{
    const {two}:className=className
    const {style}=document.querySelector(`.${two}`) as HTMLElement  
-   style.transform=`translateX(${page*-jump}px)`
+   style.transform=`translateX(${page*-data.jump}px)`
    },[page])
-   if (auth){
+   if (data.auth){
     return <Navigate to='/home' />
    }
    return <div style={style2}>
@@ -164,8 +160,7 @@ export default function About():JSX.Element {
                  <div className='color1'>
                   {refObj.map(({name,ref}:obj,i:number):JSX.Element=>(
                     <div className={`${name}`} ref={ref} key={i}
-                     onClick={():void=>dispatch({type:name})}>
-                    </div>
+                     onClick={():void=>dispatch({type:name})} />
                    ))}
                  </div>
                </div>
@@ -183,6 +178,7 @@ export default function About():JSX.Element {
       </div> 
    </div>
 }
+
 type style={
   width:string,
   height:string,

@@ -1,8 +1,11 @@
 import { useAppSelector } from '../types/state.js'
-import {Link } from 'react-router-dom'
+import {Link,NavLink } from 'react-router-dom'
 import { state } from '../store/slice1.js'
 type state1={
   phone:state
+}
+interface LinkProp{
+  isActive:boolean
 }
 export default function Header():JSX.Element {
     const current:string=useAppSelector(({phone:{current}}:state1)=>current)
@@ -17,10 +20,10 @@ export default function Header():JSX.Element {
                   SmartShop
                </div>
                <div className='headerDiv'>
-                  <Link to={!current?'/home':'bask'}
-                    className='headerLink'>
+                  <NavLink to={!current?'/home':'bask'}
+                   className={({isActive}:LinkProp)=>(!isActive?'headerLink':'ActivLink')}>
                     корзина
-                  </Link>
+                  </NavLink>
                </div>
              </div>
            </div>

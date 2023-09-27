@@ -1,10 +1,9 @@
-import {useState,ChangeEvent,useEffect,useRef,FC} from 'react'
-import back from '../img/back1.jpg'
-import { Link,Navigate } from 'react-router-dom'
-import {useAppSelector,LinkStyle,DivEntry,style } from '../types/state.js'
-import { bind, useActions } from '../store/store.js'
+import {useState,ChangeEvent,useEffect,useRef} from 'react'
+import { Link,Navigate,useOutletContext } from 'react-router-dom'
+import {useAppSelector,LinkStyle,DivEntry,style} from '../types/state.js'
+import { bind, useActions ,getUser} from '../store/store.js'
 import { User } from '../store/slice'
-import { state } from '../store/slice'
+import { func } from '../App.js'
 interface state1{
     name:string,
     phone:string,
@@ -14,26 +13,21 @@ interface state2{
     auth:boolean,
     error:string
 }
-type state3={
-    reduce:state
-}
+
 export default function Entry():JSX.Element {
     const [state,setState]=useState<state1>({name:'',phone:''})
     const [state1,setState1]=useState<state2>({auth:false,error:''})
-    const user:User[]=useAppSelector(({reduce:{user}}:state3)=>user)
-    const {add2,add3}:bind=useActions()
+    const SetContext:func=useOutletContext()
+    const user:User[]=useAppSelector(getUser)
     const entry=useRef<HTMLDivElement>(null!)
-    useEffect(():void=>{
-    const {style}=document.querySelector('body') as HTMLElement
-    style.background=`url(${back}) no-repeat`
-    style.backgroundSize='100vw 100vh'
-    },[])
+    const {add2,add3}:bind=useActions()
+    useEffect(():void=>SetContext('home'),[])
     useEffect(():void=>{
     const height:number=state1.error!==''?320:300
     entry.current.style.height=`${height}px`
     },[state1.error])
     const change=({target}:ChangeEvent<HTMLInputElement>):void=>{
-    setState((prev:state1):state1=>({...prev,[target.name]:target.value}))
+    setState((prev:state1)=>({...prev,[target.name]:target.value}))
     }
     const setName=(e:ChangeEvent<HTMLInputElement>):void=>{
       add2(e.target.value)
@@ -48,20 +42,19 @@ export default function Entry():JSX.Element {
     if (phone==state.phone&&name==state.name) con++
         })
     if (con==0) {
-    setState1((prev:state2):state2=>({...prev,error:'не найден'}))
+    setState1((prev:state2)=>({...prev,error:'не найден'}))
         }else{
-    setState1((prev:state2):state2=>({...prev,auth:true}))
+    setState1((prev:state2)=>({...prev,auth:true}))
         }
     }else{
-    setState1((prev:state2):state2=>({...prev,auth:false}))
+    setState1((prev:state2)=>({...prev,auth:false}))
       }
     }
     if (state1.auth) {
       return <Navigate to='/' />
     }
     return <div>
-             <div ref={entry}
-              className='login'>
+            <div ref={entry} className='login'>
               <div style={DivEntry}>
                 Login
               </div>
@@ -98,6 +91,7 @@ export default function Entry():JSX.Element {
                </div>    
             </div>
 }
+
 interface props {
   user:User[],
   data:string,
@@ -106,16 +100,20 @@ interface props {
   place:string
 }
 
-const Login:FC<props>=({user,data,chan,set,place}):JSX.Element=>{
-const list:JSX.Element[]=user.map(({name,phone}:User,i:number):JSX.Element=>{
-if (data=='name') return <option key={i} value={name}></option>
-else return <option key={i} value={phone}></option>
-})
-return <div className='info'>
-     <input name={data} style={style} type="text" placeholder={place}
-      list={data} onChange={(e):void=>{chan(e);set(e)}} />
+function Login({user,data,chan,set,place}:props):JSX.Element{
+return (
+  <div className='info'>
+    <input name={data} style={style} type="text" placeholder={place}
+     list={data} onChange={(e):void=>{chan(e);set(e)}} />
     <datalist id={data}>
-       {list}
+       {user.map((item:User,i:number):JSX.Element=>(
+        data=='name'?(
+        <option key={i} value={item.name} />
+         ):(
+        <option key={i} value={item.phone} />
+         )
+        ))}
     </datalist>
   </div>
+  )
 }

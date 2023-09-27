@@ -1,13 +1,14 @@
 
-import { Link } from 'react-router-dom'
-import { useActions,bind } from '../store/store.js'
-import {useAppSelector,LinkStyle,union,union1 } from '../types/state.js'
+import { Link,useOutletContext } from 'react-router-dom'
+import { useActions,bind,getById } from '../store/store.js'
+import {useAppSelector,LinkStyle,union,union1} from '../types/state.js'
 import { item1 } from './items.jsx'
-import { User,bask } from '../store/slice'
+import { bask } from '../store/slice'
 import { mass } from './items.js'
 import { state } from '../store/slice1.js';
 import { state as st } from '../store/slice.js';
 import {useEffect} from 'react'
+import { func } from '../App.js'
 interface state2 {
    phone:state
 }
@@ -17,20 +18,16 @@ interface state3 {
 type List=JSX.Element[]|undefined
 
 export default function Bask2():JSX.Element {
+const SetContext:func=useOutletContext()
 const id:union=useAppSelector(({phone}:state2)=>phone.id)
-const user:User[]=useAppSelector(({reduce}:state3)=>reduce.user)
+const user:union1=useAppSelector((x:state3)=>getById(x,id))
 const {del}:bind=useActions()
-const user1:union1=user.find(({phone}:User):boolean=>phone==id)
 let [imgClass,divClass]:string[]=['','']
-useEffect(():void=>{
-  const {style}=document.querySelector('body') as HTMLElement
-  style.background='none'
-  style.backgroundSize='none'
-  },[])
+useEffect(():void=>SetContext('none'),[])
 const remove=(i:number):void=>{
-if (typeof user1?.id!=='undefined'){
- del({id:user1.id,index:i})
-    }
+if (typeof user?.id!=='undefined'){
+ del({id:user.id,index:i})
+  }
 }
 enum style1{
   width='50%',
@@ -43,7 +40,7 @@ enum style3 {
   width='80%',
   margin='auto'
 }
-const list:List=user1?.bask.map(({name,price,src,color}:bask,i:number):JSX.Element=>{
+const list:List=user?.bask.map(({name,price,src,color}:bask,i:number):JSX.Element=>{
  if (item1.some(({name:n}:mass):boolean=>n==name)) {
   imgClass='baskImgMac'
   divClass='item2'
@@ -76,7 +73,7 @@ const list:List=user1?.bask.map(({name,price,src,color}:bask,i:number):JSX.Eleme
              </div>
           </div>
        }) 
-       if (user1?.bask.length==0) {
+       if (user?.bask.length==0) {
         return <div className='baskLost'>
             корзина пока пуста
         </div>
