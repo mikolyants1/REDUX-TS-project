@@ -58,13 +58,13 @@ let [imgClass,nameClass,priceClass]:string[]=['','','']
 const text:JSX.Element[]=item.map((item:mass,i:number):JSX.Element=>{
   const {src,name,price,src1}:mass=item
   if (item1.some(({name:n}:mass):boolean=>n==name)) {
-    imgClass='itemImgMac'
-    nameClass='itemNameMac'
-    priceClass='itemPriceMac'
+     imgClass='itemImgMac'
+     nameClass='itemNameMac'
+     priceClass='itemPriceMac'
     }else{
-    imgClass='itemImg'
-    nameClass='itemName'
-    priceClass='itemPrice'
+     imgClass='itemImg'
+     nameClass='itemName'
+     priceClass='itemPrice'
     }
    return  <div className='item' key={i}>
              <img className={imgClass} 
@@ -73,7 +73,7 @@ const text:JSX.Element[]=item.map((item:mass,i:number):JSX.Element=>{
                src={src} alt="" />
              <div className={nameClass}>
                <Link className='itemLink' 
-                  to={`/shop/about/?name=${name}`}>
+                to={`/shop/about/?name=${name}`}>
                   {name}
                </Link>
              </div>
@@ -90,25 +90,46 @@ return <>
             search
           </button>
         </div>
-       <div className='sel'>
-        <button
-         onClick={sort}>
-            отсортировать
-        </button> 
-         <select className='select' name='value'
-           value={param.value} onChange={change}>
-            <option value="up">
-              по возрастанию
-            </option>
-            <option value="down">
-              по убыванию
-            </option>
-         </select>
-         </div>
+        <div className='sel'> 
+          <Select
+           value={param.value}
+           onChange={change}
+           click={sort}
+           />
+        </div>
         <div className='main1'>
            {text}
         </div>
-    </>
+      </>
 }
 return null
+}
+interface prop{
+  value:string,
+  onChange:(e:ChangeEvent<union6>)=>void,
+  click:()=>void
+}
+interface Option{
+  title:string,
+  val:string
+}
+function Select(props:prop):JSX.Element{
+  const values:Option[]=[
+    {val:'up',title:'по возрастанию'},
+    {val:'down',title:'по убыванию'},
+  ]
+  return (
+    <>
+      <button onClick={props.click}>
+         отсортировать
+      </button> 
+      <select className='select' name='value' {...props}>
+       {values.map(({title,val}:Option,i:number):JSX.Element=>(
+        <option key={i} value={val}>
+            {title}
+        </option>
+        ))}
+      </select>
+    </>
+  )
 }

@@ -72,19 +72,21 @@ const list:List=user?.bask.map(({name,price,src,color}:bask,i:number):JSX.Elemen
                 </button>
              </div>
           </div>
-       }) 
-       if (user?.bask.length==0) {
-        return <div className='baskLost'>
-            корзина пока пуста
-        </div>
-       }else{
-        return <div className='itemList'>
+       })
+ return <>
+          {user?.bask.length==0?(
+            <div className='baskLost'>
+              корзина пока пуста
+            </div>
+            ):(
+             <div className='itemList'>
                   {list}
-                  <div className='baskBack'>
-                    <Link style={LinkStyle} to='/'>
-                      вернуться к покупкам
-                    </Link>
-                  </div>
-               </div>
-           }
+                <div className='baskBack'>
+                  <Link style={LinkStyle} to='/'>
+                     вернуться к покупкам
+                  </Link>
+                </div>
+              </div>
+            )}
+        </> 
 }

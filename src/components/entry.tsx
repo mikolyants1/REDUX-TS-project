@@ -16,16 +16,16 @@ interface state2{
 
 export default function Entry():JSX.Element {
     const [state,setState]=useState<state1>({name:'',phone:''})
-    const [state1,setState1]=useState<state2>({auth:false,error:''})
+    const [path,setPath]=useState<state2>({auth:false,error:''})
     const SetContext:func=useOutletContext()
     const user:User[]=useAppSelector(getUser)
     const entry=useRef<HTMLDivElement>(null!)
     const {add2,add3}:bind=useActions()
     useEffect(():void=>SetContext('home'),[])
     useEffect(():void=>{
-    const height:number=state1.error!==''?320:300
+    const height:number=path.error!==''?320:300
     entry.current.style.height=`${height}px`
-    },[state1.error])
+    },[path.error])
     const change=({target}:ChangeEvent<HTMLInputElement>):void=>{
     setState((prev:state1)=>({...prev,[target.name]:target.value}))
     }
@@ -41,19 +41,19 @@ export default function Entry():JSX.Element {
     user.forEach(({phone,name}:User):void=>{
     if (phone==state.phone&&name==state.name) con++
         })
-    if (con==0) {
-    setState1((prev:state2)=>({...prev,error:'не найден'}))
-        }else{
-    setState1((prev:state2)=>({...prev,auth:true}))
+    if (con==0){
+     setPath((prev:state2)=>({...prev,error:'не найден'}))
+      }else{
+    setPath((prev:state2)=>({...prev,auth:true}))
         }
     }else{
-    setState1((prev:state2)=>({...prev,auth:false}))
+    setPath((prev:state2)=>({...prev,auth:false}))
       }
     }
-    if (state1.auth) {
+    if (path.auth) {
       return <Navigate to='/' />
     }
-    return <div>
+    return (
             <div ref={entry} className='login'>
               <div style={DivEntry}>
                 Login
@@ -72,24 +72,24 @@ export default function Entry():JSX.Element {
                set={setNum}
                place='password'
               />
-               <div className='error'>
-                     {state1.error}
-                   </div>
-                 <div className='reg1'>
-                  <button className='but1' onClick={press}>     
-                        войти
-                  </button>
-                 </div> 
-                   <div className='if'>
-                      или
-                   </div>
-                   <div className='if' >
-                    <Link style={LinkStyle} to='/regist'>
-                      зарегестрироваться
-                    </Link>
-                  </div>
-               </div>    
-            </div>
+              <div className='error'>
+                 {path.error}
+              </div>
+              <div className='reg1'>
+                <button className='but1' onClick={press}>     
+                    войти
+                </button>
+              </div> 
+              <div className='if'>
+                или
+              </div>
+              <div className='if' >
+                <Link style={LinkStyle} to='/regist'>
+                  зарегестрироваться
+                </Link>
+              </div>
+            </div>    
+            )
 }
 
 interface props {
@@ -106,13 +106,9 @@ return (
     <input name={data} style={style} type="text" placeholder={place}
      list={data} onChange={(e):void=>{chan(e);set(e)}} />
     <datalist id={data}>
-       {user.map((item:User,i:number):JSX.Element=>(
-        data=='name'?(
-        <option key={i} value={item.name} />
-         ):(
-        <option key={i} value={item.phone} />
-         )
-        ))}
+      {user.map(({name,phone}:User,i:number):JSX.Element=>(
+        <option key={i} value={data=='name'?name:phone} />
+      ))}
     </datalist>
   </div>
   )

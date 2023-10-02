@@ -8,7 +8,7 @@ interface LinkProp{
   isActive:boolean
 }
 export default function Header():JSX.Element {
-    const current:string=useAppSelector(({phone:{current}}:state1)=>current)
+  const current:string=useAppSelector(({phone:{current}}:state1)=>current)
     return <div className='header' >    
              <div className='header1'>
                <div className='headerDiv'>
@@ -21,7 +21,8 @@ export default function Header():JSX.Element {
                </div>
                <div className='headerDiv'>
                   <NavLink to={!current?'/home':'bask'}
-                   className={({isActive}:LinkProp)=>(!isActive?'headerLink':'ActivLink')}>
+                   className={({isActive}:LinkProp)=>{
+                   return !isActive?'headerLink':'ActivLink'}}>
                     корзина
                   </NavLink>
                </div>

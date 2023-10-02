@@ -59,13 +59,11 @@ export const theme:Theme={
     back3:'none'
 }
 export const BackContext:Context<string>=createContext(theme.back3)
-export const MakeArrFromRef=(array:refType[]):obj[]=>{
+export function MakeArrFromRef(arr:refType[]):obj[]{
  const names:string[]=['black','grey','white']
- const arr:obj[]=[]
- array.forEach((item:refType,i:number):void=>{
-      arr.push({ref:item,name:`${names[i]}`})
+ return arr.map((item:refType,i:number):obj=>{
+   return {ref:item,name:`${names[i]}`}
     })
- return arr
   }
 type RootState = ReturnType<typeof store.getState>
 type AppDispatch = typeof store.dispatch

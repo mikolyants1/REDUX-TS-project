@@ -28,6 +28,7 @@ body .main .catalog .cat1 .Pending {
 body .ser {
   width: 100%;
   height: 25px;
+  min-width: 410px;
   display: flex;
 }
 body .ser .serBut {
@@ -38,6 +39,7 @@ body .main1 {
   width: 95%;
   margin: 30px auto;
   display: grid;
+  min-width: 410px;
   row-gap: 70px;
   -moz-column-gap: 60px;
        column-gap: 60px;
@@ -84,6 +86,7 @@ body .main1 .item .itemPrice {
 }
 body .sel {
   margin-top: 1px;
+  min-width: 410px;
 }
 body .sel .select {
   height: 20px;
@@ -371,7 +374,7 @@ body input::placeholder {
     margin: auto;
   }
   body .item {
-    margin: auto;
+    margin: 0 auto 70px auto;
     display: flex;
     flex-direction: column;
     align-items: center;

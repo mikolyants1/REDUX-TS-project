@@ -22,65 +22,64 @@ interface user {
 export default function Regist():JSX.Element {
 const SetContext:func=useOutletContext()
 const [state,setState]=useState<state1>({name:'',phone:''})
-const [state1,setState1]=useState<state2>({auth:false,error:''})
+const [path,setPath]=useState<state2>({auth:false,error:''})
 const user:User[]=useAppSelector(getUser)
 const {add}:bind=useActions()
 const regist=useRef<HTMLDivElement>(null!)
 useEffect(():void=>SetContext('regist'),[])
 useEffect(():void=>{
-const height:number=state1.error!==''?260:240
+const height:number=path.error!==''?260:240
 regist.current.style.height=`${height}px`
-  },[state1.error])
+  },[path.error])
 function press():void {
     let con:number=0
     if (state.name!==''&&state.phone!=='') {
       user.forEach(({phone,name}:User):void=>{
       if (phone==state.phone||name==state.name) con++
         })
-        if (con>0) {
-        setState1({auth:false,error:'уже есть'})
-        }else{ 
-         const obj:user={
-          name:state.name,
-          phone:state.phone,
-          obj:user
-          }   
-         add(obj);
-         setState1((prev:state2)=>({...prev,auth:true}))
-        }
+      if (con>0) {
+       setPath((prev:state2)=>({...prev,error:'уже есть'}))
+       }else{ 
+       const obj:user={
+       name:state.name,
+       phone:state.phone,
+       obj:user
+        }   
+        add(obj);
+        setPath((prev:state2)=>({...prev,auth:true}))
+      }
     }else{
-        setState1((prev:state2)=>({...prev,auth:false}))
+      setPath((prev:state2)=>({...prev,auth:false}))
     }
 }
- if (state1.auth) {
+ if (path.auth) {
    return <Navigate to='/home' />
  }
-  return <div>
-          <div ref={regist}
-            className='user'>
-              <div style={DivEntry}>
-                Regist
-              </div>
-              <SetUser
-               set={setState}
-               place='login'
-               name='name'
-               />
-              <SetUser
-               set={setState}
-               place='password'
-               name='phone'
-               />
-            <div className='error'>
-                {state1.error}
-              </div>
-              <div className='reg1'>
-               <button className='but1' onClick={press}>
-                  зарегестрироваться
-              </button>
-             </div> 
-           </div>
+  return (
+        <div ref={regist} className='user'>
+          <div style={DivEntry}>
+            Regist
+          </div>
+          <SetUser
+           set={setState}
+           place='login'
+           name='name'
+            />
+          <SetUser
+           set={setState}
+           place='password'
+           name='phone'
+           />
+          <div className='error'>
+            {path.error}
+          </div>
+          <div className='reg1'>
+            <button className='but1' onClick={press}>
+              зарегестрироваться
+            </button>
+          </div> 
         </div>
+          )
   }
 interface props {
  set:Dispatch<SetStateAction<state1>>,
@@ -89,10 +88,10 @@ interface props {
   }
 function SetUser({set,place,name}:props):JSX.Element{
  const setData=({target}:ChangeEvent<HTMLInputElement>):void=>{
-  set((prev:state1)=>({...prev,[target.name]:target.value}))
+   set((prev:state1)=>({...prev,[target.name]:target.value}))
   }
 return <div className='info'>
-    <input name={name} placeholder={place}
-     style={style} onChange={setData} type="text" />
+    <input placeholder={place} style={style}
+     onChange={setData} type="text" name={name} />
    </div>
   }

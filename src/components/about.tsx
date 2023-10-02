@@ -126,7 +126,8 @@ export default function About():JSX.Element {
    if (data.auth){
     return <Navigate to='/home' />
    }
-   return <div style={style2}>
+   return (
+          <div style={style2}>
             <div className={className.three}>
               <div className='scroll'>
                 <ScrollBut 
@@ -140,43 +141,43 @@ export default function About():JSX.Element {
                  style={style1}
                  />
               </div>
-                <div className={className.two}>
-                  {srcArr.map((item:string,i:number):JSX.Element=>(
-                    <div className={className.one} key={i}>
-                      <img style={style} src={`${item}`} alt="" />
-                    </div>
-                    ))}
-               </div>
-               <div className='aboutName'>
-                 {Name}
-               </div>  
-               <div className='aboutPrice'>
-                 {price}p
-               </div>  
-               <div className='color'>
-                 <div className='color0'>
-                   цвет
-                 </div>
-                 <div className='color1'>
+              <div className={className.two}>
+                {srcArr.map((item:string,i:number):JSX.Element=>(
+                  <div className={className.one} key={i}>
+                     <img style={style} src={`${item}`} alt="" />
+                  </div>
+                ))}
+              </div>
+              <div className='aboutName'>
+                {Name}
+              </div>  
+              <div className='aboutPrice'>
+                {price}p
+              </div>  
+              <div className='color'>
+                <div className='color0'>
+                  цвет
+                </div>
+                <div className='color1'>
                   {refObj.map(({name,ref}:obj,i:number):JSX.Element=>(
-                    <div className={`${name}`} ref={ref} key={i}
-                     onClick={():void=>dispatch({type:name})} />
-                   ))}
-                 </div>
-               </div>
-            <div className='divBut'>
-             <button className='aboutBut'
-              onClick={setBask}>
-               добавить в корзину
-             </button>
+                  <div className={`${name}`} ref={ref} key={i}
+                    onClick={():void=>dispatch({type:name})} />
+                  ))}
+                </div>
+              </div>
+              <div className='divBut'>
+                <button className='aboutBut' onClick={setBask}>
+                   добавить в корзину
+                </button>
+              </div>
+              <div className='baskBack'>
+                <Link style={LinkStyle} to='/'>
+                  вернуться на главную
+                </Link>
+              </div>
+            </div> 
           </div>
-          <div className='baskBack'>
-           <Link style={LinkStyle} to='/'>
-              вернуться на главную
-           </Link>
-         </div>
-      </div> 
-   </div>
+   )
 }
 
 type style={
@@ -194,15 +195,14 @@ interface props {
 function ScrollBut({set,className,style}:props):JSX.Element{
 const press=():void=>{
   if (className=='next') {
-  set((x:number):number=>x==2?0:x+1)
+  set((x:number)=>x==2?0:x+1)
   }else{
-  set((x:number):number=>x==0?2:x-1)
+  set((x:number)=>x==0?2:x-1)
   }
 }
-  return <>
-  <button onClick={press}
-    className={className}>
+return (
+  <button onClick={press} className={className}>
     <img style={style} src={img} alt="" />
   </button>
-  </>
+  )
 }

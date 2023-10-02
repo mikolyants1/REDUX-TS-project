@@ -8,7 +8,8 @@ interface Link{
 export default function Main():JSX.Element{
 const SetContext:func=useOutletContext()
 useEffect(():void=>SetContext('none'),[])
-return <div className='main'>
+return (
+      <div className='main'>
         <nav className='catalog'>
           {nameMass.map(({name}:mass1,i:number):JSX.Element=>(
             <div className='cat1' key={i}>
@@ -20,4 +21,5 @@ return <div className='main'>
           ))}
         </nav>
       </div>
+     )
 }
