@@ -30,17 +30,22 @@ if (typeof user?.id!=='undefined'){
   }
 }
 enum style1{
-  width='50%',
+  width='70%',
   height='25px',
+  borderRadius='5px',
+  border='1px solid grey'
 }
 enum style2 {
   color='grey'
 }
 enum style3 {
   width='80%',
-  margin='auto'
+  margin='auto',
+  display='flex',
+  justifyContent='center'
 }
-const list:List=user?.bask.map(({name,price,src,color}:bask,i:number):JSX.Element=>{
+const list:List=user?.bask.map((item:bask,i:number):JSX.Element=>{
+  const {name,price,src,color}:bask=item
  if (item1.some(({name:n}:mass):boolean=>n==name)) {
   imgClass='baskImgMac'
   divClass='item2'
@@ -62,15 +67,12 @@ const list:List=user?.bask.map(({name,price,src,color}:bask,i:number):JSX.Elemen
               </span>
                {color?.toUpperCase()}
             </div>
-              <div style={style3}>
-                <button style={style1}>
-                   купить
-                </button>
-                <button style={style1}
-                 onClick={():void=>remove(i)}>
-                  удалить
-                </button>
-             </div>
+            <div style={style3}>
+              <button style={style1}
+               onClick={()=>remove(i)}>
+                удалить
+              </button>
+            </div>
           </div>
        })
  return <>
@@ -82,9 +84,14 @@ const list:List=user?.bask.map(({name,price,src,color}:bask,i:number):JSX.Elemen
              <div className='itemList'>
                   {list}
                 <div className='baskBack'>
-                  <Link style={LinkStyle} to='/'>
-                     вернуться к покупкам
-                  </Link>
+                  <button className='buy'>
+                     купить
+                  </button>
+                  <button className='back'>
+                    <Link style={LinkStyle} to='/'>
+                      вернуться к покупкам
+                    </Link>
+                  </button>
                 </div>
               </div>
             )}

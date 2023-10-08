@@ -2,7 +2,7 @@ body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 body .main {
-  min-width: 410px;
+  min-width: 450px;
   width: 100%;
 }
 body .main .catalog {
@@ -28,7 +28,7 @@ body .main .catalog .cat1 .Pending {
 body .ser {
   width: 100%;
   height: 25px;
-  min-width: 410px;
+  min-width: 450px;
   display: flex;
 }
 body .ser .serBut {
@@ -39,7 +39,7 @@ body .main1 {
   width: 95%;
   margin: 30px auto;
   display: grid;
-  min-width: 410px;
+  min-width: 450px;
   row-gap: 70px;
   -moz-column-gap: 60px;
        column-gap: 60px;
@@ -86,7 +86,7 @@ body .main1 .item .itemPrice {
 }
 body .sel {
   margin-top: 1px;
-  min-width: 410px;
+  min-width: 450px;
 }
 body .sel .select {
   height: 20px;
@@ -140,6 +140,11 @@ body .reg1 .but1 .link1 {
   text-decoration: none;
   color: black;
 }
+body .AboutBack {
+  width: 95%;
+  margin: 10px auto;
+  font-size: 17px;
+}
 body .itemList {
   width: 400px;
   margin: auto;
@@ -147,8 +152,25 @@ body .itemList {
 body .itemList .baskBack {
   width: 100%;
   text-align: center;
-  margin-top: 50px;
-  font-size: 22px;
+  font-size: 18px;
+  display: flex;
+  margin: 40px auto;
+  height: 34px;
+}
+body .itemList .baskBack .buy {
+  width: 50%;
+  background-color: black;
+  color: white;
+  font-size: 20px;
+  letter-spacing: 1px;
+  border-radius: 5px 0 0 5px;
+}
+body .itemList .baskBack .back {
+  width: 50%;
+  border: 2px solid black;
+  background: transparent;
+  font-size: 17px;
+  border-radius: 0 5px 5px 0px;
 }
 body .item1 {
   margin: 30px auto;
@@ -161,7 +183,7 @@ body .item2 {
   height: 400px;
 }
 body .header {
-  min-width: 410px;
+  min-width: 450px;
   width: 100%;
   height: 80px;
   background-color: black;
@@ -204,7 +226,7 @@ body .aboutDiv {
   margin: 20px auto;
 }
 body .aboutDiv .imgDiv {
-  transition: 1s;
+  transition: transform 1s;
   width: 1110px;
   display: flex;
   height: 400px;
@@ -220,7 +242,7 @@ body .aboutDivMac {
   margin: 20px auto;
 }
 body .aboutDivMac .imgDivMac {
-  transition: 1s;
+  transition: transform 1s;
   width: 1350px;
   display: flex;
   height: 280px;

@@ -3,7 +3,7 @@ import type { TypedUseSelectorHook } from "react-redux"
 import { mass,mass1 } from "../components/items"
 import { User } from "../store/slice"
 import store from "../store/store"
-import { MutableRefObject,createContext,Context} from "react"
+import { MutableRefObject,createContext,Context,ChangeEvent} from "react"
 import back1 from '../img/back1.jpg'
 import back2 from '../img/back.jpg'
 export type func=JSX.Element|null
@@ -20,6 +20,9 @@ interface Theme{
     back3:string,
 }
 export enum LinkStyle {
+    textDecoration='none',
+}
+export enum LinkStyle1 {
     textDecoration='none',
     color='white'
 }
@@ -45,6 +48,11 @@ export interface props{
     show:reduce,
     id?:union
 }
+export interface component {
+    place:string,
+    data:string,
+    set?:(e:ChangeEvent<HTMLInputElement>)=>void
+   }
 export interface state1{
     item:mass[]
 }
@@ -59,12 +67,15 @@ export const theme:Theme={
     back3:'none'
 }
 export const BackContext:Context<string>=createContext(theme.back3)
-export function MakeArrFromRef(arr:refType[]):obj[]{
+export function MakeArrFromRef(...props:refType[]):obj[]{
  const names:string[]=['black','grey','white']
- return arr.map((item:refType,i:number):obj=>{
-   return {ref:item,name:`${names[i]}`}
-    })
+ return props.map((item:refType,i:number):obj=>(
+       {ref:item,name:`${names[i]}`}
+    ))
   }
+export function getCurrent(props:obj[]):HTMLDivElement[]{
+ return props.map(({ref}:obj)=>ref.current)
+}
 type RootState = ReturnType<typeof store.getState>
 type AppDispatch = typeof store.dispatch
 export const useAppDispatch: () => AppDispatch = useDispatch

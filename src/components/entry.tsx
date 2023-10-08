@@ -1,6 +1,6 @@
-import {useState,ChangeEvent,useEffect,useRef} from 'react'
+import {useState,ChangeEvent,useEffect,useRef,KeyboardEvent} from 'react'
 import { Link,Navigate,useOutletContext } from 'react-router-dom'
-import {useAppSelector,LinkStyle,DivEntry,style} from '../types/state.js'
+import {useAppSelector,LinkStyle1,DivEntry,style,component,func as Type} from '../types/state.js'
 import { bind, useActions ,getUser} from '../store/store.js'
 import { User } from '../store/slice'
 import { func } from '../App.js'
@@ -35,48 +35,51 @@ export default function Entry():JSX.Element {
     const setNum=(e:ChangeEvent<HTMLInputElement>):void=>{
       add3(e.target.value)
     }
+    const Block:component[]=[
+     {place:'login',data:'name',set:setName},
+     {place:'password',data:'phone',set:setNum}
+    ]
     function press():void {
     let con:number=0
     if (state.phone!==''&&state.name!==''){
     user.forEach(({phone,name}:User):void=>{
     if (phone==state.phone&&name==state.name) con++
         })
-    if (con==0){
-     setPath((prev:state2)=>({...prev,error:'не найден'}))
-      }else{
-    setPath((prev:state2)=>({...prev,auth:true}))
-        }
+    con==0
+    ? setPath((prev:state2)=>({...prev,error:'не найден'}))
+    : setPath((prev:state2)=>({...prev,auth:true}))
     }else{
     setPath((prev:state2)=>({...prev,auth:false}))
       }
+    }
+    const access=(e:KeyboardEvent<HTMLDivElement>):void=>{
+      if (e.key==='Enter') press()
     }
     if (path.auth) {
       return <Navigate to='/' />
     }
     return (
-            <div ref={entry} className='login'>
+            <div ref={entry} onKeyUp={access} className='login'>
               <div style={DivEntry}>
                 Login
               </div>
-              <Login
-               user={user}
-               data='name'
-               chan={change}
-               set={setName}
-               place='login'
-              />
-              <Login
-               user={user}
-               data='phone'
-               chan={change}
-               set={setNum}
-               place='password'
-              />
+               {Block.map(({data,place,set}:component,i:number):JSX.Element=>(
+                <>
+                 {set&&
+                  <Login key={i} user={user} data={data}>
+                    <input name={data} style={style} type="text"
+                     placeholder={place} list={data} tabIndex={i+1}
+                     onChange={(e)=>{change(e);set(e)}} />
+                  </Login>
+                 }
+                </>
+               ))}
               <div className='error'>
                  {path.error}
               </div>
               <div className='reg1'>
-                <button className='but1' onClick={press}>     
+                <button className='but1'
+                 tabIndex={3} onClick={press}>     
                     войти
                 </button>
               </div> 
@@ -84,7 +87,7 @@ export default function Entry():JSX.Element {
                 или
               </div>
               <div className='if' >
-                <Link style={LinkStyle} to='/regist'>
+                <Link style={LinkStyle1} to='/regist'>
                   зарегестрироваться
                 </Link>
               </div>
@@ -95,21 +98,20 @@ export default function Entry():JSX.Element {
 interface props {
   user:User[],
   data:string,
-  chan:(e:ChangeEvent<HTMLInputElement>)=>void,
-  set:(e:ChangeEvent<HTMLInputElement>)=>void,
-  place:string
+  children:JSX.Element
 }
 
-function Login({user,data,chan,set,place}:props):JSX.Element{
-return (
+function Login(props:props):Type{
+ const {user,data,children}:props=props
+ return (
   <div className='info'>
-    <input name={data} style={style} type="text" placeholder={place}
-     list={data} onChange={(e):void=>{chan(e);set(e)}} />
+     {children}
     <datalist id={data}>
       {user.map(({name,phone}:User,i:number):JSX.Element=>(
         <option key={i} value={data=='name'?name:phone} />
       ))}
     </datalist>
   </div>
-  )
+    )
+  
 }

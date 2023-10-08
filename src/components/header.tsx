@@ -8,13 +8,13 @@ interface LinkProp{
   isActive:boolean
 }
 export default function Header():JSX.Element {
-  const current:string=useAppSelector(({phone:{current}}:state1)=>current)
+  const current:string=useAppSelector(({phone}:state1)=>phone.current)
     return <div className='header' >    
              <div className='header1'>
                <div className='headerDiv'>
-                  <Link className='headerLink' to='/home'>
-                    {!current?'Unknown':current}
-                  </Link>
+                 <Link className='headerLink' to='/home'>
+                   {!current?'Unknown':current}
+                 </Link>
                </div>
                <div className='headerName'>
                   SmartShop

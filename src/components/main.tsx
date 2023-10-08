@@ -13,8 +13,8 @@ return (
         <nav className='catalog'>
           {nameMass.map(({name}:mass1,i:number):JSX.Element=>(
             <div className='cat1' key={i}>
-              <NavLink to={`${name}`} 
-               className={({isActive}:Link)=>(isActive?'Active':'Pending')}>
+              <NavLink to={`${name}`} className={({isActive}:Link)=>{
+                return isActive?'Active':'Pending'}}>
                 {name}
               </NavLink>
            </div>

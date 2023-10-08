@@ -15,6 +15,16 @@ export type func=(back:string)=>void
 interface contextProp{
   set:func
 }
+interface Style{
+  width:string,
+  height:string,
+  borderRadius:string,
+  borderLeft:string,
+  borderTop:string,
+  borderBottom:string,
+  borderRight:string,
+  rotate:string
+}
 const Home:FC<contextProp>=({set}):JSX.Element=>{
   const context:string=useContext(BackContext)
   useEffect(():void=>{
@@ -28,7 +38,7 @@ const Home:FC<contextProp>=({set}):JSX.Element=>{
      />
     )
 }
-const HomePage:FC<contextProp>=({set}):JSX.Element=>{
+const Page:FC<contextProp>=({set}):JSX.Element=>{
   return <>
       <Header />
       <Outlet
@@ -42,34 +52,37 @@ const Shop:FC=():JSX.Element=>{
          <Outlet />
         </>
 }
-const Loading:FC=():JSX.Element=>{
-  const [text,setText]=useState<string>('')
-  enum style {
-    width='100%',
-    textAlign='center'
-  }
-useEffect(():void=>{
-  setInterval(():void => {
-    setTimeout(():void => {
-      setText('')
-      }, 0);
-    setTimeout(():void => {
-      setText('.')
-      }, 200);
-    setTimeout(():void => {
-      setText('..')
-      }, 400);
-    setTimeout(():void => {
-      setText('...')
-      }, 600);
-    }, 1000);
+function Loader():JSX.Element{
+ const [spin,setSpin]=useState<number>(0)
+  useEffect(():void=>{
+    setInterval(():void => {
+     setSpin((prev:number)=>(
+      prev==360?0:prev+10
+      ))
+    }, 50);
   },[])
-return <div style={style}>
-         <div>
-           Loading {text}
-         </div>
-       </div>
-}
+   const style:Style={
+     width:'60px',
+     height:'60px',
+     borderRadius:'50%',
+     borderLeft:'15px solid white',
+     borderTop:'15px solid black',
+     borderBottom:'15px solid black',
+     borderRight:'15px solid black',
+     rotate:`${spin}deg`
+   }
+   enum load {
+    width='100%',
+    justifyContent='center',
+    display='flex'
+   }
+    return (
+      <div style={load}>
+        <div style={style} />
+      </div>
+    )
+  }
+
 export default function App():JSX.Element{
   const [context,setContext]=useState<string>(theme.back3)
   const change=(back:string):void=>{
@@ -79,7 +92,7 @@ export default function App():JSX.Element{
    }
   return (
        <Provider store={store}>
-         <PersistGate persistor={cachedStore} loading={<Loading />}>
+         <PersistGate persistor={cachedStore} loading={<Loader />}>
            <BackContext.Provider value={context}>
              <Router>
                <Routes>
@@ -87,14 +100,14 @@ export default function App():JSX.Element{
                    <Route index element={<Navigate to='shop' />} />
                    <Route path='regist' element={<Regist />} />
                    <Route path='home' element={<Entry />} />
-                   <Route path='shop' element={<HomePage set={change} />}>
+                   <Route path='shop' element={<Page set={change} />}>
                     <Route index element={<Navigate to='list'/>}/>
                       <Route path='list' element={<Shop />}>
-                         <Route index element={<Navigate to='Mac' />}/>
-                         <Route path='Mac' element={<Catalog />}/>
-                         <Route path='Iphone' element={<Catalog />}/>
-                         <Route path='Ipad' element={<Catalog />}/>
-                         <Route path='Watch' element={<Catalog />}/>
+                        <Route index element={<Navigate to='Mac' />}/>
+                        <Route path='Mac' element={<Catalog />}/>
+                        <Route path='Iphone' element={<Catalog />}/>
+                        <Route path='Ipad' element={<Catalog />}/>
+                        <Route path='Watch' element={<Catalog />}/>
                       </Route>
                       <Route path='about' element={<About />} />
                       <Route path='bask' element={<Bask2 />} />

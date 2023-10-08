@@ -1,12 +1,12 @@
 import {useState,useEffect,useRef,useReducer,Dispatch,SetStateAction}  from 'react'
 import { SetURLSearchParams,useSearchParams,useOutletContext } from 'react-router-dom'
-import {useAppSelector,LinkStyle,union2,union1,union3,MakeArrFromRef,obj} from '../types/state.js';
+import {useAppSelector,LinkStyle,union2,union1,union3,MakeArrFromRef,obj,getCurrent} from '../types/state.js';
 import { item1,item2,item3,item4 } from './items.jsx';
 import { Link,Navigate } from 'react-router-dom';
 import { URLSearchParams } from 'url';
 import { mass } from './items.js';
 import { state } from '../store/slice1.js';
-import { state as st,pay1} from '../store/slice.js';
+import { state as st} from '../store/slice.js';
 import { useActions,bind,getById } from '../store/store.js';
 import img from '../img/arr.png'
 import { func } from '../App.js';
@@ -38,12 +38,13 @@ export default function About():JSX.Element {
    const [data,setData]=useState<datas>({color:'black',auth:false,jump:360})
    const [className,setClassName]=useState<className>({one:'aboutImg',two:'imgDiv',three:'aboutDiv'})
    const [state,dispatch]=useReducer(reducer,{style1:'rgb(240, 47, 156)',style2:'black',style3:'black'})
+   const scrolls:string[]=['prev','next']
    const setContext:func=useOutletContext()
    const [page,setPage]=useState<number>(0)
    const black=useRef<HTMLDivElement>(null!)
    const white=useRef<HTMLDivElement>(null!)
    const grey=useRef<HTMLDivElement>(null!)
-   const refObj:obj[]=MakeArrFromRef([black,grey,white])
+   const refObj:obj[]=MakeArrFromRef(black,grey,white)
    const [searchParams]:[URLSearchParams,SetURLSearchParams]=useSearchParams();
    const id:string=useAppSelector(({phone:{id}}:state2)=>id)
    const user:union1=useAppSelector((store:state3)=>getById(store,id))
@@ -71,18 +72,14 @@ export default function About():JSX.Element {
       }
    } 
    const setBask=():void=>{
-   if (id){
-    const obj:pay1={
+   id ? add1({
       id:user?.id,
       name:Name,
       price:price,
       src:src,
       color:data.color
-    }
-    add1(obj)
-  }else{
-  setData((prev:datas)=>({...prev,auth:true}))
-  }
+       })
+   : setData((prev:datas)=>({...prev,auth:true}))
    }
    enum style {
    width='90%',
@@ -97,23 +94,23 @@ export default function About():JSX.Element {
    borderRadius='50%'
    }
    enum style2 {
-   width='100%'
+   width='100%',
+   minWidth='450px'
    }
    useEffect(():void=>{
     setContext('none')
-   if (item1.some(({name}:mass):boolean=>name==Name)){
-     setClassName({
+    if (item1.some(({name}:mass):boolean=>name==Name)){
+    setClassName({
       one:'aboutImgMac',
       two:'imgDivMac',
       three:'aboutDivMac'
-      })
+        })
     setData((prev:datas)=>({...prev,jump:450}))
      }
    },[])
    useEffect(():void=>{
    const {style1,style2,style3}:styles=state
-   const [{ref:{current:b}},{ref:{current:g}},
-   {ref:{current:w}}]:obj[]=refObj
+   const [b,g,w]:HTMLDivElement[]=getCurrent(refObj)
     b.style.border=`2px solid ${style1}`
     g.style.border=`2px solid ${style2}`
     w.style.border=`2px solid ${style3}`
@@ -128,23 +125,26 @@ export default function About():JSX.Element {
    }
    return (
           <div style={style2}>
+            <div className='AboutBack'>
+              <Link style={LinkStyle} to='/'>
+                &#8592;вернуться на главную
+              </Link>
+            </div>
             <div className={className.three}>
               <div className='scroll'>
-                <ScrollBut 
-                 set={setPage}
-                 className='prev'
-                 style={style1}
-                 />
-                <ScrollBut 
-                 set={setPage}
-                 className='next'
-                 style={style1}
-                 />
+                {scrolls.map((item:string):JSX.Element=>(
+                   <ScrollBut 
+                    key={item}
+                    set={setPage}
+                    className={item}
+                    style={style1}
+                    />
+                 ))}
               </div>
               <div className={className.two}>
                 {srcArr.map((item:string,i:number):JSX.Element=>(
                   <div className={className.one} key={i}>
-                     <img style={style} src={`${item}`} alt="" />
+                    <img style={style} src={`${item}`} alt="" />
                   </div>
                 ))}
               </div>
@@ -161,7 +161,7 @@ export default function About():JSX.Element {
                 <div className='color1'>
                   {refObj.map(({name,ref}:obj,i:number):JSX.Element=>(
                   <div className={`${name}`} ref={ref} key={i}
-                    onClick={():void=>dispatch({type:name})} />
+                   onClick={():void=>dispatch({type:name})} />
                   ))}
                 </div>
               </div>
@@ -170,17 +170,12 @@ export default function About():JSX.Element {
                    добавить в корзину
                 </button>
               </div>
-              <div className='baskBack'>
-                <Link style={LinkStyle} to='/'>
-                  вернуться на главную
-                </Link>
-              </div>
             </div> 
           </div>
    )
 }
 
-type style={
+interface style {
   width:string,
   height:string,
   marginTop:string,
@@ -193,13 +188,11 @@ interface props {
   style:style
 }
 function ScrollBut({set,className,style}:props):JSX.Element{
-const press=():void=>{
-  if (className=='next') {
-  set((x:number)=>x==2?0:x+1)
-  }else{
-  set((x:number)=>x==0?2:x-1)
-  }
-}
+  const press=():void=>{
+  className=='next'
+  ? set((x:number)=>x==2?0:x+1)
+  : set((x:number)=>x==0?2:x-1)
+    }
 return (
   <button onClick={press} className={className}>
     <img style={style} src={img} alt="" />
