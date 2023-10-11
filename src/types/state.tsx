@@ -48,8 +48,8 @@ export interface props{
     show:reduce,
     id?:union
 }
-export interface component {
-    place:string,
+export interface comp {
+    pl:string,
     data:string,
     set?:(e:ChangeEvent<HTMLInputElement>)=>void
    }

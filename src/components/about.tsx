@@ -10,6 +10,7 @@ import { state as st} from '../store/slice.js';
 import { useActions,bind,getById } from '../store/store.js';
 import img from '../img/arr.png'
 import { func } from '../App.js';
+type reduce=string|boolean|number
 interface state2 {
    phone:state
 }
@@ -34,8 +35,11 @@ interface datas{
   auth:boolean,
   jump:number
 }
+interface action1{
+  [i:string]:reduce
+}
 export default function About():JSX.Element {
-   const [data,setData]=useState<datas>({color:'black',auth:false,jump:360})
+   const [data,move]=useReducer((prv:datas,nxt:action1)=>({...prv,...nxt}),{color:'black',auth:false,jump:360})
    const [className,setClassName]=useState<className>({one:'aboutImg',two:'imgDiv',three:'aboutDiv'})
    const [state,dispatch]=useReducer(reducer,{style1:'rgb(240, 47, 156)',style2:'black',style3:'black'})
    const scrolls:string[]=['prev','next']
@@ -55,7 +59,7 @@ export default function About():JSX.Element {
    const {src,src1,src2,price}:union2=item
    const srcArr:string[]=[src,src1,src2]
    function reducer(state:styles,{type}:action):styles{
-   setData((prev:datas)=>({...prev,color:type}))
+   move({color:type})
    switch (type) {
       case 'black':
       return {style1:'rgb(240, 47, 156)',style2:'black',style3:'black'}
@@ -79,7 +83,7 @@ export default function About():JSX.Element {
       src:src,
       color:data.color
        })
-   : setData((prev:datas)=>({...prev,auth:true}))
+   : move({auth:true})
    }
    enum style {
    width='90%',
@@ -105,7 +109,7 @@ export default function About():JSX.Element {
       two:'imgDivMac',
       three:'aboutDivMac'
         })
-    setData((prev:datas)=>({...prev,jump:450}))
+    move({jump:450})
      }
    },[])
    useEffect(():void=>{
@@ -161,7 +165,7 @@ export default function About():JSX.Element {
                 <div className='color1'>
                   {refObj.map(({name,ref}:obj,i:number):JSX.Element=>(
                   <div className={`${name}`} ref={ref} key={i}
-                   onClick={():void=>dispatch({type:name})} />
+                   onClick={()=>dispatch({type:name})} />
                   ))}
                 </div>
               </div>

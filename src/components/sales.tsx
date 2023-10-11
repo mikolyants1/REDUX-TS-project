@@ -44,7 +44,8 @@ if (param.val=='down') mass.reverse()
   }
  setState({item:mass1})
   }
-const imgChan=(item:string,e:MouseEvent<HTMLImageElement>):void=>{
+const imgChan=(item:string)=>
+ (e:MouseEvent<HTMLImageElement>):void=>{
     e.currentTarget.src=item
   }
 const keyHandler=(e:KeyboardEvent<HTMLInputElement>):void=>{
@@ -78,9 +79,9 @@ const text:JSX.Element[]=state.item.map((item:mass):JSX.Element=>{
     }
    return  <div className='item' key={name}>
              <img className={imgClass} 
-               onMouseOver={(e)=>imgChan(src1,e)}
-               onMouseOut={(e)=>imgChan(src,e)}
-               src={src} alt="" />
+              onMouseOver={imgChan(src1)}
+              onMouseOut={imgChan(src)}
+              src={src} alt="" />
              <div className={nameClass}>
                <Link className='itemLink' 
                 to={`/shop/about/?name=${name}`}>

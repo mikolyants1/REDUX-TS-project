@@ -1,6 +1,6 @@
 import {useState,ChangeEvent,useEffect,useRef,KeyboardEvent} from 'react'
 import { Link,Navigate,useOutletContext } from 'react-router-dom'
-import {useAppSelector,LinkStyle1,DivEntry,style,component,func as Type} from '../types/state.js'
+import {useAppSelector,LinkStyle1,DivEntry,style,comp,func as Type} from '../types/state.js'
 import { bind, useActions ,getUser} from '../store/store.js'
 import { User } from '../store/slice'
 import { func } from '../App.js'
@@ -35,15 +35,17 @@ export default function Entry():JSX.Element {
     const setNum=(e:ChangeEvent<HTMLInputElement>):void=>{
       add3(e.target.value)
     }
-    const Block:component[]=[
-     {place:'login',data:'name',set:setName},
-     {place:'password',data:'phone',set:setNum}
+    
+    const Block:comp[]=[
+     {pl:'login',data:'name',set:setName},
+     {pl:'password',data:'phone',set:setNum}
     ]
     function press():void {
     let con:number=0
-    if (state.phone!==''&&state.name!==''){
+    const {name:n,phone:p}:state1=state
+    if (p!==''&&n!==''){
     user.forEach(({phone,name}:User):void=>{
-    if (phone==state.phone&&name==state.name) con++
+    if (phone==p&&name==n) con++
         })
     con==0
     ? setPath((prev:state2)=>({...prev,error:'не найден'}))
@@ -63,12 +65,12 @@ export default function Entry():JSX.Element {
               <div style={DivEntry}>
                 Login
               </div>
-               {Block.map(({data,place,set}:component,i:number):JSX.Element=>(
+               {Block.map(({data,pl,set}:comp,i:number):JSX.Element=>(
                 <>
                  {set&&
                   <Login key={i} user={user} data={data}>
                     <input name={data} style={style} type="text"
-                     placeholder={place} list={data} tabIndex={i+1}
+                     placeholder={pl} list={data} tabIndex={i+1}
                      onChange={(e)=>{change(e);set(e)}} />
                   </Login>
                  }

@@ -1,6 +1,6 @@
 import {useState,ChangeEvent,useEffect,useRef,Dispatch,SetStateAction,KeyboardEvent} from'react'
 import { Navigate,useOutletContext } from 'react-router-dom'
-import {useAppSelector,DivEntry,union,style,component} from '../types/state.js'
+import {useAppSelector,DivEntry,union,style,comp} from '../types/state.js'
 import { User } from '../store/slice'
 import { bind, useActions,getUser } from '../store/store.js'
 import { func } from '../App.js'
@@ -17,10 +17,7 @@ export default function Regist():JSX.Element {
 const SetContext:func=useOutletContext()
 const [state,setState]=useState<state1>({name:'',phone:''})
 const [path,setPath]=useState<state2>({auth:false,error:''})
-const Block:component[]=[
-  {place:'login',data:'name'},
-  {place:'password',data:'phone'}
-    ]
+const Block:comp[]=[{pl:'login',data:'name'},{pl:'password',data:'phone'}]
 const user:User[]=useAppSelector(getUser)
 const {add}:bind=useActions()
 const regist=useRef<HTMLDivElement>(null!)
@@ -57,13 +54,13 @@ function press():void {
           <div style={DivEntry}>
             Regist
           </div>
-          {Block.map(({place,data}:component,i:number):JSX.Element=>(
+          {Block.map(({pl,data}:comp,i:number):JSX.Element=>(
             <SetUser
-             key={i}
-             set={setState}
-             place={place}
-             name={data}
-             id={i+1}
+              key={i}
+              set={setState}
+              place={pl}
+              name={data}
+              id={i+1}
              />
            ))}
           <div className='error'>
