@@ -39,7 +39,7 @@ interface action1{
   [i:string]:reduce
 }
 export default function About():JSX.Element {
-   const [data,move]=useReducer((prv:datas,nxt:action1)=>({...prv,...nxt}),{color:'black',auth:false,jump:360})
+   const [data,move]=useReducer((x:datas,y:action1)=>({...x,...y}),{color:'black',auth:false,jump:360})
    const [className,setClassName]=useState<className>({one:'aboutImg',two:'imgDiv',three:'aboutDiv'})
    const [state,dispatch]=useReducer(reducer,{style1:'rgb(240, 47, 156)',style2:'black',style3:'black'})
    const scrolls:string[]=['prev','next']
@@ -193,9 +193,9 @@ interface props {
 }
 function ScrollBut({set,className,style}:props):JSX.Element{
   const press=():void=>{
-  className=='next'
-  ? set((x:number)=>x==2?0:x+1)
-  : set((x:number)=>x==0?2:x-1)
+   className=='next'
+   ? set((x:number)=>x==2?0:x+1)
+   : set((x:number)=>x==0?2:x-1)
     }
 return (
   <button onClick={press} className={className}>

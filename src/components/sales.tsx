@@ -1,37 +1,39 @@
-import {useState,ChangeEvent,useEffect,MouseEvent,FocusEvent,KeyboardEvent} from 'react'
+import {useState,ChangeEvent,useEffect,MouseEvent,FocusEvent,KeyboardEvent,useReducer} from 'react'
 import {Link} from 'react-router-dom'
 import { item1, nameMass,item2,item3,item4} from './items'
-import {state1,func, union,union2,union5,union6} from '../types/state'
+import {state1,func,union,union2,union5,union6} from '../types/state'
 import { mass,mass1 } from './items'
-interface state2{
+interface state{
   val:string,
   ser:string
 }
-interface Obj{
-  [i:number]:string
+interface action{
+  [i:string]:string
 }
-export function Catalog():func{
+export default function Catalog():func{
 const url:union=window.location.pathname.split('/').at(-1)
 const show:union5=nameMass.find(({name}:mass1)=>name==url)
 if (show){
 const [state,setState]=useState<state1>({item:show.mass})
-const [param,setParam]=useState<state2>({val:'up',ser:''})
-const item5:Array<mass>=[...item1,...item2,...item3,...item4]
+const [param,dispatch]=useReducer(reduce,{val:'up',ser:''})
+const item5:mass[]=[...item1,...item2,...item3,...item4]
+useEffect(():void=>setState({item:show.mass}),[show])
 const filter=():void=>{
  const val:string=param.ser.trim().toLocaleLowerCase()
- const list:mass[]=item5.filter((item:mass):union2=>{
-  if (item.name.toLowerCase().indexOf(val)!==-1) return item
+ const list:mass[]=item5.filter((i:mass):union2=>{
+  if (i.name.toLowerCase().indexOf(val)!==-1) return i
   })
  setState({item:list})
   }
 const change=({target}:ChangeEvent<union6>):void=>{
-setParam((prev:state2)=>({...prev,[target.name]:target.value}))
-      }
-useEffect(():void=>setState({item:show.mass}),[show])
+  dispatch({[target.name]:target.value})
+  }
+function reduce(prev:state,next:action):state{
+  return {...prev,...next}
+  }
 const sort=():void=>{
 const {item}:state1=state
-const mass1:mass[]=[]
-const obj:Obj={}
+const [mass1,obj]:[mass[],action]=[[],{}]
 item.forEach(({price,name}:mass):void=>{
  obj[Number(price.split(' ').join(''))]=name
   })
@@ -64,7 +66,7 @@ const inputEvent=(e:FocusEvent<HTMLInputElement>):void=>{
     fontSize='20px',
     backgroundColor='rgb(240, 240, 240)',
 }
-const {val,ser}:state2=param
+const {val,ser}:state=param
 let [imgClass,nameClass,priceClass]:string[]=['','','']
 const text:JSX.Element[]=state.item.map((item:mass):JSX.Element=>{
   const {src,name,price,src1}:mass=item
@@ -98,8 +100,7 @@ return <>
           <input type="text" name='ser' 
            onKeyUp={keyHandler} onBlur={inputEvent}
            onFocus={inputEvent} onChange={change}
-           value={ser} style={style}
-            />
+           value={ser} style={style} />
           <button onClick={filter} 
            className='serBut'>
              search
@@ -136,7 +137,7 @@ function Select(props:prop):JSX.Element{
   return (
     <>
       {props.children}
-      <select className='select' name='value' {...props}>
+      <select className='select' name='val' {...props}>
        {values.map(({title,val}:Option):JSX.Element=>(
         <option key={val} value={val}>
             {title}

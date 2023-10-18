@@ -10,7 +10,7 @@ import Entry from './components/entry'
 import About from './components/about'
 import Main from './components/main'
 import Header from './components/header'
-import { Catalog } from './components/sales'
+import Catalog from './components/sales'
 export type func=(back:string)=>void
 interface contextProp{
   set:func
@@ -25,12 +25,13 @@ interface Style{
   borderRight:string,
   rotate:string
 }
+
 const Home:FC<contextProp>=({set}):JSX.Element=>{
-  const context:string=useContext(BackContext)
-  useEffect(():void=>{
-    const {style}=document.querySelector('body') as HTMLElement
-    style.background=`${context}`
-    style.backgroundSize=context!=='none'?'100vw 100vh':'none'
+ const context:string=useContext(BackContext)
+ useEffect(():void=>{
+  const {style}=document.querySelector('body') as HTMLElement
+  style.background=`${context}`
+  style.backgroundSize=context!=='none'?'100vw 100vh':'none'
   },[context])
   return (
     <Outlet 
