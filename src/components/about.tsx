@@ -81,7 +81,8 @@ export default function About():JSX.Element {
       name:Name,
       price:price,
       src:src,
-      color:data.color
+      color:data.color,
+      bask:user?.bask
        })
    : move({auth:true})
    }

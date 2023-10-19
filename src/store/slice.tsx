@@ -25,12 +25,14 @@ export interface pay1{
     name:union3,
     price:union,
     src:union,
-    color:union
+    color:union,
+    bask:bask[]|undefined
 }
 
 export interface pay2{
     id:number,
-    index:number
+    index:number,
+    bask:bask[]
 }
 
 const initialState:state={
@@ -45,30 +47,33 @@ const slice:Slice<state,{
     name:'shop',
     initialState,
     reducers:{
-        add:({user},{payload})=>{
+        add:(state,{payload})=>{
         const {name,phone,obj}:pay=payload
-            user.push({
-                name:name,
-                phone:phone,
-                bask:[],
-                id:Object.keys(obj).length
-            }) 
+        state.user=[...obj,{
+            name:name,
+            phone:phone,
+            bask:[],
+            id:Object.keys(obj).length
+               }]
+        
           
         },
-        add1:({user},{payload})=>{
-        const {id,name,price,src,color}:pay1=payload
-         if (typeof id=='number'){
-            user[id].bask.push({
+        add1:(state,{payload})=>{
+        const {id,name,price,src,color,bask}:pay1=payload
+        if (typeof id=='number'&&typeof bask!=='undefined'){
+            state.user[id].bask=[...bask,{
                 name:name,
                 price:price,
                 src:src,
                 color:color
-            })
+            }]
           }
         },
-        del:({user},{payload})=>{
-            const {id,index}:pay2=payload
-            user[id].bask.splice(index,1)
+        del:(state,{payload})=>{
+         const {id,index,bask}:pay2=payload
+         const newBask:bask[]=bask
+         .filter((_:bask,i:number):boolean=>i!==index)
+         state.user[id].bask=[...newBask]
         },
     }
 })

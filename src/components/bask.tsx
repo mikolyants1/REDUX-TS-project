@@ -25,8 +25,8 @@ const {del}:bind=useActions()
 let [imgClass,divClass]:string[]=['','']
 useEffect(():void=>SetContext('none'),[])
 const remove=(i:number):void=>{
-if (typeof user?.id!=='undefined'){
- del({id:user.id,index:i})
+if (typeof user?.id!=='undefined'&&typeof user.bask!=='undefined'){
+ del({id:user.id,index:i,bask:user.bask})
   }
 }
 enum style1{

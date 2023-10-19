@@ -161,7 +161,7 @@ import watch091  from '../img/watch091.jpeg'
 import watch092  from '../img/watch092.jpeg'
 import watch101  from '../img/watch101.jpg'
 import watch102  from '../img/watch012.jpeg'
-export  const item4:Array<mass>=[
+export const item4:Array<mass>=[
     {src:watch1,name:'Apple watch series 8',price:'149 000',src1:watch011,src2:watch012},
     {src:watch2,name:'Apple watch SE GPS',price:'160 000',src1:watch021,src2:watch022},
     {src:watch3,name:'Apple watch Cellular',price:'165 000',src1:watch031,src2:watch032},
