@@ -1,7 +1,8 @@
-import {useState,ChangeEvent,useEffect,MouseEvent,FocusEvent,KeyboardEvent,useReducer} from 'react'
+import {useState,ChangeEvent,useEffect,MouseEvent,
+FocusEvent,KeyboardEvent,useReducer} from 'react'
 import {Link} from 'react-router-dom'
 import { item1, nameMass,item2,item3,item4} from './items'
-import {state1,func,union,union2,union5,union6} from '../types/state'
+import {state1,func,union,union2,union5,union6,style6} from '../types/state'
 import { mass,mass1 } from './items'
 interface state{
   val:string,
@@ -25,8 +26,8 @@ const filter=():void=>{
   })
  setState({item:list})
   }
-const change=({target}:ChangeEvent<union6>):void=>{
-  dispatch({[target.name]:target.value})
+const change=(e:ChangeEvent<union6>):void=>{
+  dispatch({[e.target.name]:e.target.value})
   }
 function reduce(prev:state,next:action):state{
   return {...prev,...next}
@@ -58,28 +59,18 @@ const inputEvent=(e:FocusEvent<HTMLInputElement>):void=>{
    e.type=='blur'?'240,240,240':'200,200,200'
    })`
  }
-  enum style {
-    border=`1px solid grey`,
-    width='93%',
-    height='26px',
-    textAlign='center',
-    fontSize='20px',
-    backgroundColor='rgb(240, 240, 240)',
-}
+
 const {val,ser}:state=param
-let [imgClass,nameClass,priceClass]:string[]=['','','']
-const text:JSX.Element[]=state.item.map((item:mass):JSX.Element=>{
-  const {src,name,price,src1}:mass=item
-  if (item1.some(({name:n}:mass):boolean=>n==name)) {
-     imgClass='itemImgMac'
-     nameClass='itemNameMac'
-     priceClass='itemPriceMac'
-    }else{
-     imgClass='itemImg'
-     nameClass='itemName'
-     priceClass='itemPrice'
-    }
-   return  <div className='item' key={name}>
+const text:JSX.Element[]=state.item.map(
+ ({src,name,price,src1}:mass):JSX.Element=>{
+  const isMac:boolean=item1.some((i:mass):boolean=>i.name==name)
+  const text:string=isMac?'Mac':''
+  const priceClass:string=`itemPrice${text}`
+  const imgClass:string=`itemImg${text}`
+  const nameClass:string=`itemName${text}`
+
+   return  (
+           <div className='item' key={name}>
              <img className={imgClass} 
               onMouseOver={imgChan(src1)}
               onMouseOut={imgChan(src)}
@@ -94,13 +85,14 @@ const text:JSX.Element[]=state.item.map((item:mass):JSX.Element=>{
                 {price}p
              </div>
            </div>
-        }) 
+         )
+      }) 
 return <>
         <div className='ser'>
           <input type="text" name='ser' 
            onKeyUp={keyHandler} onBlur={inputEvent}
            onFocus={inputEvent} onChange={change}
-           value={ser} style={style} />
+           value={ser} style={style6} />
           <button onClick={filter} 
            className='serBut'>
              search
@@ -129,7 +121,8 @@ interface Option{
   title:string,
   val:string
 }
-function Select(props:prop):JSX.Element{
+
+ function Select(props:prop):JSX.Element{
   const values:Option[]=[
     {val:'up',title:'по возрастанию'},
     {val:'down',title:'по убыванию'},

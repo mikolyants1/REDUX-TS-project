@@ -1,6 +1,8 @@
-import {useState,useEffect,useRef,useReducer,Dispatch,SetStateAction}  from 'react'
+import {useState,useEffect,useRef,useReducer,Dispatch,
+SetStateAction,memo,NamedExoticComponent}  from 'react'
 import { SetURLSearchParams,useSearchParams,useOutletContext } from 'react-router-dom'
-import {useAppSelector,LinkStyle,union2,union1,union3,MakeArrFromRef,obj,getCurrent} from '../types/state.js';
+import {useAppSelector,LinkStyle,union2,union3,MakeArrFromRef,obj,getCurrent,
+ScrollStyle, union1, getItem, style2, style1} from '../types/state.js';
 import { item1,item2,item3,item4 } from './items.jsx';
 import { Link,Navigate } from 'react-router-dom';
 import { URLSearchParams } from 'url';
@@ -35,13 +37,16 @@ interface datas{
   auth:boolean,
   jump:number
 }
-interface action1{
-  [i:string]:reduce
-}
+type action1=Record<string,reduce>
+
 export default function About():JSX.Element {
-   const [data,move]=useReducer((x:datas,y:action1)=>({...x,...y}),{color:'black',auth:false,jump:360})
-   const [className,setClassName]=useState<className>({one:'aboutImg',two:'imgDiv',three:'aboutDiv'})
-   const [state,dispatch]=useReducer(reducer,{style1:'rgb(240, 47, 156)',style2:'black',style3:'black'})
+   const [data,move]=useReducer(
+   (x:datas,y:action1)=>({...x,...y}),
+   {color:'black',auth:false,jump:360})
+   const [className,setClassName]=useState<className>(
+   {one:'aboutImg',two:'imgDiv',three:'aboutDiv'})
+   const [state,dispatch]=useReducer(reducer,
+   {style1:'rgb(240, 47, 156)',style2:'black',style3:'black'})
    const scrolls:string[]=['prev','next']
    const setContext:func=useOutletContext()
    const [page,setPage]=useState<number>(0)
@@ -49,30 +54,38 @@ export default function About():JSX.Element {
    const white=useRef<HTMLDivElement>(null!)
    const grey=useRef<HTMLDivElement>(null!)
    const refObj:obj[]=MakeArrFromRef(black,grey,white)
-   const [searchParams]:[URLSearchParams,SetURLSearchParams]=useSearchParams();
-   const id:string=useAppSelector(({phone:{id}}:state2)=>id)
+   const [param]:[URLSearchParams,SetURLSearchParams]=useSearchParams();
+   const id:string=useAppSelector(({phone}:state2)=>phone.id)
    const user:union1=useAppSelector((store:state3)=>getById(store,id))
    const {add1}:bind=useActions()
-   const Name:union3=searchParams.get("name")
-   const item:union2=item1.concat(item2,item3,item4).find(({name}:mass):boolean=>name==Name)
+   const Name:union3=param.get("name")
+   const item:union2=getItem([item1,item2,item3,item4],Name)
    if (!item) return <div>error</div>
    const {src,src1,src2,price}:union2=item
    const srcArr:string[]=[src,src1,src2]
    function reducer(state:styles,{type}:action):styles{
-   move({color:type})
-   switch (type) {
+    move({color:type})
+     switch (type) {
       case 'black':
-      return {style1:'rgb(240, 47, 156)',style2:'black',style3:'black'}
-      break;
+      return {
+        style1:'rgb(240, 47, 156)',
+        style2:'black',
+        style3:'black'
+         };
       case 'grey':
-      return {style1:'black',style2:'rgb(240, 47, 156)',style3:'black'}
-      break;
+      return {
+        style1:'black',
+        style2:'rgb(240, 47, 156)',
+        style3:'black'
+         };
       case 'white':
-      return {style1:'black',style2:'black',style3:'rgb(240, 47, 156)'}
-      break;
+      return {
+        style1:'black',
+        style2:'black',
+        style3:'rgb(240, 47, 156)'
+         };
       default:
-      return state
-      break;
+      return state;
       }
    } 
    const setBask=():void=>{
@@ -85,22 +98,6 @@ export default function About():JSX.Element {
       bask:user?.bask
        })
    : move({auth:true})
-   }
-   enum style {
-   width='90%',
-   marginLeft='5%',
-   height='100%'
-   }
-   enum style1 {
-   width='100%',
-   height='80%',
-   marginTop='10%',
-   marginLeft='10%',
-   borderRadius='50%'
-   }
-   enum style2 {
-   width='100%',
-   minWidth='450px'
    }
    useEffect(():void=>{
     setContext('none')
@@ -126,7 +123,7 @@ export default function About():JSX.Element {
    style.transform=`translateX(${page*-data.jump}px)`
    },[page])
    if (data.auth){
-    return <Navigate to='/home' />
+     return <Navigate to='/home' />
    }
    return (
           <div style={style2}>
@@ -142,14 +139,13 @@ export default function About():JSX.Element {
                     key={item}
                     set={setPage}
                     className={item}
-                    style={style1}
                     />
                  ))}
               </div>
               <div className={className.two}>
                 {srcArr.map((item:string,i:number):JSX.Element=>(
                   <div className={className.one} key={i}>
-                    <img style={style} src={`${item}`} alt="" />
+                    <img style={style1} src={`${item}`} alt="" />
                   </div>
                 ))}
               </div>
@@ -180,19 +176,12 @@ export default function About():JSX.Element {
    )
 }
 
-interface style {
-  width:string,
-  height:string,
-  marginTop:string,
-  marginLeft:string,
-  borderRadius:string
-  }
 interface props {
   set:Dispatch<SetStateAction<number>>,
   className:string,
-  style:style
 }
-function ScrollBut({set,className,style}:props):JSX.Element{
+const ScrollBut:NamedExoticComponent<props>=memo(
+ ({set,className}:props):JSX.Element=>{
   const press=():void=>{
    className=='next'
    ? set((x:number)=>x==2?0:x+1)
@@ -200,7 +189,7 @@ function ScrollBut({set,className,style}:props):JSX.Element{
     }
 return (
   <button onClick={press} className={className}>
-    <img style={style} src={img} alt="" />
+    <img style={ScrollStyle} src={img} alt="" />
   </button>
   )
-}
+})

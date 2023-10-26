@@ -60,7 +60,7 @@ const slice:Slice<state,{
         },
         add1:(state,{payload})=>{
         const {id,name,price,src,color,bask}:pay1=payload
-        if (typeof id=='number'&&typeof bask!=='undefined'){
+        if (typeof id=='number'&&bask){
             state.user[id].bask=[...bask,{
                 name:name,
                 price:price,
@@ -71,8 +71,8 @@ const slice:Slice<state,{
         },
         del:(state,{payload})=>{
          const {id,index,bask}:pay2=payload
-         const newBask:bask[]=bask
-         .filter((_:bask,i:number):boolean=>i!==index)
+         const newBask:bask[]=bask.filter(
+         (_:bask,i:number):boolean=>i!==index)
          state.user[id].bask=[...newBask]
         },
     }

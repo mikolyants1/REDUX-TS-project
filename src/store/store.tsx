@@ -45,7 +45,7 @@ export const useActions=():bind=>{
     }
 export const getUser=(state:state3)=>state.reduce.user
 export const getById=({reduce}:state3,id:string):union1=>{
-  return reduce.user.find((x:User)=>x.phone==id)
+  return reduce.user.find((x:User):boolean=>x.phone==id)
     }
 export const cachedStore:Persistor=persistStore(store)
 export default store
