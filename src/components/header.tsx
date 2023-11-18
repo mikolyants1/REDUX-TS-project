@@ -20,7 +20,7 @@ export default function Header():JSX.Element {
                   SmartShop
                </div>
                <div className='headerDiv'>
-                  <NavLink to={!current?'/home':'bask'}
+                  <NavLink to={!current?'/home':'bask'} 
                    className={({isActive}:LinkProp):string=>{
                    return !isActive?'headerLink':'ActivLink'}}>
                     корзина

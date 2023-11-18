@@ -1,10 +1,12 @@
-import {useEffect,useRef,KeyboardEvent,ChangeEvent} from 'react'
+import {useEffect,useRef} from 'react'
 import { Link,Navigate,useOutletContext } from 'react-router-dom'
-import {useAppSelector,LinkStyle1,DivEntry,style,comp,
-func as Type,door,useReduce, setAction} from '../types/state.js'
+import {useAppSelector,comp,door,useReduce, 
+setAction, Evt, Key} from '../types/state.js'
 import { bind, useActions ,getUser} from '../store/store.js'
 import { User } from '../store/slice'
 import { func } from '../App.js'
+import { Login } from './setting.js'
+import { DivEntry, LinkStyle1, style } from './style.js'
 
 export default function Entry():JSX.Element {
     const [state,dispatch]=useReduce()
@@ -17,8 +19,7 @@ export default function Entry():JSX.Element {
     const height:number=state.error!==''?320:300
     entry.current.style.height=`${height}px`
     },[state.error])
-    const change=(set:setAction)=>
-     (e:ChangeEvent<HTMLInputElement>):void=>{
+    const change=(set:setAction)=>(e:Evt):void=>{
      dispatch({[e.target.name]:e.target.value})
       set(e.target.value)
     }
@@ -38,7 +39,7 @@ export default function Entry():JSX.Element {
      dispatch({auth:false})
       }
     }
-    const access=(e:KeyboardEvent<HTMLDivElement>):void=>{
+    const access=(e:Key<HTMLDivElement>):void=>{
       if (e.key==='Enter') press()
     }
     if (state.auth) {
@@ -81,21 +82,4 @@ export default function Entry():JSX.Element {
           )
 }
 
-interface props {
-  user:User[],
-  data:string,
-  children:JSX.Element
-}
 
-function Login({user,data,children}:props):Type{
- return (
-  <div className='info'>
-     {children}
-    <datalist id={data}>
-      {user.map(({name,phone}:User,i:number):JSX.Element=>(
-        <option key={i} value={data=='name'?name:phone} />
-      ))}
-    </datalist>
-  </div>
-    )
-}

@@ -1,8 +1,7 @@
 
 import { Link,useOutletContext } from 'react-router-dom'
 import { useActions,bind,getById } from '../store/store.js'
-import {useAppSelector,LinkStyle,union, union1,
-style3, style5, style4} from '../types/state.js'
+import {useAppSelector,union, union1} from '../types/state.js'
 import { item1 } from './items.jsx'
 import { bask } from '../store/slice'
 import { mass } from './items.js'
@@ -10,6 +9,7 @@ import { state } from '../store/slice1.js';
 import { state as st } from '../store/slice.js';
 import {useEffect} from 'react'
 import { func } from '../App.js'
+import { LinkStyle, style3, style4, style5 } from './style.js'
 interface state2 {
    phone:state
 }

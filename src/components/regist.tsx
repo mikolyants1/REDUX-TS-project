@@ -1,11 +1,12 @@
-import {ChangeEvent,useEffect,useRef,KeyboardEvent,
-memo,useCallback,NamedExoticComponent} from'react'
+import {useEffect,useRef,useCallback} from'react'
 import { Navigate,useOutletContext } from 'react-router-dom'
-import {useAppSelector,DivEntry,style,comp, 
-door, useReduce} from '../types/state.js'
+import {useAppSelector,comp, door, useReduce,
+ Evt, Key} from '../types/state.js'
 import { User } from '../store/slice'
 import { bind, useActions,getUser } from '../store/store.js'
 import { func } from '../App.js'
+import { Register } from './setting.js'
+import { DivEntry } from './style.js'
 type block=Omit<comp,'set'>
 
 export default function Regist():JSX.Element {
@@ -37,18 +38,19 @@ function press():void {
      dispatch({auth:false})
     }
   }
-  const access=(e:KeyboardEvent<HTMLDivElement>):void=>{
+  const access=(e:Key<HTMLDivElement>):void=>{
     if (e.key==='Enter') press()
   }
-  const set=useCallback(
-   (e:ChangeEvent<HTMLInputElement>):void=>{
+  const set=useCallback((e:Evt):void=>{
     dispatch({[e.target.name]:e.target.value})
    },[])
   if (state.auth) {
    return <Navigate to='/home' />
   }
   return (
-        <div ref={regist} onKeyUp={access} className='user'>
+        <div ref={regist}
+         onKeyUp={access}
+         className='user'>
           <div style={DivEntry}>
             Regist
           </div>
@@ -73,18 +75,3 @@ function press():void {
         </div>
           )
   }
-interface props {
- set:(e:ChangeEvent<HTMLInputElement>)=>void,
- place:string,
- name:string,
- id:number
-  }
-const Register:NamedExoticComponent<props>=memo(
-function Set({set,place,name,id}:props):JSX.Element{
-return (
-    <div className='info'>
-      <input placeholder={place} style={style} tabIndex={id}
-       onChange={set} type="text" name={name} />
-    </div>
-    )
-  })

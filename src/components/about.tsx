@@ -1,8 +1,8 @@
-import {useState,useEffect,useRef,useReducer,Dispatch,
-SetStateAction,memo,NamedExoticComponent}  from 'react'
-import { SetURLSearchParams,useSearchParams,useOutletContext } from 'react-router-dom'
-import {useAppSelector,LinkStyle,union2,union3,MakeArrFromRef,obj,getCurrent,
-ScrollStyle, union1, getItem, style2, style1} from '../types/state.js';
+import {useState,useEffect,useRef,useReducer}  from 'react'
+import { SetURLSearchParams,useSearchParams,
+useOutletContext } from 'react-router-dom'
+import {useAppSelector,union2,union3,MakeArrFromRef,
+obj,getCurrent,union1, getItem} from '../types/state.js';
 import { item1,item2,item3,item4 } from './items.jsx';
 import { Link,Navigate } from 'react-router-dom';
 import { URLSearchParams } from 'url';
@@ -10,8 +10,9 @@ import { mass } from './items.js';
 import { state } from '../store/slice1.js';
 import { state as st} from '../store/slice.js';
 import { useActions,bind,getById } from '../store/store.js';
-import img from '../img/arr.png'
 import { func } from '../App.js';
+import { ScrollBut } from './setting.js';
+import { LinkStyle, style1, style2 } from './style.js';
 type reduce=string|boolean|number
 interface state2 {
    phone:state
@@ -135,7 +136,7 @@ export default function About():JSX.Element {
             <div className={className.three}>
               <div className='scroll'>
                 {scrolls.map((item:string):JSX.Element=>(
-                   <ScrollBut 
+                   <ScrollBut
                     key={item}
                     set={setPage}
                     className={item}
@@ -175,21 +176,3 @@ export default function About():JSX.Element {
           </div>
    )
 }
-
-interface props {
-  set:Dispatch<SetStateAction<number>>,
-  className:string,
-}
-const ScrollBut:NamedExoticComponent<props>=memo(
- ({set,className}:props):JSX.Element=>{
-  const press=():void=>{
-   className=='next'
-   ? set((x:number)=>x==2?0:x+1)
-   : set((x:number)=>x==0?2:x-1)
-    }
-return (
-  <button onClick={press} className={className}>
-    <img style={ScrollStyle} src={img} alt="" />
-  </button>
-  )
-})

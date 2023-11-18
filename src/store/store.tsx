@@ -39,6 +39,7 @@ const persist:Reducer<EmptyObject & {reduce:state,phone:state}
 const store:ToolkitStore=configureStore({
     reducer:persist
 })
+
 export const useActions=():bind=>{
   const dispatch:Dispatch<AnyAction>=useAppDispatch()
   return bindActionCreators(actions,dispatch)

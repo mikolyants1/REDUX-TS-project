@@ -54,7 +54,7 @@ const slice:Slice<state,{
             phone:phone,
             bask:[],
             id:Object.keys(obj).length
-               }]
+             }]
         
           
         },

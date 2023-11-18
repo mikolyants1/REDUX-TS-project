@@ -1,9 +1,12 @@
-import {useState,ChangeEvent,useEffect,MouseEvent,
-FocusEvent,KeyboardEvent,useReducer} from 'react'
+import {useState,ChangeEvent,useEffect,
+MouseEvent,FocusEvent,useReducer} from 'react'
 import {Link} from 'react-router-dom'
 import { item1, nameMass,item2,item3,item4} from './items'
-import {state1,func,union,union2,union5,union6,style6} from '../types/state'
+import {state1,func,union,union2,
+union5,union6, Key} from '../types/state'
 import { mass,mass1 } from './items'
+import { Select } from './setting'
+import { style6 } from './style'
 interface state{
   val:string,
   ser:string
@@ -51,7 +54,7 @@ const imgChan=(item:string)=>
  (e:MouseEvent<HTMLImageElement>):void=>{
     e.currentTarget.src=item
   }
-const keyHandler=(e:KeyboardEvent<HTMLInputElement>):void=>{
+const keyHandler=(e:Key<HTMLInputElement>):void=>{
  if (e.key==='Enter') filter()
 }
 const inputEvent=(e:FocusEvent<HTMLInputElement>):void=>{
@@ -111,32 +114,4 @@ return <>
       </>
     }
   return null
-}
-interface prop{
-  value:string,
-  onChange:(e:ChangeEvent<union6>)=>void,
-  children:JSX.Element
-}
-interface Option{
-  title:string,
-  val:string
-}
-
- function Select(props:prop):JSX.Element{
-  const values:Option[]=[
-    {val:'up',title:'по возрастанию'},
-    {val:'down',title:'по убыванию'},
-  ]
-  return (
-    <>
-      {props.children}
-      <select className='select' name='val' {...props}>
-       {values.map(({title,val}:Option):JSX.Element=>(
-        <option key={val} value={val}>
-            {title}
-        </option>
-        ))}
-      </select>
-    </>
-  )
 }
