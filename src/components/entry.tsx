@@ -10,7 +10,7 @@ import { DivEntry, LinkStyle1, style } from './style.js'
 
 export default function Entry():JSX.Element {
     const [state,dispatch]=useReduce()
-    const SetContext:func=useOutletContext()
+    const SetContext=useOutletContext<func>()
     const user:User[]=useAppSelector(getUser)
     const entry=useRef<HTMLDivElement>(null!)
     const {add2,add3}:bind=useActions()

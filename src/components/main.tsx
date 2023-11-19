@@ -6,7 +6,7 @@ interface Link{
   isActive:boolean
 }
 export default function Main():JSX.Element{
-const SetContext:func=useOutletContext()
+const SetContext=useOutletContext<func>()
 useEffect(():void=>SetContext('none'),[])
 return (
       <div className='main'>

@@ -48,6 +48,7 @@ export function Login({user,data,children}:LoginProp):func{
     name:string,
     id:number
      }
+     
  export const Register:NamedExoticComponent<regProp>=memo(
    ({set,place,name,id}:regProp):JSX.Element=>{
    return (

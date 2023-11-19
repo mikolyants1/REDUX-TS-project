@@ -10,7 +10,7 @@ import { DivEntry } from './style.js'
 type block=Omit<comp,'set'>
 
 export default function Regist():JSX.Element {
-const SetContext:func=useOutletContext()
+const SetContext=useOutletContext<func>()
 const [state,dispatch]=useReduce()
 const Block:Omit<comp,'set'>[]=[
 {pl:'login',data:'name'},

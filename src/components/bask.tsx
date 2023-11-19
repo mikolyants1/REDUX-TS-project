@@ -19,7 +19,7 @@ interface state3 {
 type List=JSX.Element[]|undefined
 
 export default function Bask2():JSX.Element {
-const SetContext:func=useOutletContext()
+const SetContext=useOutletContext<func>()
 const id:union=useAppSelector(({phone}:state2)=>phone.id)
 const user:union1=useAppSelector((x:state3)=>getById(x,id))
 const {del}:bind=useActions()

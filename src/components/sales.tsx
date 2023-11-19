@@ -1,12 +1,14 @@
 import {useState,ChangeEvent,useEffect,
 MouseEvent,FocusEvent,useReducer} from 'react'
 import {Link} from 'react-router-dom'
-import { item1, nameMass,item2,item3,item4} from './items'
-import {state1,func,union,union2,
-union5,union6, Key} from '../types/state'
+import { item1, nameMass,item2,
+item3,item4} from './items'
+import {state1,func,union2,union5,
+union6, Key} from '../types/state'
 import { mass,mass1 } from './items'
 import { Select } from './setting'
 import { style6 } from './style'
+
 interface state{
   val:string,
   ser:string
@@ -14,8 +16,9 @@ interface state{
 interface action{
   [i:string]:string
 }
+
 export default function Catalog():func{
-const url:union=window.location.pathname.split('/').at(-1)
+const url:string=String(window.location.pathname.split('/').at(-1))
 const show:union5=nameMass.find(({name}:mass1)=>name==url)
 if (show){
 const [state,setState]=useState<state1>({item:show.mass})
