@@ -23,7 +23,7 @@ export default function Header():JSX.Element {
                <div className={styles.headerDiv}>
                   <NavLink to={!current?'/home':'bask'} 
                    className={({isActive}:LinkProp):string=>{
-                   return styles[!isActive?'headerLink':'ActivLink']}}>
+                   return styles[isActive?'ActivLink':'headerLink']}}>
                     корзина
                   </NavLink>
                </div>
