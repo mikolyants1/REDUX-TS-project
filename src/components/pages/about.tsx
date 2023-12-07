@@ -2,21 +2,20 @@ import {useState,useEffect,useRef,useReducer}  from 'react'
 import { SetURLSearchParams,useSearchParams,
 useOutletContext } from 'react-router-dom'
 import {useAppSelector,union2,union3,MakeArrFromRef,
-obj,getCurrent,union1, getItem} from '../types/state.js';
-import { item1,item2,item3,item4 } from './items.jsx';
+obj,getCurrent,union1, getItem} from '../../types/state.js';
+import { item1,item2,item3,item4 } from '../data/items.js';
 import { Link,Navigate } from 'react-router-dom';
 import { URLSearchParams } from 'url';
-import { mass } from './items.js';
-import { state } from '../store/slice1.js';
-import { state as st} from '../store/slice.js';
-import { useActions,bind,getById } from '../store/store.js';
-import { func } from '../App.js';
-import { ScrollBut } from './setting.js';
-import { LinkStyle, style1, style2 } from './style.js';
+import { mass } from '../data/items.js';
+import { state as st} from '../../store/slices/slice.js';
+import { useActions,bind,getById, getUserId } from '../../store/store.js';
+import { func } from '../../App.js';
+import { ScrollBut } from './helpers/setting.js';
+import { LinkStyle, style1, style2 } from '../style/style.js';
+import styles from '../../style/about.module.css';
+
 type reduce=string|boolean|number
-interface state2 {
-   phone:state
-}
+
 interface state3 {
    reduce:st
 }
@@ -49,16 +48,16 @@ export default function About():JSX.Element {
    const [state,dispatch]=useReducer(reducer,
    {style1:'rgb(240, 47, 156)',style2:'black',style3:'black'})
    const scrolls:string[]=['prev','next']
-   const setContext:func=useOutletContext()
+   const setContext=useOutletContext<func>()
    const [page,setPage]=useState<number>(0)
    const black=useRef<HTMLDivElement>(null!)
    const white=useRef<HTMLDivElement>(null!)
    const grey=useRef<HTMLDivElement>(null!)
    const refObj:obj[]=MakeArrFromRef(black,grey,white)
    const [param]:[URLSearchParams,SetURLSearchParams]=useSearchParams();
-   const id:string=useAppSelector(({phone}:state2)=>phone.id)
+   const id:string=useAppSelector(getUserId)
    const user:union1=useAppSelector((store:state3)=>getById(store,id))
-   const {add1}:bind=useActions()
+   const {addItem}:bind=useActions()
    const Name:union3=param.get("name")
    const item:union2=getItem([item1,item2,item3,item4],Name)
    if (!item) return <div>error</div>
@@ -90,7 +89,7 @@ export default function About():JSX.Element {
       }
    } 
    const setBask=():void=>{
-   id ? add1({
+   id ? addItem({
       id:user?.id,
       name:Name,
       price:price,
@@ -98,7 +97,7 @@ export default function About():JSX.Element {
       color:data.color,
       bask:user?.bask
        })
-   : move({auth:true})
+   : move({auth:true});
    }
    useEffect(():void=>{
     setContext('none')
@@ -107,8 +106,8 @@ export default function About():JSX.Element {
       one:'aboutImgMac',
       two:'imgDivMac',
       three:'aboutDivMac'
-        })
-    move({jump:450})
+        });
+    move({jump:450});
      }
    },[])
    useEffect(():void=>{
@@ -128,13 +127,13 @@ export default function About():JSX.Element {
    }
    return (
           <div style={style2}>
-            <div className='AboutBack'>
+            <div className={styles.AboutBack}>
               <Link style={LinkStyle} to='/'>
                 &#8592;вернуться на главную
               </Link>
             </div>
             <div className={className.three}>
-              <div className='scroll'>
+              <div className={styles.scroll}>
                 {scrolls.map((item:string):JSX.Element=>(
                    <ScrollBut
                     key={item}
@@ -150,25 +149,25 @@ export default function About():JSX.Element {
                   </div>
                 ))}
               </div>
-              <div className='aboutName'>
+              <div className={styles.aboutName}>
                 {Name}
               </div>  
-              <div className='aboutPrice'>
+              <div className={styles.aboutPrice}>
                 {price}p
               </div>  
-              <div className='color'>
-                <div className='color0'>
+              <div className={styles.color}>
+                <div className={styles.color0}>
                   цвет
                 </div>
-                <div className='color1'>
+                <div className={styles.color1}>
                   {refObj.map(({name,ref}:obj,i:number):JSX.Element=>(
-                  <div className={`${name}`} ref={ref} key={i}
+                  <div className={styles[name]} ref={ref} key={i}
                    onClick={()=>dispatch({type:name})} />
                   ))}
                 </div>
               </div>
-              <div className='divBut'>
-                <button className='aboutBut' onClick={setBask}>
+              <div className={styles.divBut}>
+                <button className={styles.aboutBut} onClick={setBask}>
                    добавить в корзину
                 </button>
               </div>

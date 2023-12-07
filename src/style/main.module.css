@@ -1,0 +1,33 @@
+
+   .main{
+      min-width: 450px;
+       width: 100%; 
+   }
+   .catalog{
+       width: 100%;
+       display: flex;
+   }
+       .cat1{
+          height: 25px;
+          background-color: rgb(197, 197, 197);
+           width: 100%;
+           padding: 10px 0px;
+           text-align: center;
+           border: 1px solid black;
+           font-size: 21px;
+       }
+           .Active{
+              color:rgb(224, 6, 252);
+           }
+           .Pending{
+              text-decoration: none;
+              color: black;
+           }
+   input::placeholder{
+      font-size: 17px;
+      color: white;
+      padding: 5px;
+   }
+  
+  
+   

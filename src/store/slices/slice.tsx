@@ -1,5 +1,6 @@
 import {createSlice,PayloadAction,Slice} from '@reduxjs/toolkit'
-import {union, union3 ,union4} from '../types/state'
+import {union, union3 ,union4} from '../../types/state'
+
 export type bask={
     name:union3,
     price:union,
@@ -40,36 +41,36 @@ const initialState:state={
 } 
 
 const slice:Slice<state,{
-    add:(state:state,action:PayloadAction<pay>)=>void,
-    add1:(state:state,action:PayloadAction<pay1>)=>void,
-    del:(state:state,action:PayloadAction<pay2>)=>void,
+    addUser:(state:state,action:PayloadAction<pay>)=>void,
+    addItem:(state:state,action:PayloadAction<pay1>)=>void,
+    delItem:(state:state,action:PayloadAction<pay2>)=>void,
 },"shop">=createSlice({
     name:'shop',
     initialState,
     reducers:{
-        add:(state,{payload})=>{
+        addUser:(state,{payload})=>{
         const {name,phone,obj}:pay=payload
-        state.user=[...obj,{
+        const newUser:User = {
             name:name,
             phone:phone,
             bask:[],
             id:Object.keys(obj).length
-             }]
-        
-          
+        }
+        state.user=[ ...obj, newUser ]
         },
-        add1:(state,{payload})=>{
+        addItem:(state,{payload})=>{
         const {id,name,price,src,color,bask}:pay1=payload
         if (typeof id=='number'&&bask){
-            state.user[id].bask=[...bask,{
+            const newItem:bask = {
                 name:name,
                 price:price,
                 src:src,
                 color:color
-            }]
+            }
+          state.user[id].bask=[...bask, newItem]
           }
         },
-        del:(state,{payload})=>{
+        delItem:(state,{payload})=>{
          const {id,index,bask}:pay2=payload
          const newBask:bask[]=bask.filter(
          (_:bask,i:number):boolean=>i!==index)

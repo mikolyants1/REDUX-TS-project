@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from "react-redux"
 import type { TypedUseSelectorHook } from "react-redux"
-import { mass,mass1 } from "../components/items"
+import { mass,mass1 } from "../components/data/items"
 import store from "../store/store"
 import { MutableRefObject,createContext, useReducer, Dispatch, ChangeEvent, KeyboardEvent} from "react"
 import back1 from '../img/back1.jpg'
 import back2 from '../img/back.jpg'
-import { User } from "../store/slice"
+import { User } from "../store/slices/slice"
 import { ActionCreatorWithPayload } from "@reduxjs/toolkit"
 export type func=JSX.Element|null
 export type union=string|undefined

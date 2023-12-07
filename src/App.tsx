@@ -4,30 +4,23 @@ import store,{cachedStore} from './store/store'
 import { PersistGate } from 'redux-persist/lib/integration/react'
 import { BrowserRouter as Router,Route,Routes,Outlet,Navigate} from 'react-router-dom'
 import { theme,BackContext} from './types/state'
-import Bask2 from './components/bask'
-import Regist from './components/regist'
-import Entry from './components/entry'
-import About from './components/about'
-import Main from './components/main'
-import Header from './components/header'
-import Catalog from './components/sales'
+import Bask2 from './components/pages/bask'
+import Regist from './components/pages/regist'
+import Entry from './components/pages/entry'
+import About from './components/pages/about'
+import Main from './components/pages/main'
+import Header from './components/pages/header'
+import Catalog from './components/pages/sales'
+import Loader from './components/ui/load'
+
 export type func=(back:string)=>void
+
 interface contextProp{
   set:func
 }
-interface Style{
-  width:string,
-  height:string,
-  borderRadius:string,
-  borderLeft:string,
-  borderTop:string,
-  borderBottom:string,
-  borderRight:string,
-  rotate:string
-}
 
 const Home:FC<contextProp>=({set}):JSX.Element=>{
- const context:string=useContext(BackContext)
+ const context=useContext<string>(BackContext)
  useEffect(():void=>{
   const {style}=document.querySelector('body') as HTMLElement
   style.background=`${context}`
@@ -53,36 +46,6 @@ const Shop:FC=():JSX.Element=>{
          <Outlet />
         </>
 }
-function Loader():JSX.Element{
- const [spin,setSpin]=useState<number>(0)
-  useEffect(():void=>{
-    setInterval(():void => {
-     setSpin((prev:number)=>(
-      prev==360?0:prev+10
-      ))
-    }, 50);
-  },[])
-   const style:Style={
-     width:'60px',
-     height:'60px',
-     borderRadius:'50%',
-     borderLeft:'15px solid white',
-     borderTop:'15px solid black',
-     borderBottom:'15px solid black',
-     borderRight:'15px solid black',
-     rotate:`${spin}deg`
-   }
-   enum load {
-    width='100%',
-    justifyContent='center',
-    display='flex'
-   }
-    return (
-      <div style={load}>
-        <div style={style} />
-      </div>
-    )
-  }
 
 export default function App():JSX.Element{
   const [context,setContext]=useState<string>(theme.back3)

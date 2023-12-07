@@ -1,12 +1,13 @@
 import {useEffect,useRef,useCallback} from'react'
 import { Navigate,useOutletContext } from 'react-router-dom'
 import {useAppSelector,comp, door, useReduce,
- Evt, Key} from '../types/state.js'
-import { User } from '../store/slice'
-import { bind, useActions,getUser } from '../store/store.js'
-import { func } from '../App.js'
-import { Register } from './setting.js'
-import { DivEntry } from './style.js'
+ Evt, Key} from '../../types/state.js'
+import { User } from '../../store/slices/slice.js'
+import { bind, useActions,getUser } from '../../store/store.js'
+import { func } from '../../App.js'
+import { Register } from './helpers/setting.js'
+import { DivEntry } from '../style/style.js'
+import styles from '../../style/entry.module.css'
 type block=Omit<comp,'set'>
 
 export default function Regist():JSX.Element {
@@ -16,7 +17,7 @@ const Block:Omit<comp,'set'>[]=[
 {pl:'login',data:'name'},
 {pl:'password',data:'phone'}]
 const user:User[]=useAppSelector(getUser)
-const {add}:bind=useActions()
+const {addUser}:bind=useActions()
 const regist=useRef<HTMLDivElement>(null!)
 useEffect(():void=>SetContext('regist'),[])
 useEffect(():void=>{
@@ -31,7 +32,7 @@ function press():void {
     if (count.length>0) {
      dispatch({error:'уже есть'})
       } else { 
-     add({name:n,phone:p,obj:user})
+     addUser({name:n,phone:p,obj:user})
      dispatch({auth:true})
       }
     } else {
@@ -39,7 +40,7 @@ function press():void {
     }
   }
   const access=(e:Key<HTMLDivElement>):void=>{
-    if (e.key==='Enter') press()
+    if (e.key==='Enter') press();
   }
   const set=useCallback((e:Evt):void=>{
     dispatch({[e.target.name]:e.target.value})
@@ -50,7 +51,7 @@ function press():void {
   return (
         <div ref={regist}
          onKeyUp={access}
-         className='user'>
+         className={styles.user}>
           <div style={DivEntry}>
             Regist
           </div>
@@ -63,11 +64,11 @@ function press():void {
              id={i+1}
              />
            ))}
-          <div className='error'>
+          <div className={styles.error}>
             {state.error}
           </div>
-          <div className='reg1'>
-            <button className='but1' 
+          <div className={styles.reg1}>
+            <button className={styles.but1} 
              tabIndex={3} onClick={press}>
               зарегестрироваться
             </button>

@@ -1,9 +1,12 @@
 import { ChangeEvent, Dispatch, NamedExoticComponent,
 SetStateAction, memo } from "react"
-import { Evt,func,union6 } from "../types/state"
-import img1 from '../img/arr.png'
-import { User } from "../store/slice"
-import { ScrollStyle, style } from "./style"
+import { Evt,func,union6 } from "../../../types/state"
+import img1 from '../../../img/arr.png'
+import { User } from "../../../store/slices/slice"
+import { ScrollStyle, style } from "../../style/style"
+import styles from '../../../style/entry.module.css'
+import styles1 from '../../../style/about.module.css'
+import styles2 from '../../../style/sale.module.css'
 
 interface scrollProp {
     set:Dispatch<SetStateAction<number>>,
@@ -17,7 +20,7 @@ interface scrollProp {
      : set((x:number)=>x==0?2:x-1)
       }
   return (
-    <button onClick={press} className={className}>
+    <button onClick={press} className={styles1[className]}>
       <img style={ScrollStyle} src={img1} alt="" />
     </button>
     )
@@ -31,7 +34,7 @@ interface scrollProp {
   
 export function Login({user,data,children}:LoginProp):func{
    return (
-    <div className='info'>
+    <div className={styles.info}>
        {children}
       <datalist id={data}>
         {user.map(({name,phone}:User,i:number):JSX.Element=>(
@@ -52,9 +55,11 @@ export function Login({user,data,children}:LoginProp):func{
  export const Register:NamedExoticComponent<regProp>=memo(
    ({set,place,name,id}:regProp):JSX.Element=>{
    return (
-       <div className='info'>
-         <input placeholder={place} style={style} tabIndex={id}
-          onChange={set} type="text" name={name} />
+       <div className={styles.info}>
+         <input placeholder={place}
+          style={style} tabIndex={id}
+          onChange={set} type="text"
+           name={name} />
        </div>
        )
      })
@@ -77,7 +82,7 @@ export function Select(props:selProp):JSX.Element{
         return (
           <>
             {props.children}
-            <select className='select' name='val' {...props}>
+            <select className={styles2.select} name='val' {...props}>
              {values.map(({title,val}:Option):JSX.Element=>(
               <option key={val} value={val}>
                   {title}

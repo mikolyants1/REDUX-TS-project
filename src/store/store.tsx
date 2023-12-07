@@ -2,8 +2,8 @@ import { configureStore,combineReducers, Reducer, AnyAction,
 EmptyObject,Dispatch,bindActionCreators,CaseReducerActions,PayloadAction} from '@reduxjs/toolkit'
 import storage from 'redux-persist/lib/storage'
 import { persistStore, persistReducer, Persistor, WebStorage } from 'redux-persist'
-import slice,{User, action1,pay,pay1,pay2,state as st1} from './slice'
-import slice1,{action2} from './slice1'
+import slice,{User, action1,pay,pay1,pay2,state as st1} from './slices/slice'
+import slice1,{action2,state as st2} from './slices/slice1'
 import { ToolkitStore } from '@reduxjs/toolkit/dist/configureStore'
 import { PersistPartial } from 'redux-persist/lib/persistReducer'
 import { union1, useAppDispatch} from '../types/state'
@@ -15,12 +15,15 @@ interface state{
  interface state3 {
     reduce:st1
  }
+ interface state4 {
+    phone:st2
+ }
 export type bind=CaseReducerActions<{
-    add:(state:state,action:PayloadAction<pay>)=>void,
-    add1:(state:state,action:PayloadAction<pay1>)=>void,
-    del:(state:state,action:PayloadAction<pay2>)=>void,
-    add2:(state:state,action:PayloadAction<string>)=>void,
-    add3:(state:state,action:PayloadAction<string>)=>void,
+    addUser:(state:state,action:PayloadAction<pay>)=>void,
+    addItem:(state:state,action:PayloadAction<pay1>)=>void,
+    delItem:(state:state,action:PayloadAction<pay2>)=>void,
+    setCurrent:(state:state,action:PayloadAction<string>)=>void,
+    setId:(state:state,action:PayloadAction<string>)=>void,
 },"shop">
 const actions:bind={
     ...action1,
@@ -44,7 +47,11 @@ export const useActions=():bind=>{
   const dispatch:Dispatch<AnyAction>=useAppDispatch()
   return bindActionCreators(actions,dispatch)
     }
+    
 export const getUser=(state:state3)=>state.reduce.user
+
+export const getUserId=(state:state4)=>state.phone.id
+
 export const getById=({reduce}:state3,id:string):union1=>{
   return reduce.user.find((x:User):boolean=>x.phone==id)
     }

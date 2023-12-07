@@ -1,6 +1,7 @@
-import { useAppSelector } from '../types/state.js'
+import { useAppSelector } from '../../types/state.js'
 import {Link,NavLink } from 'react-router-dom'
-import { state } from '../store/slice1.js'
+import { state } from '../../store/slices/slice1.js'
+import styles from '../../style/header.module.css'
 type state1={
   phone:state
 }
@@ -9,20 +10,20 @@ interface LinkProp{
 }
 export default function Header():JSX.Element {
   const current:string=useAppSelector(({phone}:state1)=>phone.current)
-    return <div className='header' >    
-             <div className='header1'>
-               <div className='headerDiv'>
-                 <Link className='headerLink' to='/home'>
+    return <div className={styles.header}>    
+             <div className={styles.header1}>
+               <div className={styles.headerDiv}>
+                 <Link className={styles.headerLink} to='/home'>
                    {!current?'Unknown':current}
                  </Link>
                </div>
-               <div className='headerName'>
+               <div className={styles.headerName}>
                   SmartShop
                </div>
-               <div className='headerDiv'>
+               <div className={styles.headerDiv}>
                   <NavLink to={!current?'/home':'bask'} 
                    className={({isActive}:LinkProp):string=>{
-                   return !isActive?'headerLink':'ActivLink'}}>
+                   return styles[!isActive?'headerLink':'ActivLink']}}>
                     корзина
                   </NavLink>
                </div>

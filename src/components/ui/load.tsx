@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import { load } from "../style/style";
 
 interface Style{
     width:string,
@@ -30,11 +30,6 @@ interface Style{
         borderBottom:'15px solid black',
         borderRight:'15px solid black',
         rotate:`${spin}deg`
-      }
-      enum load {
-       width='100%',
-       justifyContent='center',
-       display='flex'
       }
        return (
          <div style={load}>

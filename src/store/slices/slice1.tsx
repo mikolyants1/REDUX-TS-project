@@ -9,18 +9,18 @@ const initialState:state={
     id:''
 }
 const slice1:Slice<state,{
-    add2:(state:state,action:PayloadAction<string>)=>void,
-    add3:(state:state,action:PayloadAction<string>)=>void,
+    setCurrent:(state:state,action:PayloadAction<string>)=>void,
+    setId:(state:state,action:PayloadAction<string>)=>void,
 },"shop">=createSlice({
     name:'shop',
     initialState,
     reducers:{  
-        add2:(state,action)=>{
-            state.current=action.payload     
-                },
-        add3:(state,action)=>{
-            state.id=action.payload
-                },
+        setCurrent:(state,action)=>{
+         state.current=action.payload     
+        },
+        setId:(state,action)=>{
+         state.id=action.payload
+        },
     }
 })
 export const action2=slice1.actions

@@ -1,19 +1,20 @@
 import {useEffect,useRef} from 'react'
 import { Link,Navigate,useOutletContext } from 'react-router-dom'
 import {useAppSelector,comp,door,useReduce, 
-setAction, Evt, Key} from '../types/state.js'
-import { bind, useActions ,getUser} from '../store/store.js'
-import { User } from '../store/slice'
-import { func } from '../App.js'
-import { Login } from './setting.js'
-import { DivEntry, LinkStyle1, style } from './style.js'
+setAction, Evt, Key} from '../../types/state.js'
+import { bind, useActions ,getUser} from '../../store/store.js'
+import { User } from '../../store/slices/slice.js'
+import { func } from '../../App.js'
+import { Login } from './helpers/setting.js'
+import { DivEntry, LinkStyle1, style } from '../style/style.js'
+import styles from '../../style/entry.module.css'
 
 export default function Entry():JSX.Element {
     const [state,dispatch]=useReduce()
     const SetContext=useOutletContext<func>()
     const user:User[]=useAppSelector(getUser)
     const entry=useRef<HTMLDivElement>(null!)
-    const {add2,add3}:bind=useActions()
+    const {setCurrent,setId}:bind=useActions()
     useEffect(():void=>SetContext('home'),[])
     useEffect(():void=>{
     const height:number=state.error!==''?320:300
@@ -24,8 +25,8 @@ export default function Entry():JSX.Element {
       set(e.target.value)
     }
     const Block:comp[]=[
-     {pl:'login',data:'name',set:add2},
-     {pl:'password',data:'phone',set:add3}
+     {pl:'login',data:'name',set:setCurrent},
+     {pl:'password',data:'phone',set:setId}
     ]
     function press():void {
     const {name:n,phone:p}:door=state
@@ -46,7 +47,7 @@ export default function Entry():JSX.Element {
       return <Navigate to='/' />
     }
     return (
-            <div ref={entry} onKeyUp={access} className='login'>
+            <div ref={entry} onKeyUp={access} className={styles.login}>
               <div style={DivEntry}>
                 Login
               </div>
@@ -61,19 +62,19 @@ export default function Entry():JSX.Element {
                  }
                 </>
                ))}
-              <div className='error'>
+              <div className={styles.error}>
                  {state.error}
               </div>
-              <div className='reg1'>
-                <button className='but1'
+              <div className={styles.reg1}>
+                <button className={styles.but1}
                  tabIndex={3} onClick={press}>     
                     войти
                 </button>
               </div> 
-              <div className='if'>
+              <div className={styles.if}>
                 или
               </div>
-              <div className='if' >
+              <div className={styles.if} >
                 <Link style={LinkStyle1} to='/regist'>
                   зарегестрироваться
                 </Link>

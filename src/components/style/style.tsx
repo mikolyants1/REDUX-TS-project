@@ -62,4 +62,8 @@ export enum style1 {
     backgroundColor='rgb(240, 240, 240)',
     }
 
- 
+ export enum load {
+  width='100%',
+  justifyContent='center',
+  display='flex'
+ }

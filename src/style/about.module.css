@@ -1,0 +1,126 @@
+.AboutBack{
+    width: 95%;
+    margin: 10px auto;
+    font-size: 17px;
+}
+
+ .aboutDiv{
+    overflow: hidden;
+    position: relative;
+     width:370px;
+     margin:20px auto;
+ }
+.imgDiv{
+    transition:transform 1s;
+    width: 1110px;
+    display: flex; 
+    height: 400px;
+     }
+ .aboutImg{
+     width:360px;
+    height:400px
+    }
+     
+ .aboutDivMac{
+    overflow: hidden;
+    position: relative;
+     width:450px;
+     margin:20px auto;
+ }
+     .imgDivMac{
+        transition:transform 1s;
+        width: 1350px;
+        display:flex;
+        height: 280px;
+     }
+    .aboutImgMac{
+            width:450px;
+            height:250px
+        }
+ .scroll{
+    z-index: 100;
+    width: 100%;
+    position: absolute;
+    margin-top: 200px;
+    display: flex;
+    justify-content: space-between;
+ }
+.prev{
+    border-radius: 50%;
+     border:none;
+    height: 50px;
+    width:50px ;
+    opacity: 0.5;
+    rotate:180deg
+     }
+.next{
+    border-radius: 50%;
+    border:none;
+    height: 50px;
+    width: 50px;
+    opacity: 0.5;
+    }
+ .color{
+    margin: auto;
+    width: 70%;
+    display: flex;
+ }
+ .color0{
+    font-size: 20px;
+    margin-top: 1px;
+    width: 60px;
+ }
+ .color1{
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+ }
+ .grey{
+    border-radius: 50%;
+    border: 1px solid rgb(4, 4, 4);
+    width: 30px;
+    height: 30px;
+    background-color: grey;
+ }
+ .white{
+    border-radius: 50%;
+    border: 1px solid rgb(4, 4, 4);
+    width: 30px;
+    height: 30px;
+    background-color: rgb(254, 253, 253);
+ }
+ .black{
+    border-radius: 50%;
+    border: 1px solid rgb(4, 4, 4);
+    width: 30px;
+    height: 30px;
+    background-color: black;
+    }
+  
+ .aboutPrice{
+     margin: auto;
+     width:80%;
+     text-align:center;
+     font-size:20px;
+     color:rgb(5, 5, 5);
+     font-weight: bold;
+ }
+ .aboutName{
+     width:100%;
+     text-align:center;
+     font-size:24px;
+     color:grey
+ }
+ .divBut{
+     width:100%;
+     margin-top:10px;
+     display:flex;
+ }
+ .aboutBut{
+     margin: auto;
+     width:80%;
+     height:40px;
+     font-size: 18px;
+     border-radius: 10px;
+     border: 1px solid grey;
+  }
