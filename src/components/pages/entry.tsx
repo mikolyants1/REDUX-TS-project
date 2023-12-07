@@ -4,10 +4,10 @@ import {useAppSelector,comp,door,useReduce,
 setAction, Evt, Key} from '../../types/state.js'
 import { bind, useActions ,getUser} from '../../store/store.js'
 import { User } from '../../store/slices/slice.js'
-import { func } from '../../App.js'
-import { Login } from './helpers/setting.js'
 import { DivEntry, LinkStyle1, style } from '../style/style.js'
 import styles from '../../style/entry.module.css'
+import { Login } from '../ui/inputs/Login.js'
+import { func } from '../routes/route.js'
 
 export default function Entry():JSX.Element {
     const [state,dispatch]=useReduce()

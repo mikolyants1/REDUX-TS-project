@@ -7,9 +7,9 @@ import { bask } from '../../store/slices/slice.js'
 import { mass } from '../data/items.js'
 import { state } from '../../store/slices/slice.js';
 import {useEffect} from 'react'
-import { func } from '../../App.js'
 import { LinkStyle, style3, style4, style5 } from '../style/style.js'
 import styles from '../../style/bask.module.css';
+import { func } from '../routes/route.js'
 
 interface state3 {
    reduce:state

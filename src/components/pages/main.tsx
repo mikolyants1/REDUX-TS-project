@@ -1,8 +1,8 @@
 import {useEffect} from 'react'
 import { NavLink,useOutletContext } from 'react-router-dom'
 import {nameMass,mass1 } from '../data/items'
-import { func } from '../../App'
 import styles from '../../style/main.module.css'
+import { func } from '../routes/route'
 
 interface Link{
   isActive:boolean

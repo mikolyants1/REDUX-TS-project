@@ -9,10 +9,10 @@ import { URLSearchParams } from 'url';
 import { mass } from '../data/items.js';
 import { state as st} from '../../store/slices/slice.js';
 import { useActions,bind,getById, getUserId } from '../../store/store.js';
-import { func } from '../../App.js';
-import { ScrollBut } from './helpers/setting.js';
 import { LinkStyle, style1, style2 } from '../style/style.js';
 import styles from '../../style/about.module.css';
+import { ScrollBut } from '../ui/buttons/scroll.js';
+import { func } from '../routes/route.js';
 
 type reduce=string|boolean|number
 

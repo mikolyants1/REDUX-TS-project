@@ -4,10 +4,10 @@ import {useAppSelector,comp, door, useReduce,
  Evt, Key} from '../../types/state.js'
 import { User } from '../../store/slices/slice.js'
 import { bind, useActions,getUser } from '../../store/store.js'
-import { func } from '../../App.js'
-import { Register } from './helpers/setting.js'
 import { DivEntry } from '../style/style.js'
 import styles from '../../style/entry.module.css'
+import { Register } from '../ui/inputs/Register.js'
+import { func } from '../routes/route.js'
 type block=Omit<comp,'set'>
 
 export default function Regist():JSX.Element {

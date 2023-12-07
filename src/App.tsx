@@ -1,51 +1,16 @@
 import {Provider} from 'react-redux'
-import {FC,useEffect,useState,useContext} from 'react'
+import {useState} from 'react'
 import store,{cachedStore} from './store/store'
 import { PersistGate } from 'redux-persist/lib/integration/react'
-import { BrowserRouter as Router,Route,Routes,Outlet,Navigate} from 'react-router-dom'
+import { BrowserRouter as Router,Route,Routes,Navigate} from 'react-router-dom'
 import { theme,BackContext} from './types/state'
 import Bask2 from './components/pages/bask'
 import Regist from './components/pages/regist'
 import Entry from './components/pages/entry'
 import About from './components/pages/about'
-import Main from './components/pages/main'
-import Header from './components/pages/header'
 import Catalog from './components/pages/sales'
 import Loader from './components/ui/load'
-
-export type func=(back:string)=>void
-
-interface contextProp{
-  set:func
-}
-
-const Home:FC<contextProp>=({set}):JSX.Element=>{
- const context=useContext<string>(BackContext)
- useEffect(():void=>{
-  const {style}=document.querySelector('body') as HTMLElement
-  style.background=`${context}`
-  style.backgroundSize=context!=='none'?'100vw 100vh':'none'
-  },[context])
-  return (
-    <Outlet 
-     context={set}
-     />
-    )
-}
-const Page:FC<contextProp>=({set}):JSX.Element=>{
-  return <>
-      <Header />
-      <Outlet
-       context={set}
-       />
-    </>
-}
-const Shop:FC=():JSX.Element=>{
-  return <>
-         <Main/>
-         <Outlet />
-        </>
-}
+import { Home, Page, Shop } from './components/routes/route'
 
 export default function App():JSX.Element{
   const [context,setContext]=useState<string>(theme.back3)

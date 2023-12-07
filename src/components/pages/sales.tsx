@@ -6,9 +6,9 @@ item3,item4} from '../data/items'
 import {state1,func,union2,union5,
 union6, Key} from '../../types/state'
 import { mass,mass1 } from '../data/items'
-import { Select } from './helpers/setting'
 import { style6 } from '../style/style'
 import styles from '../../style/sale.module.css'
+import { Select } from '../ui/inputs/Select'
 interface state{
   val:string,
   ser:string
