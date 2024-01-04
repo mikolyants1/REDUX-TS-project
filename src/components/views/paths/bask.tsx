@@ -23,7 +23,7 @@ if (typeof user?.id=='number'&&user.bask){
 },[])
 
  return <>
-          {user.bask.length==0?(
+          {user.bask.length==0 ? (
             <div className={styles.baskLost}>
               корзина пока пуста
             </div>

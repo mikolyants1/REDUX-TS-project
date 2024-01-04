@@ -14,11 +14,12 @@ interface props {
 function BaskList({name,src,price,color,remove}:props):JSX.Element {
  const isMac:boolean = item1.some(({name:n}:mass):boolean=>n == name);
  const imgClass:string = `baskImg${isMac ? "Mac" : ""}`;
- const divClass:string = `item${isMac ? 2 : 1}`
+ const divClass:string = `item${isMac ? 2 : 1}`;
       
-         return(
+         return (
              <div className={styles[divClass]}>
-                  <img className={styles[imgClass]} src={`../${src}`} alt="" />
+                  <img className={styles[imgClass]}
+                   src={`../${src}`} alt="" />
                   <div className={styles.baskName}>
                     {name}
                   </div>
