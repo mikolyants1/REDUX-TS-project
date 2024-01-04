@@ -1,7 +1,7 @@
 import { Dispatch, NamedExoticComponent,
 SetStateAction, memo } from "react"
 import img1 from '../../../img/arr.png'
-import { ScrollStyle } from "../../style/style"
+import { ScrollStyle } from "../../style/style.js"
 import styles from '../../../style/about.module.css'
 
 interface scrollProp {

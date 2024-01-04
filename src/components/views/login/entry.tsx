@@ -1,53 +1,53 @@
 import {useEffect,useRef} from 'react'
 import { Link,Navigate,useOutletContext } from 'react-router-dom'
-import {useAppSelector,comp,door,useReduce, 
-setAction, Evt, Key} from '../../types/state.js'
-import { bind, useActions ,getUser} from '../../store/store.js'
-import { User } from '../../store/slices/slice.js'
-import { DivEntry, LinkStyle1, style } from '../style/style.js'
-import styles from '../../style/entry.module.css'
-import { Login } from '../ui/inputs/Login.js'
-import { func } from '../routes/route.js'
+import {useAppSelector,comp,door, 
+setAction, Evt, Key, User, funcRoute} from '../../../types/state.js'
+import { bind, useActions ,getUser} from '../../../store/store.js'
+import { DivEntry, LinkStyle1, style } from '../../style/style.js'
+import styles from '../../../style/entry.module.css'
+import { Login } from '../../ui/inputs/Login.js'
+import { useReduce } from '../../helpers/reducer.js'
 
 export default function Entry():JSX.Element {
-    const [state,dispatch]=useReduce()
-    const SetContext=useOutletContext<func>()
-    const user:User[]=useAppSelector(getUser)
-    const entry=useRef<HTMLDivElement>(null!)
-    const {setCurrent,setId}:bind=useActions()
-    useEffect(():void=>SetContext('home'),[])
+    const [state,dispatch] = useReduce();
+    const SetContext = useOutletContext<funcRoute>();
+    const user:User[] = useAppSelector(getUser);
+    const entry = useRef<HTMLDivElement>(null!);
+    const {setCurrent,setId}:bind = useActions();
+    useEffect(():void=>SetContext('home'),[]);
     useEffect(():void=>{
-    const height:number=state.error!==''?320:300
-    entry.current.style.height=`${height}px`
-    },[state.error])
+    const height:number = state.error !=='' ? 320 : 300;
+    entry.current.style.height = `${height}px`;
+    },[state.error]);
     const change=(set:setAction)=>(e:Evt):void=>{
-     dispatch({[e.target.name]:e.target.value})
-      set(e.target.value)
+     dispatch({[e.target.name]:e.target.value});
+      set(e.target.value);
     }
-    const Block:comp[]=[
+    const Block:comp[] = [
      {pl:'login',data:'name',set:setCurrent},
      {pl:'password',data:'phone',set:setId}
     ]
     function press():void {
-    const {name:n,phone:p}:door=state
-    if (p!==''&&n!==''){
-    const count:User[]=user.filter(
-    (i:User):boolean=>i.phone==p&&i.name==n)
+    const {name:n,phone:p}:door = state;
+    if (p !== '' && n!== ''){
+    const count:User[] = user.filter(
+    (i:User):boolean=>i.phone==p&&i.name==n);
     count.length==0
     ? dispatch({error:'не найден'})
-    : dispatch({auth:true})
+    : dispatch({auth:true});
     } else {
-     dispatch({auth:false})
-      }
-    }
+     dispatch({auth:false});
+      };
+    };
     const access=(e:Key<HTMLDivElement>):void=>{
-      if (e.key==='Enter') press()
+      if (e.key==='Enter') press();
     }
     if (state.auth) {
       return <Navigate to='/' />
     }
     return (
-            <div ref={entry} onKeyUp={access} className={styles.login}>
+            <div ref={entry} onKeyUp={access}
+             className={styles.login}>
               <div style={DivEntry}>
                 Login
               </div>

@@ -1,5 +1,5 @@
 .AboutBack{
-    width: 95%;
+    width: 90%;
     margin: 10px auto;
     font-size: 17px;
 }
@@ -34,8 +34,8 @@
         height: 280px;
      }
     .aboutImgMac{
-            width:450px;
-            height:250px
+       width:450px;
+       height:250px
         }
  .scroll{
     z-index: 100;

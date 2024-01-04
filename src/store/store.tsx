@@ -2,19 +2,16 @@ import { configureStore,combineReducers, Reducer, AnyAction,
 EmptyObject,Dispatch,bindActionCreators,CaseReducerActions,PayloadAction} from '@reduxjs/toolkit'
 import storage from 'redux-persist/lib/storage'
 import { persistStore, persistReducer, Persistor, WebStorage } from 'redux-persist'
-import slice,{User, action1,pay,pay1,pay2,state as st1} from './slices/slice'
+import slice,{ action1} from './slices/slice'
 import slice1,{action2,state as st2} from './slices/slice1'
 import { ToolkitStore } from '@reduxjs/toolkit/dist/configureStore'
 import { PersistPartial } from 'redux-persist/lib/persistReducer'
-import { union1, useAppDispatch} from '../types/state'
+import { User, pay, pay1, pay2, state3, union1, useAppDispatch} from '../types/state'
 
 interface state{
     key:string,
     storage:WebStorage
 }
- interface state3 {
-    reduce:st1
- }
  interface state4 {
     phone:st2
  }
@@ -48,12 +45,12 @@ export const useActions=():bind=>{
   return bindActionCreators(actions,dispatch)
     }
     
-export const getUser=(state:state3)=>state.reduce.user
+export const getUser=(state:state3)=>state.reduce.user;
 
-export const getUserId=(state:state4)=>state.phone.id
+export const getUserId=(state:state4)=>state.phone.id;
 
 export const getById=({reduce}:state3,id:string):union1=>{
   return reduce.user.find((x:User):boolean=>x.phone==id)
-    }
+ };
 export const cachedStore:Persistor=persistStore(store)
 export default store

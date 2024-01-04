@@ -67,3 +67,9 @@ export enum style1 {
   justifyContent='center',
   display='flex'
  }
+ export enum error {
+  width ='100%',
+  justifyContent='center',
+  display='flex',
+  textAlign='center'
+ }

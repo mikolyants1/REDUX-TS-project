@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { load } from "../style/style";
+import { load } from "../../../style/style";
 
-interface Style{
+interface Style {
     width:string,
     height:string,
     borderRadius:string,
@@ -12,7 +12,7 @@ interface Style{
     rotate:string
   }
 
-  function Loader():JSX.Element{
+  function Loader():JSX.Element {
     const [spin,setSpin]=useState<number>(0)
      useEffect(():void=>{
        setInterval(():void => {

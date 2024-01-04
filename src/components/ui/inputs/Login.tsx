@@ -1,5 +1,5 @@
-import { User } from "../../../store/slices/slice"
 import styles from '../../../style/entry.module.css'
+import { User } from '../../../types/state'
 
 interface LoginProp {
     user:User[],
