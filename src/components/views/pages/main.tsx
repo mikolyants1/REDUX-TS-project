@@ -18,7 +18,7 @@ interface action{
 }
 
 export default function Catalog(): JSX.Element {
-const url:string = String(useParams().id);
+const url:string = useParams().id ?? "Mac";
 const show:union5 = nameMass.find(({name}:mass1)=>name==url);
 if (!show) return <Error />;
 const [state,setState]=useState<state1>({item:show.mass});

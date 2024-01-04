@@ -1,12 +1,12 @@
 
-import { Link,useOutletContext } from 'react-router-dom'
+import { useOutletContext } from 'react-router-dom'
 import { useActions,bind,getById, getUserId } from '../../../store/store.js'
 import {useAppSelector,union, union1, bask, state3, funcRoute} from '../../../types/state.js'
 import {useCallback, useEffect} from 'react'
-import { LinkStyle } from '../../style/style.js'
 import styles from '../../../style/bask.module.css';
 import BaskList from '../../ui/blocks/cards/BaskList.js'
 import Error from '../../ui/blocks/load/error.js'
+import BuyLink from '../../ui/blocks/links/buyLink.js'
 
 export default function Bask():JSX.Element {
 const SetContext = useOutletContext<funcRoute>();
@@ -41,16 +41,7 @@ if (typeof user?.id=='number'&&user.bask){
                  remove={remove(i)}
                  />
                 )})}
-               <div className={styles.baskBack}>
-                 <button className={styles.buy}>
-                   купить
-                 </button>
-                 <button className={styles.back}>
-                   <Link style={LinkStyle} to='/'>
-                     вернуться к покупкам
-                   </Link>
-                 </button>
-               </div>
+               <BuyLink />
              </div>
             )}
         </> 

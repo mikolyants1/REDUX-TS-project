@@ -19,10 +19,12 @@ const user:User[] = useAppSelector(getUser);
 const {addUser}:bind = useActions();
 const regist = useRef<HTMLDivElement>(null!);
 useEffect(():void=>SetContext('regist'),[]);
+
 useEffect(():void=>{
 const height:number=state.error!==''? 260 : 240;
 regist.current.style.height = `${height}px`;
   },[state.error]);
+
 function press():void {
   const {name:n,phone:p}:door = state;
   if (n !== '' && p !== '') {

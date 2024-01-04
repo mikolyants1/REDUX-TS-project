@@ -1,12 +1,13 @@
-import {useEffect,useRef} from 'react'
-import { Link,Navigate,useOutletContext } from 'react-router-dom'
+import {useCallback, useEffect,useRef} from 'react'
+import {Navigate,useOutletContext } from 'react-router-dom'
 import {useAppSelector,comp,door, 
 setAction, Evt, Key, User, funcRoute} from '../../../types/state.js'
 import { bind, useActions ,getUser} from '../../../store/store.js'
-import { DivEntry, LinkStyle1, style } from '../../style/style.js'
+import { DivEntry, style } from '../../style/style.js'
 import styles from '../../../style/entry.module.css'
 import { Login } from '../../ui/inputs/Login.js'
 import { useReduce } from '../../helpers/reducer.js'
+import EntryLink from '../../ui/blocks/links/EntryLink.js'
 
 export default function Entry():JSX.Element {
     const [state,dispatch] = useReduce();
@@ -22,12 +23,12 @@ export default function Entry():JSX.Element {
     const change=(set:setAction)=>(e:Evt):void=>{
      dispatch({[e.target.name]:e.target.value});
       set(e.target.value);
-    }
+    };
     const Block:comp[] = [
      {pl:'login',data:'name',set:setCurrent},
      {pl:'password',data:'phone',set:setId}
     ]
-    function press():void {
+    const press = useCallback(():void=> {
     const {name:n,phone:p}:door = state;
     if (p !== '' && n!== ''){
     const count:User[] = user.filter(
@@ -38,13 +39,16 @@ export default function Entry():JSX.Element {
     } else {
      dispatch({auth:false});
       };
-    };
+    },[state.name,state.phone]);
+
     const access=(e:Key<HTMLDivElement>):void=>{
       if (e.key==='Enter') press();
-    }
+    };
+
     if (state.auth) {
-      return <Navigate to='/' />
-    }
+      return <Navigate to='/shop/list/Mac' />
+    };
+
     return (
             <div ref={entry} onKeyUp={access}
              className={styles.login}>
@@ -62,23 +66,10 @@ export default function Entry():JSX.Element {
                  }
                 </>
                ))}
-              <div className={styles.error}>
-                 {state.error}
-              </div>
-              <div className={styles.reg1}>
-                <button className={styles.but1}
-                 tabIndex={3} onClick={press}>     
-                    войти
-                </button>
-              </div> 
-              <div className={styles.if}>
-                или
-              </div>
-              <div className={styles.if} >
-                <Link style={LinkStyle1} to='/regist'>
-                  зарегестрироваться
-                </Link>
-              </div>
+               <EntryLink
+                error={state.error}
+                press={press}
+               />
             </div>    
           )
 }
