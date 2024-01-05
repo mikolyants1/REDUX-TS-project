@@ -18,16 +18,15 @@ function AboutCard(props:props):JSX.Element {
   const white = useRef<HTMLDivElement>(null!);
   const grey = useRef<HTMLDivElement>(null!);
   const refObj:obj[] = MakeArrFromRef(black,grey,white);
-
-  useLayoutEffect(():void=>{
-    const {style1,style2,style3}:Styles = state;
-    const [b,g,w]:HTMLDivElement[] = getCurrent(refObj);
-     b.style.border=`2px solid ${style1}`
-     g.style.border=`2px solid ${style2}`
-     w.style.border=`2px solid ${style3}`
-    },[state]);
   
-    
+  useLayoutEffect(():void=>{
+   const {style1,style2,style3}:Styles = state;
+   const [b,g,w]:HTMLDivElement[] = getCurrent(refObj);
+   b.style.border=`2px solid ${style1}`
+   g.style.border=`2px solid ${style2}`
+   w.style.border=`2px solid ${style3}`
+  },[state]);
+  
   return (
     <>
       <div className={styles[className.two]} id='img'>
@@ -55,7 +54,7 @@ function AboutCard(props:props):JSX.Element {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default memo(AboutCard)
+export default memo(AboutCard);

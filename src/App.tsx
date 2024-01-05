@@ -34,7 +34,7 @@ export default function App():JSX.Element{
                    <Route path='shop' element={<Page set={change} />}>
                      <Route index element={<Navigate to='list'/>}/>
                       <Route path='list' element={<Shop />}>
-                        <Route index element={<Navigate to=':id' />}/>
+                        <Route index element={<Navigate to='Mac' />}/>
                         <Route path=':id' element={<Catalog />}/>
                       </Route>
                       <Route path='about' element={<About />} />

@@ -13,12 +13,12 @@ interface Style {
   }
 
   function Loader():JSX.Element {
-    const [spin,setSpin]=useState<number>(0)
+    const [spin,setSpin] = useState<number>(0);
      useEffect(():void=>{
        setInterval(():void => {
         setSpin((prev:number)=>(
-         prev==360?0:prev+10
-         ))
+         prev == 360 ? 0 : prev+10
+         ));
        }, 50);
      },[])
       const style:Style={

@@ -14,10 +14,9 @@ interface regProp {
    ({set,place,name,id}:regProp):JSX.Element=>{
    return (
        <div className={styles.info}>
-         <input placeholder={place}
-          style={style} tabIndex={id}
-          onChange={set} type="text"
-           name={name} />
+         <input placeholder={place} style={style}
+          tabIndex={id} onChange={set}
+          type="text" name={name} />
        </div>
        )
      })

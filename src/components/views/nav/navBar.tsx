@@ -8,8 +8,8 @@ interface Link{
   isActive:boolean
 }
 export default function NavBar():JSX.Element{
-const SetContext=useOutletContext<funcRoute>()
-useEffect(():void=>SetContext('none'),[])
+const SetContext = useOutletContext<funcRoute>();
+useEffect(():void=> SetContext('none'),[]);
 return (
       <div className={styles.main}>
         <nav className={styles.catalog}>

@@ -11,13 +11,13 @@ import { useActions,bind,getById, getUserId } from '../../../store/store.js';
 import { LinkStyle, style2 } from '../../style/style.js';
 import styles from '../../../style/about.module.css';
 import { ScrollBut } from '../../ui/buttons/scroll.js';
-import { reducer } from '../../helpers/reducer.js';
+import { reduce, reducer } from '../../helpers/reducer.js';
 import { getItem } from '../../helpers/functions.js';
 import AboutCard from '../../ui/blocks/cards/AboutCard.js';
 import Error from '../../ui/blocks/load/error.js';
 
 export default function About():JSX.Element {
-   const [data,move] = useReducer((x:datas,y:action1)=>({...x,...y}),
+   const [data,move] = useReducer(reduce<datas,action1>,
    {color:'black',auth:false,jump:360});
    const [className,setClassName] = useState<className>(
    {one:'aboutImg',two:'imgDiv',three:'aboutDiv'});
@@ -33,7 +33,7 @@ export default function About():JSX.Element {
    const {addItem}:bind = useActions();
    const Name:string = String(param.get("name"));
    const item:union2 = getItem([item1,item2,item3,item4],Name);
-   if (!item) return <div>error</div>
+   if (!item) return <Error />
    const {src,src1,src2,price}:union2 = item;
    const memoNames:className = useMemo(()=>className,[className]);
    const memoStyles:Styles = useMemo(()=>state,[state]);
@@ -99,7 +99,7 @@ export default function About():JSX.Element {
                className={memoNames}
                price={price}
                toggle={toggle}
-              />
+               />
               <div className={styles.divBut}>
                 <button onClick={setBask}
                  className={styles.aboutBut}>

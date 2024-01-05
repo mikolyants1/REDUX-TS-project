@@ -10,8 +10,8 @@ interface props {
     price:string
 }
 
-function Sale({name,price,src,src1}:props):JSX.Element {
- const isMac:boolean=item1.some((i:mass)=>i.name==name)
+function ItemCard({name,price,src,src1}:props):JSX.Element {
+ const isMac:boolean=item1.some((i:mass)=>i.name == name);
  const str:string= isMac ? 'Mac' : '';
  const priceClass:string = `itemPrice${str}`;
  const imgClass:string = `itemImg${str}`;
@@ -41,4 +41,4 @@ function Sale({name,price,src,src1}:props):JSX.Element {
    );
 };
 
-export default memo(Sale)
+export default memo(ItemCard)

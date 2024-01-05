@@ -4,7 +4,7 @@ import { useActions,bind,getById, getUserId } from '../../../store/store.js'
 import {useAppSelector,union, union1, bask, state3, funcRoute} from '../../../types/state.js'
 import {useCallback, useEffect} from 'react'
 import styles from '../../../style/bask.module.css';
-import BaskList from '../../ui/blocks/cards/BaskList.js'
+import BaskCard from '../../ui/blocks/cards/BaskCard.js'
 import Error from '../../ui/blocks/load/error.js'
 import BuyLink from '../../ui/blocks/links/buyLink.js'
 
@@ -32,7 +32,7 @@ if (typeof user?.id=='number'&&user.bask){
               {user.bask.map((item:bask,i:number):JSX.Element=>{ 
                const {name,src,price,color}:bask = item;
                return (
-                <BaskList
+                <BaskCard
                  key={i}
                  name={name}
                  src={src}

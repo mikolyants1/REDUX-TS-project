@@ -1,5 +1,5 @@
 import { Dispatch, useReducer } from "react"
-import { Styles, action, door } from "../../types/state"
+import { Styles, action,door} from "../../types/state"
 
 const initial:door = {
     name:'',
@@ -40,3 +40,7 @@ export function useReduce():[door,Dispatch<action>]{
        return state;
        }
     } 
+
+export function reduce<S,A>(prev:S,next:A):S{
+   return {...prev,...next};
+   };

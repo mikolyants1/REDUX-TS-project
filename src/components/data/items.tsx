@@ -176,10 +176,16 @@ export const item4:Array<mass>=[
 export interface mass1{
     name:string,
     mass:mass[]
-}
-export const nameMass:mass1[]=[
+};
+export const nameMass:mass1[] = [
     {name:'Mac',mass:item1},
     {name:'Iphone',mass:item2},
     {name:'Ipad',mass:item3},
     {name:'Watch',mass:item4}
-]
+];
+export const item5:mass[] = [
+    ...item1,
+    ...item2,
+    ...item3,
+    ...item4
+];

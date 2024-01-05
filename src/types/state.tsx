@@ -86,7 +86,7 @@ export type action1 = Record<string,reduce1>;
 
 export type action = Record<string,boolean|string>
 
-export type bask={
+export type bask = {
   name:string,
   price:string,
   src:string,
@@ -123,6 +123,14 @@ export interface pay2{
 
 export interface state3 {
   reduce:initial
+}
+
+export interface state4{
+  val:string,
+  ser:string
+}
+export interface action3{
+  [i:string]:string
 }
 type RootState = ReturnType<typeof store.getState>
 type AppDispatch = typeof store.dispatch

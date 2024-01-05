@@ -13,7 +13,7 @@ interface Option{
   }
   
 export function Select(props:selProp):JSX.Element{
- const values:Option[]=[
+ const values:Option[] = [
       {val:'up',title:'по возрастанию'},
       {val:'down',title:'по убыванию'},
     ]
