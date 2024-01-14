@@ -13,14 +13,13 @@ import { BackContext, theme } from './components/helpers/context'
 import { Home } from './components/routes/HomeRout'
 import { Page } from './components/routes/PageRout'
 import { Shop } from './components/routes/ShopRout'
+import { Theme } from './types/state'
 
 export default function App():JSX.Element{
-  const [context,setContext] = useState<string>(theme.back3);
-  const change = (back:string):void=> {
-    if (back=='home') setContext(theme.back1);
-    else if (back=='regist') setContext(theme.back2);
-    else setContext(theme.back3);
-   }
+  const [context,setContext] = useState<string>(theme.none);
+  const change = (back:keyof Theme):void=> {
+     setContext(theme[back]);
+   };
   return (
        <Provider store={store}>
          <PersistGate persistor={cachedStore} loading={<Loader />}>
@@ -33,12 +32,12 @@ export default function App():JSX.Element{
                    <Route path='home' element={<Entry />} />
                    <Route path='shop' element={<Page set={change} />}>
                      <Route index element={<Navigate to='list'/>}/>
-                      <Route path='list' element={<Shop />}>
-                        <Route index element={<Navigate to='Mac' />}/>
-                        <Route path=':id' element={<Catalog />}/>
-                      </Route>
-                      <Route path='about' element={<About />} />
-                      <Route path='bask' element={<Bask2 />} />
+                     <Route path='list' element={<Shop />}>
+                       <Route index element={<Navigate to='Mac' />}/>
+                       <Route path=':id' element={<Catalog />}/>
+                     </Route>
+                     <Route path='about' element={<About />} />
+                     <Route path='bask' element={<Bask2 />} />
                    </Route>
                  </Route>
                </Routes>

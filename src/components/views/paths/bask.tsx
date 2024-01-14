@@ -1,7 +1,7 @@
 
 import { useOutletContext } from 'react-router-dom'
 import { useActions,bind,getById, getUserId } from '../../../store/store.js'
-import {useAppSelector,union, union1, bask, state3, funcRoute} from '../../../types/state.js'
+import {useAppSelector, bask, state3, funcRoute, Und, User} from '../../../types/state.js'
 import {useCallback, useEffect} from 'react'
 import styles from '../../../style/bask.module.css';
 import BaskCard from '../../ui/blocks/cards/BaskCard.js'
@@ -10,14 +10,15 @@ import BuyLink from '../../ui/blocks/links/buyLink.js'
 
 export default function Bask():JSX.Element {
 const SetContext = useOutletContext<funcRoute>();
-const id:union = useAppSelector(getUserId);
-const user:union1 = useAppSelector((x:state3)=>getById(x,id));
+const id:Und<string> = useAppSelector(getUserId);
+const user:Und<User> = useAppSelector((x:state3)=>getById(x,id));
 if (!user) return <Error />
 const {delItem}:bind = useActions();
 useEffect(():void=>SetContext('none'),[]);
 
 const remove = useCallback((i:number) => ():void=>{
 if (typeof user?.id=='number'&&user.bask){
+ console.log(i);
  delItem({id:user?.id,index:i,bask:user.bask});
   }
 },[])

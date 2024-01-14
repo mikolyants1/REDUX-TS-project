@@ -1,7 +1,7 @@
 import {ChangeEvent, Dispatch, FocusEvent, SetStateAction, memo} from 'react'
 import styles from '../../../../style/sale.module.css'
 import { style6 } from '../../../style/style';
-import { Key, state1, union2, union6 } from '../../../../types/state';
+import { Key, Und, state1, union6 } from '../../../../types/state';
 import { item5, mass } from '../../../data/items';
 
 interface props {
@@ -13,7 +13,7 @@ function Search({value,set,change}:props):JSX.Element {
   
   const filter=():void=>{
     const val:string = value.trim().toLocaleLowerCase();
-    const list:mass[] = item5.filter((i:mass):union2=>{
+    const list:mass[] = item5.filter((i:mass):Und<mass>=>{
      if (i.name.toLowerCase().indexOf(val)!==-1) return i;
      });
     set({item:list});

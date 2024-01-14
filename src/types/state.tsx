@@ -7,15 +7,9 @@ import { ActionCreatorWithPayload } from "@reduxjs/toolkit"
 
 export type func = JSX.Element|null;
 
-export type union = string|undefined;
-
-export type union1 = User|undefined;
-
-export type union2 = mass|undefined;
+export type Und<T> = T|undefined;
 
 export type union3 = string|null;
-
-export type union4 = number|undefined;
 
 export type union5 = mass1|undefined;
 
@@ -24,9 +18,9 @@ export type union6 = HTMLSelectElement|HTMLInputElement;
 export type setAction = ActionCreatorWithPayload<string>;
 
 export interface Theme{
-    back1:string,
-    back2:string,
-    back3:string,
+    home:string,
+    regist:string,
+    none:string,
 }
 
  export interface door{
@@ -56,7 +50,7 @@ export interface obj {
   name:string
 };
 
-export type funcRoute=(back:string)=>void
+export type funcRoute=(back:keyof Theme)=>void
 
 export interface contextProp {
   set:funcRoute
@@ -93,8 +87,8 @@ export type bask = {
   color:string
 }
 export interface User{
-name:union,
-phone:union,
+name:Und<string>,
+phone:Und<string>,
 bask:bask[],
 id:number
 }
@@ -102,12 +96,12 @@ export interface initial{
   user:User[],
 }
 export interface pay{
-name:union,
-phone:union,
+name:Und<string>,
+phone:Und<string>,
 obj:User[]
 }
 export interface pay1{
-  id:union4,
+  id:Und<number>,
   name:string,
   price:string,
   src:string,
@@ -128,6 +122,11 @@ export interface state3 {
 export interface state4{
   val:string,
   ser:string
+}
+export interface AboutContext {
+  toggle:(name:string)=>()=>void,
+  srcs:string[],
+  className:className
 }
 export interface action3{
   [i:string]:string

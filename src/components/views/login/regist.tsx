@@ -45,7 +45,7 @@ function press():void {
     if (e.key==='Enter') press();
   };
 
-  const set=useCallback((e:Evt):void=>{
+  const set = useCallback((e:Evt):void=>{
     dispatch({[e.target.name]:e.target.value});
    },[]);
    

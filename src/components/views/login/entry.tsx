@@ -50,27 +50,26 @@ export default function Entry():JSX.Element {
     };
 
     return (
-            <div ref={entry} onKeyUp={access}
-             className={styles.login}>
-              <div style={DivEntry}>
-                Login
-              </div>
-               {Block.map(({data,pl,set}:comp,i:number):JSX.Element=>(
-                <>
-                 {set&&
-                  <Login key={i} user={user} data={data}>
-                    <input name={data} style={style} type="text"
-                     placeholder={pl} list={data} tabIndex={i+1}
-                     onChange={change(set)} />
-                  </Login>
-                 }
-                </>
-               ))}
-               <EntryLink
-                error={state.error}
-                press={press}
-               />
-            </div>    
+        <div ref={entry} onKeyUp={access}
+         className={styles.login}>
+          <div style={DivEntry}>
+            Login
+          </div>
+           {Block.map(({data,pl,set}:comp,i:number):JSX.Element=>(
+            <>
+              {set&&
+               <Login key={i} user={user} data={data}>
+                 <input name={data} style={style} type="text"
+                  placeholder={pl} list={data} tabIndex={i+1}
+                  onChange={change(set)} />
+               </Login>}
+            </>
+            ))}
+            <EntryLink
+             error={state.error}
+             press={press}
+             />
+          </div>    
           )
 }
 

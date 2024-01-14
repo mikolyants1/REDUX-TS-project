@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState,memo } from "react";
 import { error } from "../../../style/style";
 
 function Error():JSX.Element {
@@ -18,4 +18,4 @@ function Error():JSX.Element {
        );
 }
 
-export default Error
+export default memo(Error)

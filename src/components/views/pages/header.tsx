@@ -9,7 +9,7 @@ interface LinkProp{
 export default function Header():JSX.Element {
   const current:string = useAppSelector(getCurrent);
     return (
-      <div className={styles.header}>    
+      <header className={styles.header}>    
         <div className={styles.header1}>
           <div className={styles.headerDiv}>
             <Link className={styles.headerLink} to='/home'>
@@ -27,6 +27,6 @@ export default function Header():JSX.Element {
             </NavLink>
           </div>
         </div>
-      </div>
+      </header>
     );
 };

@@ -6,7 +6,7 @@ import slice,{ action1} from './slices/slice'
 import slice1,{action2,state as st2} from './slices/slice1'
 import { ToolkitStore } from '@reduxjs/toolkit/dist/configureStore'
 import { PersistPartial } from 'redux-persist/lib/persistReducer'
-import { User, pay, pay1, pay2, state1, state3, union1, useAppDispatch} from '../types/state'
+import { Und, User, pay, pay1, pay2, state3, useAppDispatch} from '../types/state'
 
 interface state{
     key:string,
@@ -51,7 +51,7 @@ export const getUserId=(state:state4)=>state.phone.id;
 
 export const getCurrent = (state:state4)=> state.phone.current;
 
-export const getById=({reduce}:state3,id:string):union1=>{
+export const getById=({reduce}:state3,id:string):Und<User>=>{
   return reduce.user.find((x:User):boolean=>x.phone==id)
  };
 export const cachedStore:Persistor=persistStore(store)

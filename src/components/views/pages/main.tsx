@@ -30,7 +30,7 @@ item.forEach(({price,name}:mass):void=>{
  const key:string = price.split(' ').join('');
  obj[key] = name;
   })
-const mass:string[] = Array.from(Object.values(obj))
+const mass:string[] = Array.from(Object.values(obj));
 if (param.val == 'down') mass.reverse();
  for (const elem of mass) {
   item.forEach((x:mass):void=>{
@@ -38,10 +38,10 @@ if (param.val == 'down') mass.reverse();
     });
   };
  setState({item:mass1});
-  };
+};
 
 return (
-      <>
+      <main>
        <Search
         value={param.ser}
         set={setState}
@@ -66,6 +66,6 @@ return (
             />
            )})}
         </div>
-      </>
+      </main>
     )
 }

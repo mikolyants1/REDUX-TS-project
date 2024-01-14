@@ -11,13 +11,13 @@ interface props {
 }
 
 function ItemCard({name,price,src,src1}:props):JSX.Element {
- const isMac:boolean=item1.some((i:mass)=>i.name == name);
- const str:string= isMac ? 'Mac' : '';
+ const isMac:boolean = item1.some((i:mass)=>i.name == name);
+ const str:string = isMac ? 'Mac' : '';
  const priceClass:string = `itemPrice${str}`;
  const imgClass:string = `itemImg${str}`;
  const nameClass:string = `itemName${str}`;
   
- const imgChan=(item:string)=>
+ const imgChan =(item:string) =>
  (e:MouseEvent<HTMLImageElement>):void=>{
     e.currentTarget.src = item;
   };
