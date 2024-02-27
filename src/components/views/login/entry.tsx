@@ -1,40 +1,38 @@
 import {useCallback, useEffect,useRef} from 'react'
 import {Navigate,useOutletContext } from 'react-router-dom'
-import {useAppSelector,comp,door,setAction,
- Evt, Key, User, funcRoute} from '../../../types/state.js'
+import {useAppSelector,IDoor,SetAction,
+ Evt, Key, IUser, FuncRoute, IComp} from '../../../types/state.js'
 import { bind, useActions ,getUser} from '../../../store/store.js'
 import { DivEntry, style } from '../../style/style.js'
 import styles from '../../../style/entry.module.css'
 import { Login } from '../../ui/inputs/Login.js'
 import { useReduce } from '../../helpers/reducer.js'
 import EntryLink from '../../ui/blocks/links/EntryLink.js'
+import EntryFields from '../../helpers/functions/fields/EntryFields.js'
 
-export default function Entry():JSX.Element {
-    const [state,dispatch] = useReduce();
-    const SetContext = useOutletContext<funcRoute>();
-    const user:User[] = useAppSelector(getUser);
-    const entry = useRef<HTMLDivElement>(null!);
-    const {setCurrent,setId}:bind = useActions();
-    useEffect(():void=>SetContext('home'),[]);
+function Entry():JSX.Element {
+  const [state,dispatch] = useReduce();
+  const SetContext = useOutletContext<FuncRoute>();
+  const user:IUser[] = useAppSelector(getUser);
+  const entry = useRef<HTMLDivElement>(null!);
+  const {setCurrent,setId}:bind = useActions();
+  const Block:IComp[] = EntryFields({setCurrent,setId});
+  useEffect(():void=>SetContext('home'),[]);
 
-    useEffect(():void=>{
+  useEffect(():void=>{
     const height:number = state.error ? 320 : 300;
     entry.current.style.height = `${height}px`;
-    },[state.error]);
+  },[state.error]);
 
-    const change=(set:setAction)=>(e:Evt):void=>{
-     dispatch({[e.target.name]:e.target.value});
-      set(e.target.value);
-    };
-    const Block:comp[] = [
-     {pl:'login',data:'name',set:setCurrent},
-     {pl:'password',data:'phone',set:setId}
-    ]
+  const change = (set:SetAction) => (e:Evt):void =>{
+    dispatch({[e.target.name]:e.target.value});
+    set(e.target.value);
+  };
     const press = useCallback(():void=> {
-    const {name:n,phone:p}:door = state;
-    if (p !== '' && n!== ''){
-    const count:User[] = user.filter(
-    (i:User):boolean=>i.phone==p&&i.name==n);
+    const {name:n,phone:p}:IDoor = state;
+    if (p && n){
+    const count:IUser[] = user.filter(
+    (i:IUser):boolean=>i.phone==p&&i.name==n);
     count.length==0
     ? dispatch({error:'не найден'})
     : dispatch({auth:true});
@@ -57,7 +55,7 @@ export default function Entry():JSX.Element {
           <div style={DivEntry}>
             Login
           </div>
-           {Block.map(({data,pl,set}:comp,i:number):JSX.Element=>(
+           {Block.map(({data,pl,set}:IComp,i:number):JSX.Element=>(
             <>
               {set&&
                <Login key={i} user={user} data={data}>
@@ -75,4 +73,4 @@ export default function Entry():JSX.Element {
           )
 }
 
-
+export default Entry

@@ -1,13 +1,13 @@
 import { createContext } from "react"
-import { AboutContext, Theme } from "../../types/state";
+import { IAboutContext, ITheme } from "../../types/state";
 import back1 from '../../img/back1.jpg'
 import back2 from '../../img/back2.jpg'
 
-export const theme:Theme = {
+export const theme:ITheme = {
     home:`url(${back1}) no-repeat`,
     regist:`url(${back2}) no-repeat`,
     none:'none'
 };
-export const AboutTheme = createContext<AboutContext>({} as AboutContext);
+export const AboutTheme = createContext<IAboutContext>({} as IAboutContext);
 
 export const BackContext = createContext<string>(theme.none);

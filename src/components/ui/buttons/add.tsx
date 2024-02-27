@@ -1,25 +1,24 @@
 import {Dispatch, memo} from 'react'
 import styles from '../../../style/about.module.css'
-import { Und, User, action1, datas, state3, useAppSelector } from '../../../types/state'
+import { Und, IUser, Action1, IDatas, IState3, useAppSelector, IMass } from '../../../types/state'
 import { getById, getUserId, useActions } from '../../../store/store'
 import Error from '../blocks/load/error'
 import { SetURLSearchParams, useSearchParams } from 'react-router-dom'
-import { mass } from '../../data/items'
 import { getItem } from '../../helpers/functions/items/getItem'
 
 interface props {
-    move:Dispatch<action1>,
-    data:datas
+    move:Dispatch<Action1>,
+    data:IDatas
 }
 
 function AddToBask({move,data}:props):JSX.Element {
   const id:string = useAppSelector(getUserId);
   const [param]:[URLSearchParams,SetURLSearchParams] = useSearchParams();
-  const user:Und<User> = useAppSelector((store:state3)=>getById(store,id));
+  const user:Und<IUser> = useAppSelector((store:IState3)=>getById(store,id));
   const Name:string = `${param.get("name")}`;
-  const item:mass = getItem(Name) as mass;
+  const item:IMass = getItem(Name) as IMass;
   if (!item) return <Error />;
-  const {src,price}:mass = item;
+  const {src,price}:IMass = item;
   const {addItem} = useActions();
 
   const setBask = ():void=>{

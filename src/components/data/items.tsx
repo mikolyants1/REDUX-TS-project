@@ -1,10 +1,3 @@
-export type mass={
-    src:string,
-    name:string,
-    price:string,
-    src1:string,
-    src2:string,
-}
 
 import mac1  from '../../img/mac1.png'
 import mac2  from '../../img/mac2.png'
@@ -34,7 +27,7 @@ import mac092 from '../../img/mac092.jpg'
 import mac091 from '../../img/mac091.jpg'
 import mac101 from '../../img/mac101.jpg'
 
-export const item1:Array<mass>=[
+export const item1:Array<IMass>=[
     {src:mac1,name:'MacBook pro 16',price:'149 000',src1:mac011 ,src2:mac012},
     {src:mac2,name:'MacBook Air 14',price:'130 000',src1:mac021,src2:mac022},
     {src:mac3,name:'MacBook pro 13',price:'125 000',src1:mac031,src2:mac032},
@@ -77,7 +70,7 @@ import ip091 from '../../img/iphone111.jpeg'
 import ip092 from '../../img/iphone112.jpeg'
 import ip101  from '../../img/iphone101.jpeg'
 import ip102  from '../../img/iphone102.jpeg'
-export const item2:Array<mass>=[
+export const item2:Array<IMass>=[
     {src:iphone1,name:'Iphone 14 pro max',price:'125 000',src1:ip011,src2:ip012},
     {src:iphone2,name:'Iphone 13 pro',price:'104 000',src1:ip021,src2:ip022},
     {src:iphone3,name:'Iphone 13',price:'93 000',src1:ip031,src2:ip032},
@@ -118,7 +111,7 @@ import ipad091  from '../../img/ipad091.jpg'
 import ipad092  from '../../img/ipad092.jpg'
 import ipad101  from '../../img/ipad101.jpg'
 import ipad102  from '../../img/ipad012.jpg' 
-export const item3:Array<mass>=[
+export const item3:Array<IMass>=[
     {src:ipad1,name:'Ipad  pro 11',price:'149 000',src1:ipad011,src2:ipad012},
     {src:ipad2,name:'Ipad  pro 13',price:'160 000',src1:ipad021,src2:ipad022},
     {src:ipad3,name:'Ipad Air 10,9',price:'115 000',src1:ipad031,src2:ipad032},
@@ -161,7 +154,8 @@ import watch091  from '../../img/watch091.jpeg'
 import watch092  from '../../img/watch092.jpeg'
 import watch101  from '../../img/watch101.jpg'
 import watch102  from '../../img/watch012.jpeg'
-export const item4:Array<mass>=[
+import { IMass, IMass1 } from '../../types/state'
+export const item4:Array<IMass>=[
     {src:watch1,name:'Apple watch series 8',price:'149 000',src1:watch011,src2:watch012},
     {src:watch2,name:'Apple watch SE GPS',price:'160 000',src1:watch021,src2:watch022},
     {src:watch3,name:'Apple watch Cellular',price:'165 000',src1:watch031,src2:watch032},
@@ -173,17 +167,27 @@ export const item4:Array<mass>=[
     {src:watch9,name:'Apple watch  40mm',price:'129 000',src1:watch091,src2:watch092},
     {src:watch10,name:'Apple watch  GPS',price:'125 000',src1:watch101,src2:watch102}
     ]
-export interface mass1{
-    name:string,
-    mass:mass[]
-};
-export const nameMass:mass1[] = [
-    {name:'Mac',mass:item1},
-    {name:'Iphone',mass:item2},
-    {name:'Ipad',mass:item3},
-    {name:'Watch',mass:item4}
+
+export const nameMass:IMass1[] = [
+    {
+        name:'Mac',
+        mass:item1
+    },
+    {
+        name:'Iphone',
+        mass:item2
+    },
+    {
+        name:'Ipad',
+        mass:item3
+    },
+    {
+        name:'Watch',
+        mass:item4
+    }
 ];
-export const item5:mass[] = [
+
+export const item5:IMass[] = [
     ...item1,
     ...item2,
     ...item3,

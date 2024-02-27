@@ -1,11 +1,11 @@
 import {memo, useContext} from 'react'
 import styles from '../../../../style/about.module.css'
 import { style1 } from '../../../style/style'
-import { AboutContext } from '../../../../types/state'
+import { IAboutContext } from '../../../../types/state'
 import { AboutTheme } from '../../../helpers/context'
 
 function ImgContainer():JSX.Element {
-  const {srcs,className,page,jump} = useContext<AboutContext>(AboutTheme);
+  const {srcs,className,page,jump} = useContext<IAboutContext>(AboutTheme);
   
   return (
     <div id='img'

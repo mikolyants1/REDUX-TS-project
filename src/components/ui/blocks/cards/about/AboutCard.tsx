@@ -1,6 +1,6 @@
 import { memo,useLayoutEffect, useMemo, useReducer, useRef} from 'react'
 import styles from '../../../../../style/about.module.css';
-import { Styles, obj } from '../../../../../types/state';
+import { IStyles, IObj } from '../../../../../types/state';
 import { getCurrent } from '../../../../helpers/functions/ref/getCurrent';
 import { MakeArrFromRef } from '../../../../helpers/functions/ref/makeArrFromRef';
 import ImgContainer from '../../about/ImgContainer';
@@ -16,11 +16,11 @@ function AboutCard({name,price}:props):JSX.Element {
   const black = useRef<HTMLDivElement>(null!);
   const white = useRef<HTMLDivElement>(null!);
   const grey = useRef<HTMLDivElement>(null!);
-  const refObj:obj[] = MakeArrFromRef(black,grey,white);
-  const memoRefs:obj[] = useMemo(()=>refObj,[refObj]);
+  const refObj:IObj[] = MakeArrFromRef(black,grey,white);
+  const memoRefs:IObj[] = useMemo(()=>refObj,[refObj]);
 
   useLayoutEffect(():void=>{
-   const {style1,style2,style3}:Styles = state;
+   const {style1,style2,style3}:IStyles = state;
    const [b,g,w]:HTMLDivElement[] = getCurrent(refObj);
    b.style.border = `2px solid ${style1}`;
    g.style.border = `2px solid ${style2}`;

@@ -1,19 +1,18 @@
 import {ChangeEvent, Dispatch, FocusEvent, SetStateAction, memo} from 'react'
 import styles from '../../../../style/sale.module.css'
 import { style6 } from '../../../style/style';
-import { Key, state1, union6 } from '../../../../types/state';
-import {mass } from '../../../data/items';
+import { Key, IState1, Union6, IMass } from '../../../../types/state';
 import sortItems from '../../../helpers/functions/items/sortItems';
 
 interface props {
     value:string,
-    set:Dispatch<SetStateAction<state1>>,
-    change:(e:ChangeEvent<union6>)=>void
+    set:Dispatch<SetStateAction<IState1>>,
+    change:(e:ChangeEvent<Union6>)=>void
 };
 
 function Search({value,set,change}:props):JSX.Element {
   const filter = ():void => {
-    const list:mass[] = sortItems(value);
+    const list:IMass[] = sortItems(value);
     set({item:list});
    };
    

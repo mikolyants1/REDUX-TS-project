@@ -1,9 +1,9 @@
 import { FC, useContext, useLayoutEffect } from "react"
 import { Outlet } from "react-router-dom"
 import { BackContext } from "../helpers/context"
-import { contextProp } from "../../types/state";
+import { IContextProp } from "../../types/state";
 
-export const Home:FC<contextProp>=({set}):JSX.Element=>{
+export const Home:FC<IContextProp> = ({set}):JSX.Element =>{
     const context = useContext<string>(BackContext);
 
     useLayoutEffect(():void=>{

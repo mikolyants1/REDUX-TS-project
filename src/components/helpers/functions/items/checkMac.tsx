@@ -1,5 +1,6 @@
-import { item1, mass } from "../../../data/items"
+import { IMass } from "../../../../types/state";
+import { item1 } from "../../../data/items"
 
 export default (name:string):boolean => {
-  return item1.some((i:mass)=>i.name == name);
+  return item1.some((i:IMass)=>i.name == name);
 };

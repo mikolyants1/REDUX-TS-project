@@ -1,10 +1,10 @@
 import {ChangeEvent} from 'react'
-import { union6 } from '../../../types/state'
+import { Union6 } from '../../../types/state'
 import styles from '../../../style/sale.module.css'
 
 interface selProp{
     value:string,
-    onChange:(e:ChangeEvent<union6>)=>void,
+    onChange:(e:ChangeEvent<Union6>)=>void,
     children:JSX.Element
   }
 interface Option{

@@ -1,8 +1,9 @@
-import { item5, mass } from "../../../data/items";
+import { IMass } from "../../../../types/state";
+import { item5} from "../../../data/items";
 
-function sortItems(value:string):mass[] {
+function sortItems(value:string):IMass[] {
   const val:string = value.trim().toLowerCase();
-  return item5.filter((i:mass)=>(
+  return item5.filter((i:IMass)=>(
     i.name.toLowerCase().indexOf(val) !== -1
   ));
 }
