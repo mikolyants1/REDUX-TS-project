@@ -1,140 +1,153 @@
 import { useDispatch, useSelector } from "react-redux"
 import type { TypedUseSelectorHook } from "react-redux"
-import { mass,mass1 } from "../components/data/items"
 import store from "../store/store"
 import { MutableRefObject,ChangeEvent, KeyboardEvent, Dispatch, SetStateAction} from "react"
 import { ActionCreatorWithPayload } from "@reduxjs/toolkit"
 
-export type func = JSX.Element|null;
+export interface IMass {
+  src:string,
+  name:string,
+  price:string,
+  src1:string,
+  src2:string,
+}
+
+export interface IMass1{
+  name:string,
+  mass:IMass[]
+};
+
+export type Func = JSX.Element|null;
 
 export type Und<T> = T|undefined;
 
-export type union3 = string|null;
+export type Union3 = string|null;
 
-export type union5 = mass1|undefined;
+export type Union5 = IMass1|undefined;
 
-export type union6 = HTMLSelectElement|HTMLInputElement;
+export type Union6 = HTMLSelectElement|HTMLInputElement;
 
-export type setAction = ActionCreatorWithPayload<string>;
+export type SetAction = ActionCreatorWithPayload<string>;
 
 export interface IContext {
   val:string,
-  setState:Dispatch<SetStateAction<state1>>
+  setState:Dispatch<SetStateAction<IState1>>
 }
-export interface Theme{
+export interface ITheme{
     home:string,
     regist:string,
     none:string,
 }
 
- export interface door{
+ export interface IDoor{
     name:string,
     phone:string,
     auth:boolean,
     error:string
     }
-export type reduce = null|mass[]
+export type Reduce = null|IMass[]
 
-export interface comp {
+export interface IComp {
     pl:string,
     data:string,
-    set:setAction
+    set:SetAction
    }
-export interface state1{
-    item:mass[],
+export interface IState1{
+    item:IMass[]
 }
+
 export type Evt = ChangeEvent<HTMLInputElement>;
 
 export type Key<T> = KeyboardEvent<T>;
 
-export type refType = MutableRefObject<HTMLDivElement>;
+export type RefType = MutableRefObject<HTMLDivElement>;
 
-export interface obj {
-  ref:refType,
+export interface IObj {
+  ref:RefType,
   name:string
 };
 
-export type funcRoute=(back:keyof Theme)=>void
+export type FuncRoute=(back:keyof ITheme)=>void
 
-export interface contextProp {
-  set:funcRoute
+export interface IContextProp {
+  set:FuncRoute
 }
 
-export type reduce1 = string|boolean|number
+export type Reduce1 = string|boolean|number
 
-export interface Styles {
+export interface IStyles {
    style1:string,
    style2:string,
    style3:string
 }
-export interface action2 {
+export interface IAction2 {
    type:string
 }
-export interface className {
+export interface IClassName {
   one:string,
   two:string,
   three:string
 }
-export interface datas{
+export interface IDatas{
   color:string,
   auth:boolean,
   jump:number
 }
-export type action1 = Record<string,reduce1>;
+export type Action1 = Record<string,Reduce1>;
 
-export type action = Record<string,boolean|string>
+export type Action = Record<string,boolean|string>
 
-export type bask = {
+export type IBask = {
   name:string,
   price:string,
   src:string,
   color:string
 }
-export interface User{
+export interface IUser{
 name:Und<string>,
 phone:Und<string>,
-bask:bask[],
+bask:IBask[],
 id:number
 }
-export interface initial {
-  user:User[],
+export interface Initial {
+  user:IUser[],
 }
-export interface pay{
+export interface IPay{
 name:Und<string>,
 phone:Und<string>,
-obj:User[]
+obj:IUser[]
 }
-export interface pay1{
+export interface IPay1{
   id:Und<number>,
   name:string,
   price:string,
   src:string,
   color:string,
-  bask:bask[]|undefined
+  bask:Und<IBask[]>
 }
 
-export interface pay2{
+export interface IPay2{
   id:number,
   index:number,
-  bask:bask[]
+  bask:IBask[]
 }
 
-export interface state3 {
-  reduce:initial
+export interface IState3 {
+  reduce:Initial
 }
 
-export interface state4{
+export interface IState4{
   val:string,
   ser:string
 }
-export interface AboutContext {
-  move:Dispatch<action>,
+export interface IAboutContext {
+  move:Dispatch<Action>,
   srcs:string[],
-  className:className,
+  className:IClassName,
   page:number,
   jump:number
 }
-export interface action3{
+export interface IAction3{
   [i:string]:string
 }
 type RootState = ReturnType<typeof store.getState>
