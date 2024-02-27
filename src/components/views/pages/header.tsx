@@ -8,6 +8,11 @@ interface LinkProp{
 }
 export default function Header():JSX.Element {
   const current:string = useAppSelector(getCurrent);
+
+  const setClass = ({isActive}:LinkProp):string => {
+    return styles[isActive ? 'ActiveLink' : 'headerLink'];
+  };
+
     return (
       <header className={styles.header}>    
         <div className={styles.header1}>
@@ -20,9 +25,8 @@ export default function Header():JSX.Element {
              SmartShop
           </div>
           <div className={styles.headerDiv}>
-            <NavLink to={!current?'/home':'bask'} 
-             className={({isActive}:LinkProp):string=>{
-             return styles[isActive?'ActivLink':'headerLink']}}>
+            <NavLink className={setClass}
+             to={!current ? '/home' : 'bask'}>
                корзина
             </NavLink>
           </div>

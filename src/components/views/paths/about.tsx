@@ -1,21 +1,16 @@
-import {useState,useEffect,useReducer,useMemo,
-useLayoutEffect, useCallback}  from 'react'
-import { SetURLSearchParams,useSearchParams,
-useOutletContext } from 'react-router-dom'
-import {useAppSelector, datas,action1, className,state3,
- Styles, funcRoute,Und, User} from '../../../types/state.js';
-import { item1,item2,item3,item4 } from '../../data/items.js';
+import {useState,useReducer,useMemo,useLayoutEffect }  from 'react'
+import { SetURLSearchParams,useSearchParams,useOutletContext } from 'react-router-dom'
+import {datas,action1, className,funcRoute,Und, AboutContext} from '../../../types/state.js';
+import { item1 } from '../../data/items.js';
 import { Link,Navigate } from 'react-router-dom';
 import { URLSearchParams } from 'url';
 import { mass } from '../../data/items.js';
-import { useActions,bind,getById, getUserId } from '../../../store/store.js';
 import { LinkStyle, style2 } from '../../style/style.js';
 import styles from '../../../style/about.module.css';
-import { ScrollBut } from '../../ui/buttons/scroll.js';
-import { reduce, reducer } from '../../helpers/reducer.js';
-import { getItem } from '../../helpers/functions/getItem.js';
-import AboutCard from '../../ui/blocks/cards/AboutCard.js';
-import Error from '../../ui/blocks/load/error.js';
+import ScrollBut from '../../ui/buttons/scroll.js';
+import { reduce} from '../../helpers/reducer.js';
+import { getItem } from '../../helpers/functions/items/getItem.js';
+import AboutCard from '../../ui/blocks/cards/about/AboutCard.js';
 import AddToBask from '../../ui/buttons/add.js';
 import { AboutTheme } from '../../helpers/context.js';
 
@@ -24,43 +19,19 @@ export default function About():JSX.Element {
    {color:'black',auth:false,jump:360});
    const [className,setClassName] = useState<className>(
    {one:'aboutImg',two:'imgDiv',three:'aboutDiv'});
-   const [state,dispatch] = useReducer(reducer,
-   {style1:'rgb(240, 47, 156)',style2:'black',style3:'black'});
    const scrolls:string[] = ['prev','next'];
    const setContext = useOutletContext<funcRoute>();
    const [page,setPage] = useState<number>(0);
    const [param]:[URLSearchParams,SetURLSearchParams] = useSearchParams();
-   const id:string = useAppSelector(getUserId);
-   const user:Und<User> = useAppSelector((store:state3)=>getById(store,id));
-   if (!user) return <Error />;
-   const {addItem}:bind = useActions();
-   const Name:string = String(param.get("name"));
-   const item:Und<mass> = getItem([item1,item2,item3,item4],Name);
-   if (!item) return <Error />
+   const Name:string = `${param.get("name")}`;
+   const item:mass = getItem(Name) as mass;
    const {src,src1,src2,price}:Und<mass> = item;
-   const memoStyles:Styles = useMemo(()=>state,[state]);
+   const memoData:datas = useMemo(()=>data,[data]);
    const srcs:string[] = [src,src1,src2];
 
-   const toggle = (name:string) => ():void => {
-    dispatch({type:name});
-    move({color:name})
-   };
-  
-   const setBask = useCallback(():void=>{
-    id ? addItem({
-      id:user.id,
-      name:Name,
-      price:price,
-      src:src,
-      color:data.color,
-      bask:user?.bask
-       })
-    : move({auth:true});
-   },[data])
-
-   useEffect(():void=>{
+   useLayoutEffect(():void=>{
     setContext('none');
-    if (item1.some(({name}:mass):boolean=>name==Name)){
+    if (item1.some(({name}:mass):boolean=>name == Name)){
     setClassName({
       one:'aboutImgMac',
       two:'imgDivMac',
@@ -70,17 +41,16 @@ export default function About():JSX.Element {
      };
    },[]);
 
-   useLayoutEffect(():void=>{
-   const {style} = document.getElementById("img") as HTMLElement;
-   style.transform = `translateX(${page*-data.jump}px)`;
-   },[page]);
- 
+   const context:AboutContext = {
+     move,srcs,className,page,
+     jump:data.jump
+   };
+
    if (data.auth){
      return <Navigate to='/home' />
    }
    return (
-        <AboutTheme.Provider
-         value={{toggle,srcs,className}}>
+        <AboutTheme.Provider value={context}>
           <div style={style2}>
             <div className={styles.AboutBack}>
               <Link style={LinkStyle} to='/'>
@@ -91,19 +61,19 @@ export default function About():JSX.Element {
               <div className={styles.scroll}>
                 {scrolls.map((item:string):JSX.Element=>(
                  <ScrollBut
-                  key={item}
-                  set={setPage}
-                  className={item}
+                   key={item}
+                   set={setPage}
+                   className={item}
                   />
                 ))}
               </div>
               <AboutCard
                 name={Name}
-                state={memoStyles}
                 price={price}
                 />
               <AddToBask
-                add={setBask}
+               data={memoData}
+               move={move}
                />
             </div> 
           </div>

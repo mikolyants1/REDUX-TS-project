@@ -16,10 +16,10 @@ const slice1:Slice<state,{
     initialState,
     reducers:{  
         setCurrent:(state,action)=>{
-         state.current=action.payload     
+         state.current = action.payload     
         },
         setId:(state,action)=>{
-         state.id=action.payload
+         state.id = action.payload
         },
     }
 })

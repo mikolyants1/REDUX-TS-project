@@ -11,17 +11,18 @@ export default function NavBar():JSX.Element{
 const SetContext = useOutletContext<funcRoute>();
 useEffect(():void=>SetContext('none'),[]);
 
-const styleClass = (active:boolean):string => {
-  const Class:string = active ? 'Active' : 'Pending';
+const setClass = ({isActive}:Link):string => {
+  const Class:string = isActive ? 'Active' : 'Pending';
   return styles[Class];
-}
+};
+
 return (
       <div className={styles.main}>
         <nav className={styles.catalog}>
           {nameMass.map(({name}:mass1,i:number):JSX.Element=>(
             <div className={styles.cat1} key={i}>
-              <NavLink to={`${name}`} className={
-               ({isActive}:Link)=>styleClass(isActive)}>
+              <NavLink to={`${name}`}
+               className={setClass}>
                 {name}
               </NavLink>
            </div>

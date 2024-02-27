@@ -1,13 +1,20 @@
-import { memo, useContext } from "react"
+import { Dispatch, memo, useContext } from "react"
 import styles from '../../../../style/about.module.css'
-import { AboutContext, obj } from "../../../../types/state"
+import { AboutContext, action, obj } from "../../../../types/state"
 import { AboutTheme } from "../../../helpers/context"
 
 interface props {
-   refs:obj[]
+   refs:obj[],
+   dispatch:Dispatch<action>
 }
-function ColorContainer({refs}:props):JSX.Element {
- const {toggle} = useContext<AboutContext>(AboutTheme);
+function ColorContainer({refs,dispatch}:props):JSX.Element {
+ const {move} = useContext<AboutContext>(AboutTheme);
+ 
+ const toggle = (name:string) => ():void => {
+  dispatch({type:name});
+  move({color:name})
+ };
+
   return (
     <div className={styles.color}>
       <div className={styles.color0}>

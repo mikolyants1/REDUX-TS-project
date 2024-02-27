@@ -5,12 +5,21 @@ import { AboutContext } from '../../../../types/state'
 import { AboutTheme } from '../../../helpers/context'
 
 function ImgContainer():JSX.Element {
-  const {srcs,className} = useContext<AboutContext>(AboutTheme);
+  const {srcs,className,page,jump} = useContext<AboutContext>(AboutTheme);
+  
   return (
-    <div className={styles[className.two]} id='img'>
+    <div id='img'
+     className={styles[className.two]} 
+     style={{
+      transform:`translate(${page*-jump}px)`
+      }}>
       {srcs.map((item:string,i:number):JSX.Element=>(
        <div className={styles[className.one]} key={i}>
-         <img style={style1} src={`${item}`} alt="" />
+          <img
+           style={style1}
+           src={`${item}`}
+           alt=""
+          />
        </div>
        ))}
     </div>

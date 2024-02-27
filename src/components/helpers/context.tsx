@@ -8,9 +8,6 @@ export const theme:Theme = {
     regist:`url(${back2}) no-repeat`,
     none:'none'
 };
-export const AboutTheme = createContext<AboutContext>({
-    toggle:(_)=>()=>{},
-    srcs:[],
-    className:{one:"",two:"",three:""}
-})
+export const AboutTheme = createContext<AboutContext>({} as AboutContext);
+
 export const BackContext = createContext<string>(theme.none);

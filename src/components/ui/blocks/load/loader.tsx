@@ -21,7 +21,7 @@ interface Style {
          ));
        }, 50);
      },[])
-      const style:Style={
+      const style:Style = {
         width:'60px',
         height:'60px',
         borderRadius:'50%',

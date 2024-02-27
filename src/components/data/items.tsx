@@ -172,7 +172,7 @@ export const item4:Array<mass>=[
     {src:watch8,name:'Apple watch SE 8',price:'135 000',src1:watch081,src2:watch082},
     {src:watch9,name:'Apple watch  40mm',price:'129 000',src1:watch091,src2:watch092},
     {src:watch10,name:'Apple watch  GPS',price:'125 000',src1:watch101,src2:watch102}
-                    ]
+    ]
 export interface mass1{
     name:string,
     mass:mass[]

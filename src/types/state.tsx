@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux"
 import type { TypedUseSelectorHook } from "react-redux"
 import { mass,mass1 } from "../components/data/items"
 import store from "../store/store"
-import { MutableRefObject,ChangeEvent, KeyboardEvent} from "react"
+import { MutableRefObject,ChangeEvent, KeyboardEvent, Dispatch, SetStateAction} from "react"
 import { ActionCreatorWithPayload } from "@reduxjs/toolkit"
 
 export type func = JSX.Element|null;
@@ -17,6 +17,10 @@ export type union6 = HTMLSelectElement|HTMLInputElement;
 
 export type setAction = ActionCreatorWithPayload<string>;
 
+export interface IContext {
+  val:string,
+  setState:Dispatch<SetStateAction<state1>>
+}
 export interface Theme{
     home:string,
     regist:string,
@@ -37,7 +41,7 @@ export interface comp {
     set:setAction
    }
 export interface state1{
-    item:mass[]
+    item:mass[],
 }
 export type Evt = ChangeEvent<HTMLInputElement>;
 
@@ -92,7 +96,7 @@ phone:Und<string>,
 bask:bask[],
 id:number
 }
-export interface initial{
+export interface initial {
   user:User[],
 }
 export interface pay{
@@ -124,9 +128,11 @@ export interface state4{
   ser:string
 }
 export interface AboutContext {
-  toggle:(name:string)=>()=>void,
+  move:Dispatch<action>,
   srcs:string[],
-  className:className
+  className:className,
+  page:number,
+  jump:number
 }
 export interface action3{
   [i:string]:string

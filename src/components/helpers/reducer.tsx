@@ -8,8 +8,14 @@ const initial:door = {
     error:''
  };
  
+export const initial1:Styles = {
+   style1:'rgb(240, 47, 156)',
+   style2:'black',
+   style3:'black'
+}
+
 export function useReduce():[door,Dispatch<action>]{
-  const [state,dispatch] = useReducer(reducer,initial)
+  const [state,dispatch] = useReducer(reducer,initial);
      function reducer(prev:door,next:action):door{
             return { ...prev ,...next };
         };

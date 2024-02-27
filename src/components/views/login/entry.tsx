@@ -1,7 +1,7 @@
 import {useCallback, useEffect,useRef} from 'react'
 import {Navigate,useOutletContext } from 'react-router-dom'
-import {useAppSelector,comp,door, 
-setAction, Evt, Key, User, funcRoute} from '../../../types/state.js'
+import {useAppSelector,comp,door,setAction,
+ Evt, Key, User, funcRoute} from '../../../types/state.js'
 import { bind, useActions ,getUser} from '../../../store/store.js'
 import { DivEntry, style } from '../../style/style.js'
 import styles from '../../../style/entry.module.css'
@@ -16,10 +16,12 @@ export default function Entry():JSX.Element {
     const entry = useRef<HTMLDivElement>(null!);
     const {setCurrent,setId}:bind = useActions();
     useEffect(():void=>SetContext('home'),[]);
+
     useEffect(():void=>{
-    const height:number = state.error !=='' ? 320 : 300;
+    const height:number = state.error ? 320 : 300;
     entry.current.style.height = `${height}px`;
     },[state.error]);
+
     const change=(set:setAction)=>(e:Evt):void=>{
      dispatch({[e.target.name]:e.target.value});
       set(e.target.value);
